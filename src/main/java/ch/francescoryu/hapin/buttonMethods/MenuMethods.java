@@ -7,10 +7,23 @@
 package ch.francescoryu.hapin.buttonMethods;
 
 import javafx.scene.control.Button;
+import javafx.scene.text.Text;
 
 public class MenuMethods {
     public void setButtonStyle(Button button) {
-        button.setStyle("-fx-font-size: 35; -fx-font-family: 'Microsoft Sans Serif';");
+        button.setStyle("-fx-font-size: 35; " +
+                "-fx-font-family: 'Microsoft Sans Serif'; " +
+                "-fx-background-radius: 10; " +
+                "-fx-border-width: 2;  " +
+                "-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 ); " +
+                "-fx-focus-color: black;");
+
         button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    }
+
+    public void setLabelStyle(Text text) {
+        text.setStyle("-fx-font-size: 40; " +
+                "-fx-font-family: 'Microsoft Sans Serif'; " +
+                "-fx-text-alignment: center");
     }
 }

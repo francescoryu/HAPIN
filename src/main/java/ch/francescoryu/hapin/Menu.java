@@ -19,12 +19,14 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.EmptyStackException;
 
 
 public class Menu extends Application {
@@ -41,18 +43,19 @@ public class Menu extends Application {
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
         //--------------------------------------------------------------------------------------------------------------
+        Text linksText = new Text("Schnellzugriff");
+        navButtonMethod.setLabelStyle(linksText);
+
         Button googleButton = new Button("Google");
         navButtonMethod.setButtonStyle(googleButton);
 
         googleButton.setOnAction(e -> {
-            try {
-                Desktop.getDesktop().browse(new URI("https://www.google.com"));
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            } catch (URISyntaxException e1) {
-                e1.printStackTrace();
-            }
-        }
+                    try {
+                        Desktop.getDesktop().browse(new URI("https://www.google.com"));
+                    } catch (IOException | URISyntaxException e1) {
+                        e1.printStackTrace();
+                    }
+                }
         );
 
         Button youtubeButton = new Button("Youtube");
@@ -61,9 +64,7 @@ public class Menu extends Application {
         youtubeButton.setOnAction(e -> {
                     try {
                         Desktop.getDesktop().browse(new URI("https://www.youtube.com"));
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    } catch (URISyntaxException e1) {
+                    } catch (IOException | URISyntaxException e1) {
                         e1.printStackTrace();
                     }
                 }
@@ -75,16 +76,26 @@ public class Menu extends Application {
         tagiButton.setOnAction(e -> {
                     try {
                         Desktop.getDesktop().browse(new URI("https://www.tagesanzeiger.ch"));
-                    } catch (IOException e1) {
+                    } catch (IOException | URISyntaxException e1) {
                         e1.printStackTrace();
-                    } catch (URISyntaxException e1) {
+                    }
+                }
+        );
+
+        Button facebookButton = new Button("Facebook");
+        navButtonMethod.setButtonStyle(facebookButton);
+
+        facebookButton.setOnAction(e -> {
+                    try {
+                        Desktop.getDesktop().browse(new URI("https://www.facebook.com"));
+                    } catch (IOException | URISyntaxException e1) {
                         e1.printStackTrace();
                     }
                 }
         );
         //--------------------------------------------------------------------------------------------------------------
         Group navButtonGroup = new Group();
-        navButtonGroup.getChildren().addAll(googleButton, youtubeButton, tagiButton);
+        navButtonGroup.getChildren().addAll(googleButton, youtubeButton, tagiButton, facebookButton);
         //--------------------------------------------------------------------------------------------------------------
         HBox welcomeBox = new HBox();
         welcomeBox.setBorder(new Border(new BorderStroke(Color.MEDIUMORCHID, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
@@ -104,9 +115,9 @@ public class Menu extends Application {
 
         VBox navBox = new VBox(5);
         navBox.setSpacing(10);
-        navBox.getChildren().addAll(googleButton, youtubeButton, tagiButton);
-        navBox.setStyle("-fx-padding: 10px;");
-        navBox.setBorder(new Border(new BorderStroke(Color.MEDIUMORCHID, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
+        navBox.setBackground(Background.fill(Color.web("#d2b0d9")));
+        navBox.getChildren().addAll(linksText, googleButton, youtubeButton, tagiButton, facebookButton);
+        navBox.setStyle("-fx-padding: 10; -fx-border-style: solid inside; -fx-border-width: 2");
         //--------------------------------------------------------------------------------------------------------------
         BorderPane borderPane = new BorderPane();
         borderPane.setStyle("-fx-background-color: linear-gradient(to bottom right, #6a5acd, #ff7f50);");
