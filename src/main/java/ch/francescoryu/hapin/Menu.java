@@ -13,9 +13,6 @@ import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -32,7 +29,7 @@ import java.util.Calendar;
 
 public class Menu extends Application {
     @Override
-    public void start(Stage stage) throws IOException, URISyntaxException {
+    public void start(Stage stage) {
         MenuMethods navButtonMethod = new MenuMethods();
         //--------------------------------------------------------------------------------------------------------------
         final Text clock = new Text();
@@ -46,6 +43,7 @@ public class Menu extends Application {
         //--------------------------------------------------------------------------------------------------------------
         Button googleButton = new Button("Google");
         navButtonMethod.setButtonStyle(googleButton);
+
         googleButton.setOnAction(e -> {
             try {
                 Desktop.getDesktop().browse(new URI("https://www.google.com"));
