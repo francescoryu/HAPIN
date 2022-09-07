@@ -13,16 +13,15 @@ import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.LinearGradient;
-import javafx.scene.paint.Stop;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
@@ -31,9 +30,9 @@ import java.text.DateFormat;
 import java.util.Calendar;
 
 
-public class MainMenu extends Application {
+public class Menu extends Application {
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) throws IOException, URISyntaxException {
         MenuMethods navButtonMethod = new MenuMethods();
         //--------------------------------------------------------------------------------------------------------------
         final Text clock = new Text();
@@ -47,10 +46,9 @@ public class MainMenu extends Application {
         //--------------------------------------------------------------------------------------------------------------
         Button googleButton = new Button("Google");
         navButtonMethod.setButtonStyle(googleButton);
-
         googleButton.setOnAction(e -> {
             try {
-                Desktop.getDesktop().browse(new URI("http://www.google.com"));
+                Desktop.getDesktop().browse(new URI("https://www.google.com"));
             } catch (IOException e1) {
                 e1.printStackTrace();
             } catch (URISyntaxException e1) {
@@ -64,7 +62,21 @@ public class MainMenu extends Application {
 
         youtubeButton.setOnAction(e -> {
                     try {
-                        Desktop.getDesktop().browse(new URI("http://www.youtube.com"));
+                        Desktop.getDesktop().browse(new URI("https://www.youtube.com"));
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    } catch (URISyntaxException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+        );
+
+        Button tagiButton = new Button("Tagesanzeiger");
+        navButtonMethod.setButtonStyle(tagiButton);
+
+        tagiButton.setOnAction(e -> {
+                    try {
+                        Desktop.getDesktop().browse(new URI("https://www.tagesanzeiger.ch"));
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     } catch (URISyntaxException e1) {
@@ -74,8 +86,7 @@ public class MainMenu extends Application {
         );
         //--------------------------------------------------------------------------------------------------------------
         Group navButtonGroup = new Group();
-        navButtonGroup.getChildren().addAll(googleButton, youtubeButton);
-
+        navButtonGroup.getChildren().addAll(googleButton, youtubeButton, tagiButton);
         //--------------------------------------------------------------------------------------------------------------
         HBox welcomeBox = new HBox();
         welcomeBox.setBorder(new Border(new BorderStroke(Color.MEDIUMORCHID, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
@@ -95,7 +106,7 @@ public class MainMenu extends Application {
 
         VBox navBox = new VBox(5);
         navBox.setSpacing(10);
-        navBox.getChildren().addAll(googleButton, youtubeButton);
+        navBox.getChildren().addAll(googleButton, youtubeButton, tagiButton);
         navBox.setStyle("-fx-padding: 10px;");
         navBox.setBorder(new Border(new BorderStroke(Color.MEDIUMORCHID, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
         //--------------------------------------------------------------------------------------------------------------
@@ -111,9 +122,5 @@ public class MainMenu extends Application {
         stage.setMaximized(true);
         stage.show();
         //--------------------------------------------------------------------------------------------------------------
-    }
-
-    public static void main(String[] args) {
-        launch();
     }
 }
