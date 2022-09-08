@@ -116,6 +116,8 @@ public class Menu extends Application {
                     }
                 }
         );
+
+
         //--------------------------------------------------------------------------------------------------------------
         Group navButtonGroup = new Group();
         navButtonGroup.getChildren().addAll(googleButton, youtubeButton, tagiButton, facebookButton);
@@ -144,8 +146,13 @@ public class Menu extends Application {
         gridPane.add(tagiButton, 0, 3);
         gridPane.add(youtubeButton, 0, 4);
 
+        Button[] buttons = new Button[(int) DataHandler.getRows()];
+
+        DataHandler.createButtons(buttons, gridPane);
+        System.out.println(DataHandler.getRows());
+
         //--------------------------------------------------------------------------------------------------------------
-        Button[] btnArray = new Button[80];
+
 
 
 
