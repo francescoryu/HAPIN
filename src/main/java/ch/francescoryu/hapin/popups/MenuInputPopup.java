@@ -70,10 +70,15 @@ public class MenuInputPopup extends Application {
         });
 
         Button cancelButton = new Button();
-        ImageView deleteButtonImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/delete.png"))));
-        deleteButtonImageView.setFitHeight(25);
-        deleteButtonImageView.setPreserveRatio(true);
-        cancelButton.setGraphic(deleteButtonImageView);
+        ImageView cancelButtonImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/delete.png"))));
+        cancelButtonImageView.setFitHeight(25);
+        cancelButtonImageView.setPreserveRatio(true);
+        cancelButton.setGraphic(cancelButtonImageView);
+
+        cancelButton.setOnAction(actionEvent -> {
+            inputButtonName.setText("");
+            inputButtonUrl.setText("");
+        });
 
         HBox buttonBox = new HBox();
         buttonBox.setStyle("-fx-alignment: center; -fx-padding: 10");
