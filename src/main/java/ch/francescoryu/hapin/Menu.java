@@ -1,6 +1,7 @@
 /**
  * @author: Francesco Ryu
  * @version: 1.0
+ * @date 08.09.2022
  * @description A helping software for people who want to have everything compact(First project with JavaFx).
  */
 package ch.francescoryu.hapin;
@@ -13,26 +14,29 @@ import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.DateFormat;
 import java.util.Calendar;
-import java.util.EmptyStackException;
+import java.util.Objects;
 
 
 public class Menu extends Application {
     @Override
-    public void start(Stage stage) {
-        MenuMethods navButtonMethod = new MenuMethods();
+    public void start(Stage stage) throws FileNotFoundException {
+        MenuMethods menuMethods = new MenuMethods();
         //--------------------------------------------------------------------------------------------------------------
         final Text clock = new Text();
         final DateFormat format = DateFormat.getInstance();
@@ -40,14 +44,21 @@ public class Menu extends Application {
             final Calendar cal = Calendar.getInstance();
             clock.setText(format.format(cal.getTime()));
         }));
+
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
         //--------------------------------------------------------------------------------------------------------------
         Text linksText = new Text("Schnellzugriff");
-        navButtonMethod.setLabelStyle(linksText);
+        menuMethods.setLabelStyle(linksText);
+
+        //bidde bidde :D
 
         Button googleButton = new Button("Google");
-        navButtonMethod.setButtonStyle(googleButton);
+        ImageView googleImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/googleImgMenu.png"))));
+        googleImageView.setFitHeight(25);
+        googleImageView.setPreserveRatio(true);
+        googleButton.setGraphic(googleImageView);
+        menuMethods.setButtonStyle(googleButton);
 
         googleButton.setOnAction(e -> {
                     try {
@@ -59,7 +70,11 @@ public class Menu extends Application {
         );
 
         Button youtubeButton = new Button("Youtube");
-        navButtonMethod.setButtonStyle(youtubeButton);
+        ImageView youtubeImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/youtubeImgMenu.png"))));
+        youtubeImageView.setFitHeight(25);
+        youtubeImageView.setPreserveRatio(true);
+        youtubeButton.setGraphic(youtubeImageView);
+        menuMethods.setButtonStyle(youtubeButton);
 
         youtubeButton.setOnAction(e -> {
                     try {
@@ -71,7 +86,11 @@ public class Menu extends Application {
         );
 
         Button tagiButton = new Button("Tagesanzeiger");
-        navButtonMethod.setButtonStyle(tagiButton);
+        ImageView tagiImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/tagiImgMenu.png"))));
+        tagiImageView.setFitHeight(25);
+        tagiImageView.setPreserveRatio(true);
+        tagiButton.setGraphic(tagiImageView);
+        menuMethods.setButtonStyle(tagiButton);
 
         tagiButton.setOnAction(e -> {
                     try {
@@ -83,7 +102,11 @@ public class Menu extends Application {
         );
 
         Button facebookButton = new Button("Facebook");
-        navButtonMethod.setButtonStyle(facebookButton);
+        ImageView facebookImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/facebookImgMenu.png"))));
+        facebookImageView.setFitHeight(25);
+        facebookImageView.setPreserveRatio(true);
+        facebookButton.setGraphic(facebookImageView);
+        menuMethods.setButtonStyle(facebookButton);
 
         facebookButton.setOnAction(e -> {
                     try {
@@ -112,12 +135,58 @@ public class Menu extends Application {
         infoBox.getChildren().addAll(clock);
 
         //--------------------------------------------------------------------------------------------------------------
+        GridPane gridPane = new GridPane();
+        gridPane.setStyle("-fx-background-color: #d2b0d9; -fx-padding: 10; -fx-alignment: center");
+        gridPane.setVgap(10);
+        gridPane.setHgap(20);
+        gridPane.add(googleButton, 0, 1);
+        gridPane.add(facebookButton, 0, 2);
+        gridPane.add(tagiButton, 0, 3);
+        gridPane.add(youtubeButton, 0, 4);
 
-        VBox navBox = new VBox(5);
+        Button[] btnArray = new Button[20];
+        for (int i = 6; i < 15; i++) {
+            btnArray[i] = new Button();
+            gridPane.add(btnArray[i], 0, i);
+        }
+
+
+        ScrollPane scrollPane = new ScrollPane(gridPane);
+        scrollPane.setStyle("-fx-padding: 10; -fx-border-style: solid inside; -fx-border-width: 2; -fx-background-color: #d2b0d9;");
+        scrollPane.setFitToWidth(true);
+
+        Button addButton = new Button();
+        ImageView addButtonImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/add.png"))));
+        addButtonImageView.setFitHeight(35);
+        addButtonImageView.setPreserveRatio(true);
+        addButton.setGraphic(addButtonImageView);
+
+        //--------------------------------------------------------------------------------------------------------------
+        addButton.setOnAction(actionEvent -> {
+            Scene scene = new Scene(new BorderPane(), 600, 300);
+            Stage stage1 = new Stage();
+            stage1.setTitle("Hinzufügen");
+            stage1.setScene(scene);
+            stage1.show();
+        });
+        //--------------------------------------------------------------------------------------------------------------
+
+        Button deleteButton = new Button();
+        ImageView deleteButtonImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/delete.png"))));
+        deleteButtonImageView.setFitHeight(35);
+        deleteButtonImageView.setPreserveRatio(true);
+        deleteButton.setGraphic(deleteButtonImageView);
+
+        HBox navButtonBox = new HBox();
+        navButtonBox.setStyle("-fx-alignment: center; -fx-padding: 20");
+        navButtonBox.setSpacing(10);
+        navButtonBox.getChildren().addAll(addButton, deleteButton);
+
+        VBox navBox = new VBox();
+        navBox.setStyle("-fx-padding: 20; -fx-alignment: center");
         navBox.setSpacing(10);
-        navBox.setBackground(Background.fill(Color.web("#d2b0d9")));
-        navBox.getChildren().addAll(linksText, googleButton, youtubeButton, tagiButton, facebookButton);
-        navBox.setStyle("-fx-padding: 10; -fx-border-style: solid inside; -fx-border-width: 2");
+        navBox.setMinWidth(350);
+        navBox.getChildren().addAll(linksText, scrollPane, navButtonBox);
         //--------------------------------------------------------------------------------------------------------------
         BorderPane borderPane = new BorderPane();
         borderPane.setStyle("-fx-background-color: linear-gradient(to bottom right, #6a5acd, #ff7f50);");
