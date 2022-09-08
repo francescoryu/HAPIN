@@ -7,6 +7,7 @@
 package ch.francescoryu.hapin;
 
 import ch.francescoryu.hapin.buttonMethods.MenuMethods;
+import ch.francescoryu.hapin.popups.MenuInputPopup;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -15,6 +16,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -50,8 +52,6 @@ public class Menu extends Application {
         //--------------------------------------------------------------------------------------------------------------
         Text linksText = new Text("Schnellzugriff");
         menuMethods.setLabelStyle(linksText);
-
-        //bidde bidde :D
 
         Button googleButton = new Button("Google");
         ImageView googleImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/googleImgMenu.png"))));
@@ -144,11 +144,9 @@ public class Menu extends Application {
         gridPane.add(tagiButton, 0, 3);
         gridPane.add(youtubeButton, 0, 4);
 
-        Button[] btnArray = new Button[20];
-        for (int i = 6; i < 15; i++) {
-            btnArray[i] = new Button();
-            gridPane.add(btnArray[i], 0, i);
-        }
+        //--------------------------------------------------------------------------------------------------------------
+        Button[] btnArray = new Button[80];
+
 
 
         ScrollPane scrollPane = new ScrollPane(gridPane);
@@ -163,11 +161,14 @@ public class Menu extends Application {
 
         //--------------------------------------------------------------------------------------------------------------
         addButton.setOnAction(actionEvent -> {
-            Scene scene = new Scene(new BorderPane(), 600, 300);
-            Stage stage1 = new Stage();
-            stage1.setTitle("Hinzufügen");
-            stage1.setScene(scene);
-            stage1.show();
+
+            MenuInputPopup menuInputPopup = new MenuInputPopup();
+            try {
+                menuInputPopup.start(new Stage());
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+
         });
         //--------------------------------------------------------------------------------------------------------------
 

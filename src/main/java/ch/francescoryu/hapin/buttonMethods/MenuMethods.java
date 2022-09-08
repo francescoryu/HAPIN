@@ -7,8 +7,10 @@
 package ch.francescoryu.hapin.buttonMethods;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
+import org.jetbrains.annotations.Nullable;
 
 public class MenuMethods {
     public void setButtonStyle(Button button) {
@@ -26,4 +28,14 @@ public class MenuMethods {
                 "-fx-font-family: 'Microsoft Sans Serif'; " +
                 "-fx-text-alignment: center");
     }
+
+    public void setPopUpStyle(Text text) {
+        text.setStyle("-fx-font-size: 20;" +
+                "-fx-font-family: 'Microsoft Sans Serif'");
+    }
+    public void setInputTextFieldStyle (TextField textField) {
+        textField.setStyle("-fx-font-size: 18;" +
+                "-fx-font-family: 'Microsoft Sans Serif'");
+    }
+
 }
