@@ -68,7 +68,7 @@ public class MenuInputPopup extends Application {
         saveButton.setGraphic(saveButtonImageView);
 
         saveButton.setOnAction(actionEvent -> {
-            DataHandler.writeFile(getInputFromTextField());
+
             try {
                 DataHandler.readFileAsString();
             } catch (Exception e) {
@@ -76,21 +76,11 @@ public class MenuInputPopup extends Application {
             }
         });
 
-        FileChooser fileChooser = new FileChooser();
 
         Button chooseFile = new Button("Datei auswählen");
 
         chooseFile.setOnAction(actionEvent -> {
-            File selectedFile = fileChooser.showOpenDialog(stage);
-            fileChooser.setInitialDirectory(new File("navMenuImg/" + selectedFile.getName()));
-            System.out.println(selectedFile.getName());
-            Path from = Paths.get(selectedFile.toURI());
-            Path to = Paths.get("Images/" + selectedFile.getName());
-            try {
-                Files.copy(from, to);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            DataHandler.saveData(stage, DataHandler.getInputFromTextField(inputButtonName, inputButtonUrl));
 
         });
 
@@ -122,11 +112,4 @@ public class MenuInputPopup extends Application {
     }
 
 
-
-    public String getInputFromTextField() {
-        String inputFromTextField = inputButtonName.getText() + " " + inputButtonUrl.getText();
-        System.out.println(inputFromTextField);
-
-        return inputFromTextField;
-    }
 }

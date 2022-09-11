@@ -159,6 +159,8 @@ public class Menu extends Application {
             DataHandler.createButtons(buttons, gridPane);
         } catch (IOException e) {
             throw new RuntimeException(e);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
         }
 
         //--------------------------------------------------------------------------------------------------------------
