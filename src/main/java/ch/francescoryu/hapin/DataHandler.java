@@ -45,7 +45,7 @@ public class DataHandler {
     public static void saveData(Stage stage, String input) {
         FileChooser fileChooser = new FileChooser();
         File selectedFile = fileChooser.showOpenDialog(stage);
-        fileChooser.setInitialDirectory(new File("navMenuImg/" + selectedFile.getName()));
+        fileChooser.setInitialDirectory(new File("src/main/resources/" + selectedFile.getName()));
         System.out.println(selectedFile.getName());
         Path from = Paths.get(selectedFile.toURI());
         try {
