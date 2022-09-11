@@ -33,7 +33,6 @@ public class MenuInputPopup extends Application {
 
         BorderPane popupBorderPane = new BorderPane();
         MenuMethods menuMethods = new MenuMethods();
-        DataHandler dataHandler = new DataHandler();
 
         Text buttonNameText = new Text("Button Name: ");
         menuMethods.setPopUpStyle(buttonNameText);

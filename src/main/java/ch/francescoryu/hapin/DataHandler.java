@@ -4,10 +4,15 @@ import ch.francescoryu.hapin.buttonMethods.MenuMethods;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 
+import java.awt.*;
 import java.io.*;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DataHandler {
 
@@ -15,8 +20,9 @@ public class DataHandler {
 
     public static void writeFile(String input) {
         try {
-            FileWriter myWriter = new FileWriter(filePath, true);
-            myWriter.write(input + "\n");
+            BufferedWriter myWriter = Files.newBufferedWriter(Path.of(filePath), StandardOpenOption.APPEND);
+            myWriter.write(input);
+            myWriter.newLine();
             myWriter.close();
         } catch (IOException e) {
             System.out.println("ERROR");
@@ -39,13 +45,25 @@ public class DataHandler {
     }
 
 
-    public static void createButtons(Button[] buttons, GridPane gridPane) {
+    public static void createButtons(ArrayList<Button> buttons, GridPane gridPane) throws IOException {
         MenuMethods menuMethods = new MenuMethods();
         int j = 5;
-        for (int i = 0; i < getRows(); i++) {
-            buttons[i] = new Button();
-            menuMethods.setButtonStyle(buttons[i]);
-            gridPane.add(buttons[i], 0, j);
+
+        List<String> lines = Files.readAllLines(new File(filePath).toPath());
+
+        for (String s : lines) {
+            String[] arr = s.split(" ");
+            Button b = new Button(arr[0]);
+            b.setOnAction(e -> {
+                try {
+                    Desktop.getDesktop().browse(new URI("https://" + arr[1]));
+                } catch (IOException | URISyntaxException e1) {
+                    e1.printStackTrace();
+                }
+            });
+            menuMethods.setButtonStyle(b);
+            buttons.add(b);
+            gridPane.add(b, 0, j);
             j++;
         }
     }

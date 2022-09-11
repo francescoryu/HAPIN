@@ -16,7 +16,6 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -31,11 +30,15 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Objects;
 
 
 public class Menu extends Application {
+
+    private final ArrayList<Button> buttons = new ArrayList<>();
+
     @Override
     public void start(Stage stage) throws FileNotFoundException {
         MenuMethods menuMethods = new MenuMethods();
@@ -146,9 +149,17 @@ public class Menu extends Application {
         gridPane.add(tagiButton, 0, 3);
         gridPane.add(youtubeButton, 0, 4);
 
+        buttons.add(googleButton);
+        buttons.add(facebookButton);
+        buttons.add(tagiButton);
+        buttons.add(youtubeButton);
 
-        DataHandler.createButtons(buttons, gridPane);
-        System.out.println(DataHandler.getRows());
+
+        try {
+            DataHandler.createButtons(buttons, gridPane);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         //--------------------------------------------------------------------------------------------------------------
 
