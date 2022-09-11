@@ -81,7 +81,7 @@ public class DataHandler {
         List<String> lines = Files.readAllLines(new File(filePath).toPath());
 
         for (String s : lines) {
-            String[] arr = s.split(";+");
+            String[] arr = s.split(";");
             Button b = new Button(arr[0]);
             b.setOnAction(e -> {
                 try {
