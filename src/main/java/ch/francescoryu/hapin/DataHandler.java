@@ -24,7 +24,7 @@ public class DataHandler {
         }
     }
 
-    public static void readFileAsString() throws Exception {
+    public static void readFileAsString() {
         BufferedReader reader;
         try {
             reader = new BufferedReader(new FileReader(filePath));
@@ -38,19 +38,6 @@ public class DataHandler {
         }
     }
 
-    public static long getRows() {
-        Path path = Paths.get(filePath);
-        long lines = 0;
-
-        try {
-            lines = Files.lines(path).count();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return lines;
-    }
 
     public static void createButtons(Button[] buttons, GridPane gridPane) {
         MenuMethods menuMethods = new MenuMethods();

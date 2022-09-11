@@ -146,7 +146,6 @@ public class Menu extends Application {
         gridPane.add(tagiButton, 0, 3);
         gridPane.add(youtubeButton, 0, 4);
 
-        Button[] buttons = new Button[(int) DataHandler.getRows()];
 
         DataHandler.createButtons(buttons, gridPane);
         System.out.println(DataHandler.getRows());
@@ -168,7 +167,6 @@ public class Menu extends Application {
 
         //--------------------------------------------------------------------------------------------------------------
         addButton.setOnAction(actionEvent -> {
-
             MenuInputPopup menuInputPopup = new MenuInputPopup();
             try {
                 menuInputPopup.start(new Stage());
@@ -185,10 +183,17 @@ public class Menu extends Application {
         deleteButtonImageView.setPreserveRatio(true);
         deleteButton.setGraphic(deleteButtonImageView);
 
+        Button refreshButton = new Button();
+
+        refreshButton.setOnAction(actionEvent -> {
+            
+        });
+
+
         HBox navButtonBox = new HBox();
         navButtonBox.setStyle("-fx-alignment: center; -fx-padding: 20");
         navButtonBox.setSpacing(10);
-        navButtonBox.getChildren().addAll(addButton, deleteButton);
+        navButtonBox.getChildren().addAll(addButton, deleteButton, refreshButton);
 
         VBox navBox = new VBox();
         navBox.setStyle("-fx-padding: 20; -fx-alignment: center");

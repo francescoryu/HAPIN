@@ -4,14 +4,17 @@ import ch.francescoryu.hapin.DataHandler;
 import ch.francescoryu.hapin.Menu;
 import ch.francescoryu.hapin.buttonMethods.MenuMethods;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -21,6 +24,9 @@ import java.util.Objects;
 public class MenuInputPopup extends Application {
     TextField inputButtonName;
     TextField inputButtonUrl;
+
+    final Text source = new Text(50, 100, "DRAG ME");
+    final Text target = new Text(300, 100, "DROP HERE");
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -96,18 +102,12 @@ public class MenuInputPopup extends Application {
         stage1.show();
     }
 
+
+
     public String getInputFromTextField() {
         String inputFromTextField = inputButtonName.getText() + " " + inputButtonUrl.getText();
         System.out.println(inputFromTextField);
 
         return inputFromTextField;
-    }
-
-    public void writeToSaveFile() throws IOException {
-
-    }
-
-    public void readFile() throws IOException {
-
     }
 }
