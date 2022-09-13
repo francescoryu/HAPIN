@@ -108,8 +108,9 @@ public class DataHandler {
                 b.setOnMouseClicked(mouseEvent -> {
                     if (mouseEvent.getButton() == MouseButton.SECONDARY) {
                         deleteButton.setOnAction(actionEvent -> {
-                            System.out.println(lines.get(finalCntr));
-                            lines.remove(lines.get(finalCntr));
+                            if (s == lines.get(finalCntr)) {
+                                lines.get(finalCntr);
+                            }
                         });
                     }
                 });
@@ -122,5 +123,14 @@ public class DataHandler {
 
         }
     }
+    public static void deleteCustomButton(Button button, String s) {
 
+        button.setOnMouseClicked(mouseEvent -> {
+            if (mouseEvent.getButton() == MouseButton.SECONDARY) {
+                button.setOnAction(actionEvent -> {
+
+                });
+            }
+        });
     }
+}
