@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -112,24 +113,23 @@ public class DataHandler {
                         e1.printStackTrace();
                     }
                 });
-            }
-
-            if (!withLink) {
                 int finalCntr = cntr;
-                b.setOnAction(actionEvent -> {
-                    lines.remove(b);
-                    buttons.remove(b);
+                b.setOnMouseClicked(mouseEvent -> {
+                    if (mouseEvent.getButton() == MouseButton.SECONDARY) {
+                        deleteButton.setOnAction(actionEvent -> {
+                            System.out.println(lines.get(finalCntr));
+                            lines.remove(finalCntr).lines();
+                        });
+                    }
                 });
             }
-                buttons.add(b);
-                gridPane.add(b, 0, j);
-                j++;
-                cntr++;
+
+            buttons.add(b);
+            gridPane.add(b, 0, j);
+            j++;
+            cntr++;
 
         }
-    /*public static void removeButton(int cntr, ArrayList<Button> buttons) {
-        buttons.remove();
-        lines.remove(cntr);
-    }*/
     }
-}
+
+    }

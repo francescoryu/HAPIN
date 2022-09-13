@@ -158,13 +158,7 @@ public class Menu extends Application {
         buttons.add(youtubeButton);
 
 
-        try {
-            DataHandler.createButtons(buttons, gridPane, true, null);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
+
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -207,6 +201,14 @@ public class Menu extends Application {
                 throw new RuntimeException(e);
             }
         });
+
+        try {
+            DataHandler.createButtons(buttons, gridPane, true, deleteButton);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
 
         Button refreshButton = new Button();
         ImageView refreshButtonImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/refresh.png"))));
