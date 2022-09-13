@@ -34,11 +34,15 @@ public class MenuDeletePopup extends Application {
         deleteButtonImageView.setPreserveRatio(true);
         deleteButton.setGraphic(deleteButtonImageView);
 
-        DataHandler.deleteButtons(buttons, gridPane, deleteButton);
+        DataHandler.createButtons(buttons, gridPane, false);
 
         HBox buttonBox = new HBox();
         buttonBox.setStyle("-fx-alignment: center; -fx-padding: 10");
         buttonBox.getChildren().add(deleteButton);
+
+        deleteButton.setOnAction(actionEvent -> {
+
+        });
 
 
         BorderPane popupBorderPane = new BorderPane();

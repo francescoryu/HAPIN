@@ -88,7 +88,7 @@ public class DataHandler {
         return inputFromTextField;
     }
 
-    public static void createButtons(ArrayList<Button> buttons, GridPane gridPane) throws IOException, URISyntaxException {
+    public static void createButtons(ArrayList<Button> buttons, GridPane gridPane, boolean withLink) throws IOException, URISyntaxException {
         int j = 5;
 
         //List<String> lines = Files.readAllLines(new File(filePath).toPath());
@@ -106,46 +106,18 @@ public class DataHandler {
             System.out.println(arr[2]);
             menuMethods.setButtonStyle(b);
 
-            b.setOnAction(e -> {
-                try {
-                    Desktop.getDesktop().browse(new URI("https://" + arr[1]));
-                } catch (IOException | URISyntaxException e1) {
-                    e1.printStackTrace();
-                }
-            });
+            if (withLink == true) {
+                b.setOnAction(e -> {
+                    try {
+                        Desktop.getDesktop().browse(new URI("https://" + arr[1]));
+                    } catch (IOException | URISyntaxException e1) {
+                        e1.printStackTrace();
+                    }
+                });
+            }
             buttons.add(b);
             gridPane.add(b, 0, j);
             j++;
         }
-    }
-
-    public static void deleteButtons(ArrayList<Button> buttons, GridPane gridPane, Button deleteButton) throws IOException {
-        int cntr = 0;
-        for (String s : lines) {
-            String[] arr = s.split(";");
-            Button b = new Button(arr[0]);
-
-            ImageView imageView = new ImageView(new Image(Files.newInputStream(Paths.get(arr[2]))));
-            imageView.setFitHeight(25);
-            imageView.setPreserveRatio(true);
-            b.setGraphic(imageView);
-            menuMethods.setButtonStyle(b);
-            buttons.add(b);
-            gridPane.add(b, 0, cntr);
-
-            int finalCntr = cntr;
-            deleteButton.setOnAction(actionEvent -> {
-                if (b.isPressed()) {
-                    lines.remove(finalCntr);
-                    buttons.remove(b);
-                }
-            });
-
-            cntr++;
-        }
-    }
-
-    public static void deleteButtonMethod() {
-
     }
 }
