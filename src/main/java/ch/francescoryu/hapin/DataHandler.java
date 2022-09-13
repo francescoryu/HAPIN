@@ -1,4 +1,11 @@
 package ch.francescoryu.hapin;
+/**
+ * @author: Francesco Ryu
+ * @version: 1.0
+ * @date 08.09.2022
+ * @description A helping software for people who want to have everything compact(First project with JavaFx).
+ */
+
 
 import ch.francescoryu.hapin.buttonMethods.MenuMethods;
 import javafx.scene.control.Button;
@@ -40,13 +47,10 @@ public class DataHandler {
     }
 
 
-
-
     public static void saveData(Stage stage, String input) {
         FileChooser fileChooser = new FileChooser();
         File selectedFile = fileChooser.showOpenDialog(stage);
         fileChooser.setInitialDirectory(new File("src/main/resources/" + selectedFile.getName()));
-        System.out.println(selectedFile.getName());
         Path from = Paths.get(selectedFile.toURI());
         try {
             BufferedWriter myWriter = Files.newBufferedWriter(Path.of(filePath), StandardOpenOption.APPEND);
@@ -82,7 +86,17 @@ public class DataHandler {
 
         for (String s : lines) {
             String[] arr = s.split(";");
+            //String path = arr[2];
             Button b = new Button(arr[0]);
+
+            ImageView imageView = new ImageView(new Image(Files.newInputStream(Paths.get(arr[2]))));
+            imageView.setFitHeight(25);
+            imageView.setPreserveRatio(true);
+            b.setGraphic(imageView);
+
+            System.out.println(arr[2]);
+            menuMethods.setButtonStyle(b);
+
             b.setOnAction(e -> {
                 try {
                     Desktop.getDesktop().browse(new URI("https://" + arr[1]));
@@ -90,16 +104,9 @@ public class DataHandler {
                     e1.printStackTrace();
                 }
             });
-            ImageView imageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream(arr[2]))));
-            imageView.setFitHeight(25);
-            imageView.setPreserveRatio(true);
-            b.setGraphic(imageView);
-            System.out.println(arr[2]);
-            menuMethods.setButtonStyle(b);
             buttons.add(b);
             gridPane.add(b, 0, j);
             j++;
         }
     }
-
 }

@@ -9,9 +9,11 @@ package ch.francescoryu.hapin;
 import ch.francescoryu.hapin.buttonMethods.MenuMethods;
 import ch.francescoryu.hapin.popups.MenuInputPopup;
 import javafx.animation.Animation;
+import javafx.animation.FillTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -196,15 +198,19 @@ public class Menu extends Application {
         deleteButtonImageView.setPreserveRatio(true);
         deleteButton.setGraphic(deleteButtonImageView);
 
+        deleteButton.setOnAction(actionEvent -> {
+
+        });
+
         Button refreshButton = new Button();
+        ImageView refreshButtonImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/refresh.png"))));
+        refreshButtonImageView.setFitHeight(35);
+        refreshButtonImageView.setPreserveRatio(true);
+        refreshButton.setGraphic(refreshButtonImageView);
 
         refreshButton.setOnAction(actionEvent -> {
 
-
-
-            
         });
-
 
         HBox navButtonBox = new HBox();
         navButtonBox.setStyle("-fx-alignment: center; -fx-padding: 20");

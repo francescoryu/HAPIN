@@ -1,9 +1,16 @@
 package ch.francescoryu.hapin.popups;
+/**
+ * @author: Francesco Ryu
+ * @version: 1.0
+ * @date 08.09.2022
+ * @description A helping software for people who want to have everything compact(First project with JavaFx).
+ */
 
 import ch.francescoryu.hapin.DataHandler;
 import ch.francescoryu.hapin.Menu;
 import ch.francescoryu.hapin.buttonMethods.MenuMethods;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -13,14 +20,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Objects;
 
 public class MenuInputPopup extends Application {
@@ -29,6 +30,8 @@ public class MenuInputPopup extends Application {
 
     final Text source = new Text(50, 100, "DRAG ME");
     final Text target = new Text(300, 100, "DROP HERE");
+
+    MenuMethods menuMethods = new MenuMethods();
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -74,10 +77,13 @@ public class MenuInputPopup extends Application {
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
+            saveButton.getScene().getWindow();
+            Platform.runLater(stage::close);
         });
 
 
         Button chooseFile = new Button("Datei auswählen");
+        chooseFile.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'");
 
         chooseFile.setOnAction(actionEvent -> {
             DataHandler.saveData(stage, DataHandler.getInputFromTextField(inputButtonName, inputButtonUrl));

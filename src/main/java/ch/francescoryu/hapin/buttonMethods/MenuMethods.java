@@ -6,10 +6,13 @@
 
 package ch.francescoryu.hapin.buttonMethods;
 
+import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import org.jetbrains.annotations.Nullable;
 
 public class MenuMethods {
@@ -33,9 +36,24 @@ public class MenuMethods {
         text.setStyle("-fx-font-size: 20;" +
                 "-fx-font-family: 'Microsoft Sans Serif'");
     }
-    public void setInputTextFieldStyle (TextField textField) {
+
+    public void setInputTextFieldStyle(TextField textField) {
         textField.setStyle("-fx-font-size: 18;" +
                 "-fx-font-family: 'Microsoft Sans Serif'");
+    }
+
+    @FXML
+    private javafx.scene.control.Button closeButton;
+
+    @FXML
+    public void closeButtonAction() {
+        // get a handle to the stage
+
+        Stage stage = (Stage) closeButton.getScene().getWindow();
+        // do what you have to do
+        stage.close();
+        // do what you have to do
+
     }
 
 }
