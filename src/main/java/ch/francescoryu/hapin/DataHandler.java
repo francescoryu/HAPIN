@@ -31,6 +31,16 @@ import java.util.Objects;
 public class DataHandler {
 
     static String filePath = "src/main/resources/save.txt";
+    public static MenuMethods menuMethods = new MenuMethods();
+    public static List<String> lines;
+
+    static {
+        try {
+            lines = Files.readAllLines(new File(filePath).toPath());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public static void readFileAsString() {
         BufferedReader reader;
@@ -79,10 +89,9 @@ public class DataHandler {
     }
 
     public static void createButtons(ArrayList<Button> buttons, GridPane gridPane) throws IOException, URISyntaxException {
-        MenuMethods menuMethods = new MenuMethods();
         int j = 5;
 
-        List<String> lines = Files.readAllLines(new File(filePath).toPath());
+        //List<String> lines = Files.readAllLines(new File(filePath).toPath());
 
         for (String s : lines) {
             String[] arr = s.split(";");
@@ -108,5 +117,36 @@ public class DataHandler {
             gridPane.add(b, 0, j);
             j++;
         }
+    }
+
+    public static void deleteButtons(ArrayList<Button> buttons, GridPane gridPane, Button deleteButton) throws IOException {
+        int cntr = 0;
+        for (String s : lines) {
+            String[] arr = s.split(";");
+            Button b = new Button(arr[0]);
+
+            ImageView imageView = new ImageView(new Image(Files.newInputStream(Paths.get(arr[2]))));
+            imageView.setFitHeight(25);
+            imageView.setPreserveRatio(true);
+            b.setGraphic(imageView);
+            menuMethods.setButtonStyle(b);
+            buttons.add(b);
+            gridPane.add(b, 0, cntr);
+
+            int finalCntr = cntr;
+            deleteButton.setOnAction(actionEvent -> {
+                if (b.isPressed()) {
+                    lines.remove(finalCntr);
+                    System.out.println("TRUE");
+                }
+            });
+
+
+            cntr++;
+        }
+    }
+
+    public static void deleteButtonMethod() {
+
     }
 }

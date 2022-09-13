@@ -7,6 +7,7 @@
 package ch.francescoryu.hapin;
 
 import ch.francescoryu.hapin.buttonMethods.MenuMethods;
+import ch.francescoryu.hapin.popups.MenuDeletePopup;
 import ch.francescoryu.hapin.popups.MenuInputPopup;
 import javafx.animation.Animation;
 import javafx.animation.FillTransition;
@@ -199,7 +200,12 @@ public class Menu extends Application {
         deleteButton.setGraphic(deleteButtonImageView);
 
         deleteButton.setOnAction(actionEvent -> {
-
+            MenuDeletePopup menuDeletePopup = new MenuDeletePopup();
+            try {
+                menuDeletePopup.start(new Stage());
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         });
 
         Button refreshButton = new Button();
