@@ -33,15 +33,6 @@ public class DataHandler {
 
     static String filePath = "src/main/resources/save.txt";
     public static MenuMethods menuMethods = new MenuMethods();
-    public static List<String> lines;
-
-    static {
-        try {
-            lines = Files.readAllLines(new File(filePath).toPath());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     public static void readFileAsString() {
         BufferedReader reader;
@@ -92,7 +83,7 @@ public class DataHandler {
     public static void createButtons(ArrayList<Button> buttons, GridPane gridPane, boolean withLink, Button deleteButton) throws IOException, URISyntaxException {
         int j = 5;
         int cntr = 0;
-        //List<String> lines = Files.readAllLines(new File(filePath).toPath());
+        List<String> lines = Files.readAllLines(new File(filePath).toPath());
 
         for (String s : lines) {
             String[] arr = s.split(";");
@@ -118,7 +109,7 @@ public class DataHandler {
                     if (mouseEvent.getButton() == MouseButton.SECONDARY) {
                         deleteButton.setOnAction(actionEvent -> {
                             System.out.println(lines.get(finalCntr));
-                            lines.remove(finalCntr).lines();
+                            lines.remove(lines.get(finalCntr));
                         });
                     }
                 });
