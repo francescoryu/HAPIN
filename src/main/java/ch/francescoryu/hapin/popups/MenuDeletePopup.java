@@ -19,6 +19,7 @@ import java.util.Objects;
 public class MenuDeletePopup extends Application {
     @Override
     public void start(Stage stage) throws Exception {
+        int i;
         ArrayList<Button> buttons = new ArrayList<>();
         GridPane gridPane = new GridPane();
         gridPane.setStyle("-fx-background-color: #d2b0d9; -fx-padding: 10; -fx-alignment: center");
@@ -34,15 +35,11 @@ public class MenuDeletePopup extends Application {
         deleteButtonImageView.setPreserveRatio(true);
         deleteButton.setGraphic(deleteButtonImageView);
 
-        DataHandler.createButtons(buttons, gridPane, false);
+        DataHandler.createButtons(buttons, gridPane, false, deleteButton);
 
         HBox buttonBox = new HBox();
         buttonBox.setStyle("-fx-alignment: center; -fx-padding: 10");
         buttonBox.getChildren().add(deleteButton);
-
-        deleteButton.setOnAction(actionEvent -> {
-
-        });
 
 
         BorderPane popupBorderPane = new BorderPane();

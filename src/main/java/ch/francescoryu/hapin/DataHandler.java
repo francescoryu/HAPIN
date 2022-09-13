@@ -88,9 +88,9 @@ public class DataHandler {
         return inputFromTextField;
     }
 
-    public static void createButtons(ArrayList<Button> buttons, GridPane gridPane, boolean withLink) throws IOException, URISyntaxException {
+    public static void createButtons(ArrayList<Button> buttons, GridPane gridPane, boolean withLink, Button deleteButton) throws IOException, URISyntaxException {
         int j = 5;
-
+        int cntr = 0;
         //List<String> lines = Files.readAllLines(new File(filePath).toPath());
 
         for (String s : lines) {
@@ -102,11 +102,9 @@ public class DataHandler {
             imageView.setFitHeight(25);
             imageView.setPreserveRatio(true);
             b.setGraphic(imageView);
-
-            System.out.println(arr[2]);
             menuMethods.setButtonStyle(b);
 
-            if (withLink == true) {
+            if (withLink) {
                 b.setOnAction(e -> {
                     try {
                         Desktop.getDesktop().browse(new URI("https://" + arr[1]));
@@ -115,9 +113,23 @@ public class DataHandler {
                     }
                 });
             }
-            buttons.add(b);
-            gridPane.add(b, 0, j);
-            j++;
+
+            if (!withLink) {
+                int finalCntr = cntr;
+                b.setOnAction(actionEvent -> {
+                    lines.remove(b);
+                    buttons.remove(b);
+                });
+            }
+                buttons.add(b);
+                gridPane.add(b, 0, j);
+                j++;
+                cntr++;
+
         }
+    /*public static void removeButton(int cntr, ArrayList<Button> buttons) {
+        buttons.remove();
+        lines.remove(cntr);
+    }*/
     }
 }
