@@ -133,11 +133,13 @@ public class DataHandler {
             buttons.add(b);
             gridPane.add(b, 0, cntr);
 
-            if (b.isPressed()) {
-                deleteButton.setOnAction(actionEvent -> {
+            int finalCntr = cntr;
+            deleteButton.setOnAction(actionEvent -> {
+                if (b.isPressed()) {
+                    lines.remove(finalCntr);
                     buttons.remove(b);
-                });
-            }
+                }
+            });
 
             cntr++;
         }
