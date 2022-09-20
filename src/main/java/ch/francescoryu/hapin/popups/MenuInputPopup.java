@@ -73,7 +73,7 @@ public class MenuInputPopup extends Application {
         saveButton.setOnAction(actionEvent -> {
 
             try {
-                DataHandler.readFileAsString();
+                
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
