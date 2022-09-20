@@ -58,7 +58,7 @@ public class Menu extends Application {
         menuMethods.setLabelStyle(linksText);
 
         Button googleButton = new Button("Google");
-        ImageView googleImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/googleImgMenu.png"))));
+        ImageView googleImageView = new ImageView(new Image(Objects.requireNonNull(MenuInputPopup.class.getResourceAsStream("navMenuImg/googleImgMenu.png"))));
         googleImageView.setFitHeight(25);
         googleImageView.setPreserveRatio(true);
         googleButton.setGraphic(googleImageView);
@@ -74,7 +74,7 @@ public class Menu extends Application {
         );
 
         Button youtubeButton = new Button("Youtube");
-        ImageView youtubeImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/youtubeImgMenu.png"))));
+        ImageView youtubeImageView = new ImageView(new Image(Objects.requireNonNull(MenuInputPopup.class.getResourceAsStream("navMenuImg/youtubeImgMenu.png"))));
         youtubeImageView.setFitHeight(25);
         youtubeImageView.setPreserveRatio(true);
         youtubeButton.setGraphic(youtubeImageView);
@@ -90,7 +90,7 @@ public class Menu extends Application {
         );
 
         Button tagiButton = new Button("Tagesanzeiger");
-        ImageView tagiImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/tagiImgMenu.png"))));
+        ImageView tagiImageView = new ImageView(new Image(Objects.requireNonNull(MenuInputPopup.class.getResourceAsStream("navMenuImg/tagiImgMenu.png"))));
         tagiImageView.setFitHeight(25);
         tagiImageView.setPreserveRatio(true);
         tagiButton.setGraphic(tagiImageView);
@@ -106,7 +106,7 @@ public class Menu extends Application {
         );
 
         Button facebookButton = new Button("Facebook");
-        ImageView facebookImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/facebookImgMenu.png"))));
+        ImageView facebookImageView = new ImageView(new Image(Objects.requireNonNull(MenuInputPopup.class.getResourceAsStream("navMenuImg/facebookImgMenu.png"))));
         facebookImageView.setFitHeight(25);
         facebookImageView.setPreserveRatio(true);
         facebookButton.setGraphic(facebookImageView);
@@ -168,13 +168,13 @@ public class Menu extends Application {
         scrollPane.setFitToWidth(true);
 
         Button addButton = new Button();
-        ImageView addButtonImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/add.png"))));
+        ImageView addButtonImageView = new ImageView(new Image(Objects.requireNonNull(MenuInputPopup.class.getResourceAsStream("navMenuImg/add.png"))));
         addButtonImageView.setFitHeight(35);
         addButtonImageView.setPreserveRatio(true);
         addButton.setGraphic(addButtonImageView);
 
         Button deleteButton = new Button();
-        ImageView deleteButtonImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/delete.png"))));
+        ImageView deleteButtonImageView = new ImageView(new Image(Objects.requireNonNull(MenuInputPopup.class.getResourceAsStream("navMenuImg/delete.png"))));
         deleteButtonImageView.setFitHeight(35);
         deleteButtonImageView.setPreserveRatio(true);
         deleteButton.setGraphic(deleteButtonImageView);
@@ -190,7 +190,7 @@ public class Menu extends Application {
 
         //--------------------------------------------------------------------------------------------------------------
         addButton.setOnAction(actionEvent -> {
-            MenuInputPopup menuInputPopup = new MenuInputPopup(buttons, gridPane, deleteButton);
+            MenuInputPopup menuInputPopup = new MenuInputPopup();
             try {
                 menuInputPopup.start(new Stage());
             } catch (Exception e) {
@@ -207,7 +207,7 @@ public class Menu extends Application {
         }
 
         Button refreshButton = new Button();
-        ImageView refreshButtonImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/refresh.png"))));
+        ImageView refreshButtonImageView = new ImageView(new Image(Objects.requireNonNull(MenuInputPopup.class.getResourceAsStream("navMenuImg/refresh.png"))));
         refreshButtonImageView.setFitHeight(35);
         refreshButtonImageView.setPreserveRatio(true);
         refreshButton.setGraphic(refreshButtonImageView);

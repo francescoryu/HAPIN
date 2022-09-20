@@ -1,7 +1,7 @@
 package ch.francescoryu.hapin.popups;
 
 import ch.francescoryu.hapin.DataHandler;
-import ch.francescoryu.hapin.Menu;
+import ch.francescoryu.hapin.MenuInputPopup;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -30,7 +30,7 @@ public class MenuDeletePopup extends Application {
         scrollPane.setFitToWidth(true);
 
         Button deleteButton = new Button();
-        ImageView deleteButtonImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/delete.png"))));
+        ImageView deleteButtonImageView = new ImageView(new Image(Objects.requireNonNull(MenuInputPopup.class.getResourceAsStream("navMenuImg/delete.png"))));
         deleteButtonImageView.setFitHeight(35);
         deleteButtonImageView.setPreserveRatio(true);
         deleteButton.setGraphic(deleteButtonImageView);

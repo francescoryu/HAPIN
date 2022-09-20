@@ -1,243 +1,121 @@
+package ch.francescoryu.hapin.popups;
 /**
  * @author: Francesco Ryu
  * @version: 1.0
  * @date 08.09.2022
  * @description A helping software for people who want to have everything compact(First project with JavaFx).
  */
-package ch.francescoryu.hapin;
 
+import ch.francescoryu.hapin.DataHandler;
+import ch.francescoryu.hapin.Menu;
 import ch.francescoryu.hapin.buttonMethods.MenuMethods;
-import ch.francescoryu.hapin.popups.MenuDeletePopup;
-import ch.francescoryu.hapin.popups.MenuInputPopup;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Application;
-import javafx.scene.Group;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
-import java.awt.*;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Objects;
 
+public class MenuInputPopup extends Application {
+    TextField inputButtonName;
+    TextField inputButtonUrl;
 
-public class Menu extends Application {
+    final Text source = new Text(50, 100, "DRAG ME");
+    final Text target = new Text(300, 100, "DROP HERE");
 
-    private final ArrayList<Button> buttons = new ArrayList<>();
+    MenuMethods menuMethods = new MenuMethods();
 
     @Override
-    public void start(Stage stage) throws FileNotFoundException {
+    public void start(Stage stage) throws Exception {
+
+        BorderPane popupBorderPane = new BorderPane();
         MenuMethods menuMethods = new MenuMethods();
-        //--------------------------------------------------------------------------------------------------------------
-        final Text clock = new Text();
-        final DateFormat format = DateFormat.getInstance();
-        final Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
-            final Calendar cal = Calendar.getInstance();
-            clock.setText(format.format(cal.getTime()));
-        }));
 
-        timeline.setCycleCount(Animation.INDEFINITE);
-        timeline.play();
-        //--------------------------------------------------------------------------------------------------------------
-        Text linksText = new Text("Schnellzugriff");
-        menuMethods.setLabelStyle(linksText);
+        Text buttonNameText = new Text("Button Name: ");
+        menuMethods.setPopUpStyle(buttonNameText);
+        Text urlText = new Text("Pfad eingeben: ");
+        menuMethods.setPopUpStyle(urlText);
+        Text imgText = new Text("Bild hinzufügen: ");
+        menuMethods.setPopUpStyle(imgText);
 
-        Button googleButton = new Button("Google");
-        ImageView googleImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/googleImgMenu.png"))));
-        googleImageView.setFitHeight(25);
-        googleImageView.setPreserveRatio(true);
-        googleButton.setGraphic(googleImageView);
-        menuMethods.setButtonStyle(googleButton);
+        VBox textBox = new VBox();
+        textBox.setStyle("-fx-padding: 20");
+        textBox.setSpacing(35);
+        textBox.getChildren().addAll(buttonNameText, urlText, imgText);
 
-        googleButton.setOnAction(e -> {
-                    try {
-                        Desktop.getDesktop().browse(new URI("https://www.google.com"));
-                    } catch (IOException | URISyntaxException e1) {
-                        e1.printStackTrace();
-                    }
-                }
-        );
+        inputButtonName = new TextField();
+        inputButtonName.setPrefColumnCount(20);
+        menuMethods.setInputTextFieldStyle(inputButtonName);
 
-        Button youtubeButton = new Button("Youtube");
-        ImageView youtubeImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/youtubeImgMenu.png"))));
-        youtubeImageView.setFitHeight(25);
-        youtubeImageView.setPreserveRatio(true);
-        youtubeButton.setGraphic(youtubeImageView);
-        menuMethods.setButtonStyle(youtubeButton);
+        inputButtonUrl = new TextField();
+        menuMethods.setInputTextFieldStyle(inputButtonUrl);
+        inputButtonUrl.setPrefColumnCount(20);
 
-        youtubeButton.setOnAction(e -> {
-                    try {
-                        Desktop.getDesktop().browse(new URI("https://www.youtube.com"));
-                    } catch (IOException | URISyntaxException e1) {
-                        e1.printStackTrace();
-                    }
-                }
-        );
+        VBox inputBox = new VBox();
+        inputBox.setStyle("-fx-padding: 15");
+        inputBox.setSpacing(20);
+        inputBox.getChildren().addAll(inputButtonName, inputButtonUrl);
 
-        Button tagiButton = new Button("Tagesanzeiger");
-        ImageView tagiImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/tagiImgMenu.png"))));
-        tagiImageView.setFitHeight(25);
-        tagiImageView.setPreserveRatio(true);
-        tagiButton.setGraphic(tagiImageView);
-        menuMethods.setButtonStyle(tagiButton);
+        Button saveButton = new Button();
+        ImageView saveButtonImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/save.png"))));
+        saveButtonImageView.setFitHeight(25);
+        saveButtonImageView.setPreserveRatio(true);
+        saveButton.setGraphic(saveButtonImageView);
 
-        tagiButton.setOnAction(e -> {
-                    try {
-                        Desktop.getDesktop().browse(new URI("https://www.tagesanzeiger.ch"));
-                    } catch (IOException | URISyntaxException e1) {
-                        e1.printStackTrace();
-                    }
-                }
-        );
+        saveButton.setOnAction(actionEvent -> {
 
-        Button facebookButton = new Button("Facebook");
-        ImageView facebookImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/facebookImgMenu.png"))));
-        facebookImageView.setFitHeight(25);
-        facebookImageView.setPreserveRatio(true);
-        facebookButton.setGraphic(facebookImageView);
-        menuMethods.setButtonStyle(facebookButton);
-
-        facebookButton.setOnAction(e -> {
-                    try {
-                        Desktop.getDesktop().browse(new URI("https://www.facebook.com"));
-                    } catch (IOException | URISyntaxException e1) {
-                        e1.printStackTrace();
-                    }
-                }
-        );
-
-
-        //--------------------------------------------------------------------------------------------------------------
-        Group navButtonGroup = new Group();
-        navButtonGroup.getChildren().addAll(googleButton, youtubeButton, tagiButton, facebookButton);
-        //--------------------------------------------------------------------------------------------------------------
-        HBox welcomeBox = new HBox();
-        welcomeBox.setBorder(new Border(new BorderStroke(Color.MEDIUMORCHID, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
-
-        Text welcomeText = new Text("Welcome! Have a nice day!");
-        welcomeText.setStyle("-fx-font-size: 60; -fx-padding: 20, 40; -fx-font-family: 'Microsoft Sans Serif'");
-        welcomeBox.getChildren().addAll(welcomeText);
-        welcomeBox.setStyle("-fx-padding: 10; -fx-alignment: center;");
-
-        HBox infoBox = new HBox(3);
-        infoBox.setBorder(new Border(new BorderStroke(Color.MEDIUMORCHID, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
-        infoBox.setSpacing(50);
-        infoBox.setStyle("-fx-alignment: center-right; -fx-font-size: 40; -fx-padding: 10");
-        infoBox.getChildren().addAll(clock);
-
-        //--------------------------------------------------------------------------------------------------------------
-        GridPane gridPane = new GridPane();
-        gridPane.setStyle("-fx-background-color: #d2b0d9; -fx-padding: 10; -fx-alignment: center");
-        gridPane.setVgap(10);
-        gridPane.setHgap(20);
-        gridPane.add(googleButton, 0, 1);
-        gridPane.add(facebookButton, 0, 2);
-        gridPane.add(tagiButton, 0, 3);
-        gridPane.add(youtubeButton, 0, 4);
-
-        buttons.add(googleButton);
-        buttons.add(facebookButton);
-        buttons.add(tagiButton);
-        buttons.add(youtubeButton);
-
-
-
-
-        //--------------------------------------------------------------------------------------------------------------
-
-
-
-
-        ScrollPane scrollPane = new ScrollPane(gridPane);
-        scrollPane.setStyle("-fx-padding: 10; -fx-border-style: solid inside; -fx-border-width: 2; -fx-background-color: #d2b0d9;");
-        scrollPane.setFitToWidth(true);
-
-        Button addButton = new Button();
-        ImageView addButtonImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/add.png"))));
-        addButtonImageView.setFitHeight(35);
-        addButtonImageView.setPreserveRatio(true);
-        addButton.setGraphic(addButtonImageView);
-
-        Button deleteButton = new Button();
-        ImageView deleteButtonImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/delete.png"))));
-        deleteButtonImageView.setFitHeight(35);
-        deleteButtonImageView.setPreserveRatio(true);
-        deleteButton.setGraphic(deleteButtonImageView);
-
-        deleteButton.setOnAction(actionEvent -> {
-            MenuDeletePopup menuDeletePopup = new MenuDeletePopup();
             try {
-                menuDeletePopup.start(new Stage());
+                DataHandler.readFileAsString();
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
+            saveButton.getScene().getWindow();
+            Platform.runLater(stage::close);
         });
 
-        //--------------------------------------------------------------------------------------------------------------
-        addButton.setOnAction(actionEvent -> {
-            MenuInputPopup menuInputPopup = new MenuInputPopup(buttons, gridPane, deleteButton);
-            try {
-                menuInputPopup.start(new Stage());
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
 
-        });
-        //--------------------------------------------------------------------------------------------------------------
+        Button chooseFile = new Button("Datei auswählen");
+        chooseFile.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'");
 
-        try {
-            DataHandler.createButtons(buttons, gridPane, true, deleteButton);
-        } catch (IOException | URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
-
-        Button refreshButton = new Button();
-        ImageView refreshButtonImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/refresh.png"))));
-        refreshButtonImageView.setFitHeight(35);
-        refreshButtonImageView.setPreserveRatio(true);
-        refreshButton.setGraphic(refreshButtonImageView);
-
-        refreshButton.setOnAction(actionEvent -> {
+        chooseFile.setOnAction(actionEvent -> {
+            DataHandler.saveData(stage, DataHandler.getInputFromTextField(inputButtonName, inputButtonUrl));
 
         });
 
-        HBox navButtonBox = new HBox();
-        navButtonBox.setStyle("-fx-alignment: center; -fx-padding: 20");
-        navButtonBox.setSpacing(10);
-        navButtonBox.getChildren().addAll(addButton, deleteButton, refreshButton);
+        Button cancelButton = new Button();
+        ImageView cancelButtonImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/delete.png"))));
+        cancelButtonImageView.setFitHeight(25);
+        cancelButtonImageView.setPreserveRatio(true);
+        cancelButton.setGraphic(cancelButtonImageView);
 
-        VBox navBox = new VBox();
-        navBox.setStyle("-fx-padding: 20; -fx-alignment: center");
-        navBox.setSpacing(10);
-        navBox.setMinWidth(350);
-        navBox.getChildren().addAll(linksText, scrollPane, navButtonBox);
-        //--------------------------------------------------------------------------------------------------------------
-        BorderPane borderPane = new BorderPane();
-        borderPane.setStyle("-fx-background-color: linear-gradient(to bottom right, #6a5acd, #ff7f50);");
-        borderPane.setTop(welcomeBox);
-        borderPane.setLeft(navBox);
-        borderPane.setBottom(infoBox);
-        //--------------------------------------------------------------------------------------------------------------
-        Scene scene = new Scene(borderPane);
-        stage.setTitle("HAPIN");
-        stage.setScene(scene);
-        stage.setMaximized(true);
-        stage.show();
-        //--------------------------------------------------------------------------------------------------------------
+        cancelButton.setOnAction(actionEvent -> {
+            inputButtonName.setText("");
+            inputButtonUrl.setText("");
+        });
+
+        HBox buttonBox = new HBox();
+        buttonBox.setStyle("-fx-alignment: center; -fx-padding: 10");
+        buttonBox.setSpacing(10);
+        buttonBox.getChildren().addAll(cancelButton, saveButton, chooseFile);
+
+        popupBorderPane.setLeft(textBox);
+        popupBorderPane.setRight(inputBox);
+        popupBorderPane.setBottom(buttonBox);
+        Scene scene = new Scene(popupBorderPane, 600, 300);
+        Stage stage1 = new Stage();
+        stage1.setTitle("Hinzufügen");
+        stage1.setScene(scene);
+        stage1.setResizable(false);
+        stage1.show();
     }
+
+
 }
