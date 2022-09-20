@@ -1,7 +1,0 @@
-Gmail;gmail.com;src/main/resources/Gmail_icon_(2020).svg.png
-BZZ;bzz.ch;src/main/resources/bzz.png
-Futbin;futbin.com;src/main/resources/Download.png
-KSH;intranet.tam.ch/ksh;src/main/resources/photo_large.jpg
-Galaxus;galaxus.ch;src/main/resources/Download (1).png
-Bluebrixx;bluebrixx.com;src/main/resources/Download.jpg
-Digitec;digitec.ch;src/main/resources/Logo digitec.jpg

@@ -10,11 +10,9 @@ import ch.francescoryu.hapin.buttonMethods.MenuMethods;
 import ch.francescoryu.hapin.popups.MenuDeletePopup;
 import ch.francescoryu.hapin.popups.MenuInputPopup;
 import javafx.animation.Animation;
-import javafx.animation.FillTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -175,18 +173,6 @@ public class Menu extends Application {
         addButtonImageView.setPreserveRatio(true);
         addButton.setGraphic(addButtonImageView);
 
-        //--------------------------------------------------------------------------------------------------------------
-        addButton.setOnAction(actionEvent -> {
-            MenuInputPopup menuInputPopup = new MenuInputPopup();
-            try {
-                menuInputPopup.start(new Stage());
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-
-        });
-        //--------------------------------------------------------------------------------------------------------------
-
         Button deleteButton = new Button();
         ImageView deleteButtonImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/delete.png"))));
         deleteButtonImageView.setFitHeight(35);
@@ -202,11 +188,21 @@ public class Menu extends Application {
             }
         });
 
+        //--------------------------------------------------------------------------------------------------------------
+        addButton.setOnAction(actionEvent -> {
+            MenuInputPopup menuInputPopup = new MenuInputPopup(buttons, gridPane, deleteButton);
+            try {
+                menuInputPopup.start(new Stage());
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+
+        });
+        //--------------------------------------------------------------------------------------------------------------
+
         try {
             DataHandler.createButtons(buttons, gridPane, true, deleteButton);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (URISyntaxException e) {
+        } catch (IOException | URISyntaxException e) {
             throw new RuntimeException(e);
         }
 

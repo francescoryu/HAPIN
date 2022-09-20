@@ -8,6 +8,8 @@ package ch.francescoryu.hapin;
 
 
 import ch.francescoryu.hapin.buttonMethods.MenuMethods;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -27,24 +29,19 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class DataHandler {
 
     static String filePath = "src/main/resources/save.txt";
     public static MenuMethods menuMethods = new MenuMethods();
 
-    public static void readFileAsString() {
-        BufferedReader reader;
+    public static void readFileAsString(ArrayList<Button> buttons, GridPane gridPane, Button deleteButton) {
+        gridPane.getChildren().removeAll(buttons);
+        buttons.clear();
         try {
-            reader = new BufferedReader(new FileReader(filePath));
-            String line = reader.readLine();
-            while (line != null) {
-                line = reader.readLine();
-            }
-            reader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+            createButtons(buttons, gridPane, true, deleteButton);
+        } catch (IOException | URISyntaxException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -96,6 +93,7 @@ public class DataHandler {
             b.setGraphic(imageView);
             menuMethods.setButtonStyle(b);
 
+
             if (withLink) {
                 b.setOnAction(e -> {
                     try {
@@ -108,9 +106,10 @@ public class DataHandler {
                 b.setOnMouseClicked(mouseEvent -> {
                     if (mouseEvent.getButton() == MouseButton.SECONDARY) {
                         deleteButton.setOnAction(actionEvent -> {
-                            if (s == lines.get(finalCntr)) {
-                                lines.get(finalCntr);
-                            }
+                            System.out.println("rechts");
+                            System.out.println(b.getText());
+                            deleteButton(b, buttons, gridPane);
+
                         });
                     }
                 });
@@ -120,9 +119,50 @@ public class DataHandler {
             gridPane.add(b, 0, j);
             j++;
             cntr++;
-
+            ObservableList<Button> list = FXCollections.observableArrayList(buttons);
         }
     }
+
+    public static void deleteButton(Button b, ArrayList<Button> buttons, GridPane pane) {
+        pane.getChildren().remove(b);
+        buttons.remove(b);
+        try {
+            remButtonFromFile(b);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static void remButtonFromFile(Button b) throws IOException {
+        List<String> lines = Files.readAllLines(new File(filePath).toPath());
+        ArrayList<String> lines0 = new ArrayList<>(lines.size() - 1);
+
+        ArrayList<String> standard = new ArrayList<>(List.of("Google", "Tagesanzeiger", "Youtube", "Facebook"));
+        for (String s : lines) {
+            String[] arr = s.split(";");
+            // Google, Tagesanzeiger, Youtube, Facebook
+            if (!arr[0].equals(b.getText()) || !standard.contains(b.getText())) {
+                lines0.add(s);
+            }
+            else {
+                removeImage(arr[3]);
+            }
+        }
+        BufferedWriter myWriter = Files.newBufferedWriter(Path.of(filePath));
+        for (String s : lines0) {
+            myWriter.write(s);
+            myWriter.newLine();
+        }
+        myWriter.close();
+    }
+
+    private static void removeImage(String arr) {
+        File deletingFile = new File(arr);
+        deletingFile.delete();
+        System.out.println("SUCCESSFULLY DELETED FILE");
+    }
+
+
     public static void deleteCustomButton(Button button, String s) {
 
         button.setOnMouseClicked(mouseEvent -> {
