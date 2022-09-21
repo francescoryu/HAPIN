@@ -136,18 +136,6 @@ public class DataHandler {
     private static void remButtonFromFile(Button b) throws IOException {
         List<String> lines = Files.readAllLines(new File(filePath).toPath());
         ArrayList<String> lines0 = new ArrayList<>(lines.size() - 1);
-
-        ArrayList<String> standard = new ArrayList<>(List.of("Google", "Tagesanzeiger", "Youtube", "Facebook"));
-        for (String s : lines) {
-            String[] arr = s.split(";");
-            // Google, Tagesanzeiger, Youtube, Facebook
-            if (!arr[0].equals(b.getText()) || !standard.contains(b.getText())) {
-                lines0.add(s);
-            }
-            else {
-                removeImage(arr[3]);
-            }
-        }
         BufferedWriter myWriter = Files.newBufferedWriter(Path.of(filePath));
         for (String s : lines0) {
             myWriter.write(s);

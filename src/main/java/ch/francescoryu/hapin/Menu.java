@@ -56,74 +56,10 @@ public class Menu extends Application {
         Text linksText = new Text("Schnellzugriff");
         menuMethods.setLabelStyle(linksText);
 
-        Button googleButton = new Button("Google");
-        ImageView googleImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/googleImgMenu.png"))));
-        googleImageView.setFitHeight(25);
-        googleImageView.setPreserveRatio(true);
-        googleButton.setGraphic(googleImageView);
-        menuMethods.setButtonStyle(googleButton);
-
-        googleButton.setOnAction(e -> {
-                    try {
-                        Desktop.getDesktop().browse(new URI("https://www.google.com"));
-                    } catch (IOException | URISyntaxException e1) {
-                        e1.printStackTrace();
-                    }
-                }
-        );
-
-        Button youtubeButton = new Button("Youtube");
-        ImageView youtubeImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/youtubeImgMenu.png"))));
-        youtubeImageView.setFitHeight(25);
-        youtubeImageView.setPreserveRatio(true);
-        youtubeButton.setGraphic(youtubeImageView);
-        menuMethods.setButtonStyle(youtubeButton);
-
-        youtubeButton.setOnAction(e -> {
-                    try {
-                        Desktop.getDesktop().browse(new URI("https://www.youtube.com"));
-                    } catch (IOException | URISyntaxException e1) {
-                        e1.printStackTrace();
-                    }
-                }
-        );
-
-        Button tagiButton = new Button("Tagesanzeiger");
-        ImageView tagiImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/tagiImgMenu.png"))));
-        tagiImageView.setFitHeight(25);
-        tagiImageView.setPreserveRatio(true);
-        tagiButton.setGraphic(tagiImageView);
-        menuMethods.setButtonStyle(tagiButton);
-
-        tagiButton.setOnAction(e -> {
-                    try {
-                        Desktop.getDesktop().browse(new URI("https://www.tagesanzeiger.ch"));
-                    } catch (IOException | URISyntaxException e1) {
-                        e1.printStackTrace();
-                    }
-                }
-        );
-
-        Button facebookButton = new Button("Facebook");
-        ImageView facebookImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/facebookImgMenu.png"))));
-        facebookImageView.setFitHeight(25);
-        facebookImageView.setPreserveRatio(true);
-        facebookButton.setGraphic(facebookImageView);
-        menuMethods.setButtonStyle(facebookButton);
-
-        facebookButton.setOnAction(e -> {
-                    try {
-                        Desktop.getDesktop().browse(new URI("https://www.facebook.com"));
-                    } catch (IOException | URISyntaxException e1) {
-                        e1.printStackTrace();
-                    }
-                }
-        );
-
 
         //--------------------------------------------------------------------------------------------------------------
-        Group navButtonGroup = new Group();
-        navButtonGroup.getChildren().addAll(googleButton, youtubeButton, tagiButton, facebookButton);
+
+
         //--------------------------------------------------------------------------------------------------------------
         HBox welcomeBox = new HBox();
         welcomeBox.setBorder(new Border(new BorderStroke(Color.MEDIUMORCHID, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
@@ -144,15 +80,6 @@ public class Menu extends Application {
         gridPane.setStyle("-fx-background-color: #d2b0d9; -fx-padding: 10; -fx-alignment: center");
         gridPane.setVgap(10);
         gridPane.setHgap(20);
-        gridPane.add(googleButton, 0, 1);
-        gridPane.add(facebookButton, 0, 2);
-        gridPane.add(tagiButton, 0, 3);
-        gridPane.add(youtubeButton, 0, 4);
-
-        buttons.add(googleButton);
-        buttons.add(facebookButton);
-        buttons.add(tagiButton);
-        buttons.add(youtubeButton);
 
 
 

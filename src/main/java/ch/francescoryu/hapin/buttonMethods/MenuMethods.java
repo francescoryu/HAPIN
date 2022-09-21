@@ -6,14 +6,9 @@
 
 package ch.francescoryu.hapin.buttonMethods;
 
-import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import org.jetbrains.annotations.Nullable;
 
 public class MenuMethods {
     public void setButtonStyle(Button button) {
@@ -21,7 +16,8 @@ public class MenuMethods {
                 "-fx-font-family: 'Microsoft Sans Serif'; " +
                 "-fx-background-radius: 10; " +
                 "-fx-border-width: 2;  " +
-                "-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 ); ");
+                "-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );" +
+                "-fx-min-width: 180");
 
         button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     }
@@ -41,19 +37,4 @@ public class MenuMethods {
         textField.setStyle("-fx-font-size: 18;" +
                 "-fx-font-family: 'Microsoft Sans Serif'");
     }
-
-    @FXML
-    private javafx.scene.control.Button closeButton;
-
-    @FXML
-    public void closeButtonAction() {
-        // get a handle to the stage
-
-        Stage stage = (Stage) closeButton.getScene().getWindow();
-        // do what you have to do
-        stage.close();
-        // do what you have to do
-
-    }
-
 }
