@@ -105,10 +105,6 @@ public class Menu extends Application {
         deleteButtonImageView.setPreserveRatio(true);
         deleteButton.setGraphic(deleteButtonImageView);
 
-        deleteButton.setOnAction(actionEvent -> {
-
-        });
-
         //--------------------------------------------------------------------------------------------------------------
         addButton.setOnAction(actionEvent -> {
             MenuInputPopup menuInputPopup = new MenuInputPopup();

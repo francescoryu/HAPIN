@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
 public class MenuMethods {
-    public void setButtonStyle(Button button) {
+    public static void setButtonStyle(Button button) {
         button.setStyle("-fx-font-size: 25; " +
                 "-fx-font-family: 'Microsoft Sans Serif'; " +
                 "-fx-background-radius: 10; " +

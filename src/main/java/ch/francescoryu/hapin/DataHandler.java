@@ -33,7 +33,6 @@ import java.util.List;
 public class DataHandler {
 
     static String filePath = "src/main/resources/save.txt";
-    public static MenuMethods menuMethods = new MenuMethods();
 
     public static void readFileAsString(ArrayList<Button> buttons, GridPane gridPane, Button deleteButton) {
         gridPane.getChildren().removeAll(buttons);
@@ -84,14 +83,13 @@ public class DataHandler {
 
         for (String s : lines) {
             String[] arr = s.split(";");
-            //String path = arr[2];
             Button b = new Button(arr[0]);
 
             ImageView imageView = new ImageView(new Image(Files.newInputStream(Paths.get(arr[2]))));
             imageView.setFitHeight(25);
             imageView.setPreserveRatio(true);
             b.setGraphic(imageView);
-            menuMethods.setButtonStyle(b);
+            MenuMethods.setButtonStyle(b);
 
 
             if (withLink) {
@@ -102,13 +100,13 @@ public class DataHandler {
                         e1.printStackTrace();
                     }
                 });
-                int finalCntr = cntr;
                 b.setOnMouseClicked(mouseEvent -> {
                     if (mouseEvent.getButton() == MouseButton.SECONDARY) {
                         deleteButton.setOnAction(actionEvent -> {
                             System.out.println("rechts");
                             System.out.println(b.getText());
                             deleteButton(b, buttons, gridPane);
+                            removeImage(arr[2]);
 
                         });
                     }
