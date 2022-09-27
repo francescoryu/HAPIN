@@ -107,7 +107,6 @@ public class DataHandler {
                             System.out.println(b.getText());
                             deleteButton(b, buttons, gridPane);
                             removeImage(arr[2]);
-
                         });
                     }
                 });
@@ -117,7 +116,6 @@ public class DataHandler {
             gridPane.add(b, 0, j);
             j++;
             cntr++;
-            ObservableList<Button> list = FXCollections.observableArrayList(buttons);
         }
     }
 
@@ -125,13 +123,13 @@ public class DataHandler {
         pane.getChildren().remove(b);
         buttons.remove(b);
         try {
-            remButtonFromFile(b);
+            remButtonFromFile();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private static void remButtonFromFile(Button b) throws IOException {
+    private static void remButtonFromFile() throws IOException {
         List<String> lines = Files.readAllLines(new File(filePath).toPath());
         ArrayList<String> lines0 = new ArrayList<>(lines.size() - 1);
         BufferedWriter myWriter = Files.newBufferedWriter(Path.of(filePath));
@@ -146,17 +144,5 @@ public class DataHandler {
         File deletingFile = new File(arr);
         deletingFile.delete();
         System.out.println("SUCCESSFULLY DELETED FILE");
-    }
-
-
-    public static void deleteCustomButton(Button button, String s) {
-
-        button.setOnMouseClicked(mouseEvent -> {
-            if (mouseEvent.getButton() == MouseButton.SECONDARY) {
-                button.setOnAction(actionEvent -> {
-
-                });
-            }
-        });
     }
 }
