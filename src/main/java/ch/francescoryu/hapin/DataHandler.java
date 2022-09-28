@@ -123,19 +123,20 @@ public class DataHandler {
         pane.getChildren().remove(b);
         buttons.remove(b);
         try {
-            remButtonFromFile();
+            remButtonFromFile(b.getText());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private static void remButtonFromFile() throws IOException {
+    private static void remButtonFromFile(String str) throws IOException {
         List<String> lines = Files.readAllLines(new File(filePath).toPath());
-        ArrayList<String> lines0 = new ArrayList<>(lines.size() - 1);
         BufferedWriter myWriter = Files.newBufferedWriter(Path.of(filePath));
-        for (String s : lines0) {
-            myWriter.write(s);
-            myWriter.newLine();
+        for (String s : lines) {
+            if (!str.equals(s.split(";")[0])) {
+                myWriter.write(s);
+                myWriter.newLine();
+            }
         }
         myWriter.close();
     }
