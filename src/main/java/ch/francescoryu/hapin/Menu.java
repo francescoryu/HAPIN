@@ -52,7 +52,7 @@ public class Menu extends Application {
 
         //--------------------------------------------------------------------------------------------------------------
 
-        Text linksText = new Text("Schnellzugriff");
+        Text linksText = new Text("Hyperlinks");
         menuMethods.setLabelStyle(linksText);
 
         //--------------------------------------------------------------------------------------------------------------
