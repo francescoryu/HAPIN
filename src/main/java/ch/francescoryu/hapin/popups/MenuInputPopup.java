@@ -70,17 +70,6 @@ public class MenuInputPopup extends Application {
         saveButtonImageView.setPreserveRatio(true);
         saveButton.setGraphic(saveButtonImageView);
 
-        saveButton.setOnAction(actionEvent -> {
-
-            try {
-                
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-            saveButton.getScene().getWindow();
-            Platform.runLater(stage::close);
-        });
-
 
         Button chooseFile = new Button("Datei auswählen");
         chooseFile.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'");
@@ -115,6 +104,10 @@ public class MenuInputPopup extends Application {
         stage1.setScene(scene);
         stage1.setResizable(false);
         stage1.show();
+
+        saveButton.setOnAction(actionEvent -> {
+            stage1.hide();
+        });
     }
 
 
