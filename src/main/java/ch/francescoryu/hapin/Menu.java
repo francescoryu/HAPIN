@@ -133,7 +133,7 @@ public class Menu extends Application {
         refreshButton.setGraphic(refreshButtonImageView);
 
         refreshButton.setOnAction(actionEvent -> {
-            DataHandler.readFileAsString(buttons, gridPane, deleteButton);
+            DataHandler.reloadButtonList(buttons, gridPane, deleteButton);
         });
 
         HBox navButtonBox = new HBox();

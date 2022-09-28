@@ -2,13 +2,16 @@ package ch.francescoryu.hapin;
 
 import ch.francescoryu.hapin.buttonMethods.MenuMethods;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
+
 import java.awt.*;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -31,9 +34,10 @@ import java.util.List;
 
 public class DataHandler {
 
-    static String filePath = "src/main/resources/save.txt";
+    static String saveFilePath = "src/main/resources/save.txt";
+    static String loginFilePath = "src/main/resources/login.txt";
 
-    public static void readFileAsString(ArrayList<Button> buttons, GridPane gridPane, Button deleteButton) {
+    public static void reloadButtonList(ArrayList<Button> buttons, GridPane gridPane, Button deleteButton) {
         gridPane.getChildren().removeAll(buttons);
         buttons.clear();
         try {
@@ -50,7 +54,7 @@ public class DataHandler {
         fileChooser.setInitialDirectory(new File("src/main/resources/" + selectedFile.getName()));
         Path from = Paths.get(selectedFile.toURI());
         try {
-            BufferedWriter myWriter = Files.newBufferedWriter(Path.of(filePath), StandardOpenOption.APPEND);
+            BufferedWriter myWriter = Files.newBufferedWriter(Path.of(saveFilePath), StandardOpenOption.APPEND);
             myWriter.write(input + ";" + "src/main/resources/" + selectedFile.getName());
             myWriter.newLine();
             myWriter.close();
@@ -78,7 +82,7 @@ public class DataHandler {
     public static void createButtons(ArrayList<Button> buttons, GridPane gridPane, boolean withLink, Button deleteButton) throws IOException, URISyntaxException {
         int j = 5;
         int cntr = 0;
-        List<String> lines = Files.readAllLines(new File(filePath).toPath());
+        List<String> lines = Files.readAllLines(new File(saveFilePath).toPath());
 
         for (String s : lines) {
             String[] arr = s.split(";");
@@ -129,8 +133,8 @@ public class DataHandler {
     }
 
     private static void remButtonFromFile(String str) throws IOException {
-        List<String> lines = Files.readAllLines(new File(filePath).toPath());
-        BufferedWriter myWriter = Files.newBufferedWriter(Path.of(filePath));
+        List<String> lines = Files.readAllLines(new File(saveFilePath).toPath());
+        BufferedWriter myWriter = Files.newBufferedWriter(Path.of(saveFilePath));
         for (String s : lines) {
             if (!str.equals(s.split(";")[0])) {
                 myWriter.write(s);
@@ -144,5 +148,27 @@ public class DataHandler {
         File deletingFile = new File(arr);
         deletingFile.delete();
         System.out.println("SUCCESSFULLY DELETED FILE");
+    }
+
+    public static void checkLoginData(String userName, TextField pwdField) throws IOException {
+        List<String> lines = Files.readAllLines(new File(loginFilePath).toPath());
+
+        for (String s : lines) {
+            String[] arrString = s.split(";");
+            if (userName.equals(arrString[0]) && pwdField.getText().equals(arrString[1])) {
+                System.out.println("SUCCESSFUL");
+            }
+
+        }
+    }
+
+    public static void loadUserToComboBox(ComboBox<String> comboBox) throws IOException {
+        List<String> lines = Files.readAllLines(new File(loginFilePath).toPath());
+        for (String s : lines) {
+            String[] arrString = s.split(";");
+            String name = arrString[0];
+            comboBox.getItems().add(name);
+
+        }
     }
 }
