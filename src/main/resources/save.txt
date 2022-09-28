@@ -1,0 +1,3 @@
+Google;google.com;src/main/resources/google.png
+Youtube;youtube.com;src/main/resources/youtube.png
+Gmail;gmail.com;src/main/resources/gmail.png

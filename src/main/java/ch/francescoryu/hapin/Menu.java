@@ -1,9 +1,3 @@
-/**
- * @author: Francesco Ryu
- * @version: 1.0
- * @date 08.09.2022
- * @description A helping software for people who want to have everything compact(First project with JavaFx).
- */
 package ch.francescoryu.hapin;
 
 import ch.francescoryu.hapin.buttonMethods.MenuMethods;
@@ -12,7 +6,6 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -23,17 +16,20 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
-import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Objects;
 
+/**
+ * @author: Francesco Ryu
+ * @version: 1.0
+ * @date 08.09.2022
+ * @description A helping software for people who want to have everything compact(First project with JavaFx).
+ */
 
 public class Menu extends Application {
 
@@ -43,6 +39,7 @@ public class Menu extends Application {
     public void start(Stage stage) throws FileNotFoundException {
         MenuMethods menuMethods = new MenuMethods();
         //--------------------------------------------------------------------------------------------------------------
+
         final Text clock = new Text();
         final DateFormat format = DateFormat.getInstance();
         final Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
@@ -52,15 +49,17 @@ public class Menu extends Application {
 
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
+
         //--------------------------------------------------------------------------------------------------------------
+
         Text linksText = new Text("Schnellzugriff");
         menuMethods.setLabelStyle(linksText);
 
-
         //--------------------------------------------------------------------------------------------------------------
 
 
         //--------------------------------------------------------------------------------------------------------------
+
         HBox welcomeBox = new HBox();
         welcomeBox.setBorder(new Border(new BorderStroke(Color.MEDIUMORCHID, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
 
@@ -76,6 +75,7 @@ public class Menu extends Application {
         infoBox.getChildren().addAll(clock);
 
         //--------------------------------------------------------------------------------------------------------------
+
         GridPane gridPane = new GridPane();
         gridPane.setStyle("-fx-background-color: #d2b0d9; -fx-padding: 10; -fx-alignment: center");
         gridPane.setVgap(10);
@@ -92,6 +92,7 @@ public class Menu extends Application {
         ScrollPane scrollPane = new ScrollPane(gridPane);
         scrollPane.setStyle("-fx-padding: 10; -fx-border-style: solid inside; -fx-border-width: 2; -fx-background-color: #d2b0d9;");
         scrollPane.setFitToWidth(true);
+        scrollPane.setMaxHeight(500);
 
         Button addButton = new Button();
         ImageView addButtonImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/add.png"))));
@@ -106,6 +107,7 @@ public class Menu extends Application {
         deleteButton.setGraphic(deleteButtonImageView);
 
         //--------------------------------------------------------------------------------------------------------------
+
         addButton.setOnAction(actionEvent -> {
             MenuInputPopup menuInputPopup = new MenuInputPopup();
             try {
@@ -115,6 +117,7 @@ public class Menu extends Application {
             }
 
         });
+
         //--------------------------------------------------------------------------------------------------------------
 
         try {
@@ -143,18 +146,27 @@ public class Menu extends Application {
         navBox.setSpacing(10);
         navBox.setMinWidth(350);
         navBox.getChildren().addAll(linksText, scrollPane, navButtonBox);
+
+        //-------------------------------------------------------------------------------------------------------------
+
+
+
         //--------------------------------------------------------------------------------------------------------------
+
         BorderPane borderPane = new BorderPane();
         borderPane.setStyle("-fx-background-color: linear-gradient(to bottom right, #6a5acd, #ff7f50);");
         borderPane.setTop(welcomeBox);
         borderPane.setLeft(navBox);
         borderPane.setBottom(infoBox);
+
         //--------------------------------------------------------------------------------------------------------------
+
         Scene scene = new Scene(borderPane);
         stage.setTitle("HAPIN");
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.show();
+
         //--------------------------------------------------------------------------------------------------------------
     }
 }

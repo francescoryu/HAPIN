@@ -1,15 +1,6 @@
 package ch.francescoryu.hapin;
-/**
- * @author: Francesco Ryu
- * @version: 1.0
- * @date 08.09.2022
- * @description A helping software for people who want to have everything compact(First project with JavaFx).
- */
-
 
 import ch.francescoryu.hapin.buttonMethods.MenuMethods;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -18,9 +9,10 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
 import java.awt.*;
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
@@ -29,6 +21,13 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * @author: Francesco Ryu
+ * @version: 1.0
+ * @date 08.09.2022
+ * @description A helping software for people who want to have everything compact(First project with JavaFx).
+ */
 
 public class DataHandler {
 

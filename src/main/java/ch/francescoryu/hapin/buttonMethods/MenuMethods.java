@@ -1,14 +1,14 @@
-/**
- * @author: Francesco Ryu
- * @version: 1.0
- * @description methods for main menu
- */
-
 package ch.francescoryu.hapin.buttonMethods;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+
+/**
+ * @author: Francesco Ryu
+ * @version: 1.0
+ * @description methods for main menu
+ */
 
 public class MenuMethods {
     public static void setButtonStyle(Button button) {
