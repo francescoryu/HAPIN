@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -51,6 +52,7 @@ public class Login extends Application {
         buttonBox.setStyle("-fx-padding: 10");
 
         BorderPane borderPane = new BorderPane();
+        borderPane.setStyle("-fx-background-image: url(loginBackground.png);-fx-background-position: center center;");
         borderPane.setTop(loginLabelBox);
         borderPane.setCenter(inputBox);
         borderPane.setBottom(buttonBox);

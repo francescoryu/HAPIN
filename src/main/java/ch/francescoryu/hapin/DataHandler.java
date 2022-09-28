@@ -83,7 +83,6 @@ public class DataHandler {
 
     public static void createButtons(ArrayList<Button> buttons, GridPane gridPane, boolean withLink, Button deleteButton) throws IOException, URISyntaxException {
         int j = 5;
-        int cntr = 0;
         List<String> lines = Files.readAllLines(new File(saveFilePath).toPath());
 
         for (String s : lines) {
@@ -120,7 +119,6 @@ public class DataHandler {
             buttons.add(b);
             gridPane.add(b, 0, j);
             j++;
-            cntr++;
         }
     }
 

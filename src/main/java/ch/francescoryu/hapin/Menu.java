@@ -154,7 +154,8 @@ public class Menu extends Application {
         //--------------------------------------------------------------------------------------------------------------
 
         BorderPane borderPane = new BorderPane();
-        borderPane.setStyle("-fx-background-color: linear-gradient(to bottom right, #6a5acd, #ff7f50);");
+        //borderPane.setStyle("-fx-background-color: linear-gradient(to top, #CBE1EF, #9ACDE0, #5EA9BE, #F3BFB3);");
+        borderPane.setStyle("-fx-background-image: url(menuBackground.png); -fx-background-position: center center");
         borderPane.setTop(welcomeBox);
         borderPane.setLeft(navBox);
         borderPane.setBottom(infoBox);
