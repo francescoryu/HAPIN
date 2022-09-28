@@ -3,10 +3,7 @@ package ch.francescoryu.hapin;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -27,9 +24,11 @@ public class Login extends Application {
         DataHandler.loadUserToComboBox(userComboBox);
         userComboBox.setMinWidth(200);
         userComboBox.setStyle("-fx-font-family: 'Times New Roman'; -fx-font-size: 15");
+        userComboBox.setPromptText("Select User");
 
-        TextField pwdTextField = new TextField();
+        PasswordField pwdTextField = new PasswordField();
         pwdTextField.setMaxWidth(200);
+        pwdTextField.setPromptText("Enter Password");
 
         VBox inputBox = new VBox();
         inputBox.getChildren().addAll(userComboBox, pwdTextField);
@@ -38,9 +37,10 @@ public class Login extends Application {
         inputBox.setAlignment(Pos.TOP_CENTER);
 
         Button loginButton = new Button("Login");
+        loginButton.setStyle("-fx-font-family: 'Times New Roman'; -fx-font-size: 15");
         loginButton.setOnAction(actionEvent -> {
             try {
-                DataHandler.checkLoginData(userComboBox.getValue(), pwdTextField);
+                DataHandler.checkLoginData(userComboBox.getValue(), pwdTextField, stage);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -48,6 +48,7 @@ public class Login extends Application {
 
         HBox buttonBox = new HBox(loginButton);
         buttonBox.setAlignment(Pos.TOP_CENTER);
+        buttonBox.setStyle("-fx-padding: 10");
 
         BorderPane borderPane = new BorderPane();
         borderPane.setTop(loginLabelBox);
@@ -56,6 +57,7 @@ public class Login extends Application {
 
         Scene scene = new Scene(borderPane, 400, 200);
         stage.setScene(scene);
+        stage.setTitle("Login");
         stage.setResizable(false);
         stage.show();
 

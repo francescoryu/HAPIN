@@ -1,8 +1,10 @@
 package ch.francescoryu.hapin;
 
 import ch.francescoryu.hapin.buttonMethods.MenuMethods;
+import javafx.application.Application;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -51,11 +53,11 @@ public class DataHandler {
     public static void saveData(Stage stage, String input) {
         FileChooser fileChooser = new FileChooser();
         File selectedFile = fileChooser.showOpenDialog(stage);
-        fileChooser.setInitialDirectory(new File("src/main/resources/" + selectedFile.getName()));
+        fileChooser.setInitialDirectory(new File("src/main/resources/buttonImages/" + selectedFile.getName()));
         Path from = Paths.get(selectedFile.toURI());
         try {
             BufferedWriter myWriter = Files.newBufferedWriter(Path.of(saveFilePath), StandardOpenOption.APPEND);
-            myWriter.write(input + ";" + "src/main/resources/" + selectedFile.getName());
+            myWriter.write(input + ";" + "src/main/resources/buttonImages/" + selectedFile.getName());
             myWriter.newLine();
             myWriter.close();
         } catch (IOException e) {
@@ -63,7 +65,7 @@ public class DataHandler {
             e.printStackTrace();
         }
         if (selectedFile != null) {
-            Path to = Paths.get("src/main/resources/" + selectedFile.getName());
+            Path to = Paths.get("src/main/resources/buttonImages/" + selectedFile.getName());
             try {
                 Files.copy(from, to);
             } catch (IOException e) {
@@ -150,15 +152,21 @@ public class DataHandler {
         System.out.println("SUCCESSFULLY DELETED FILE");
     }
 
-    public static void checkLoginData(String userName, TextField pwdField) throws IOException {
+    public static void checkLoginData(String userName, PasswordField pwdField, Stage actualStage) throws IOException {
         List<String> lines = Files.readAllLines(new File(loginFilePath).toPath());
-
         for (String s : lines) {
             String[] arrString = s.split(";");
+
             if (userName.equals(arrString[0]) && pwdField.getText().equals(arrString[1])) {
                 System.out.println("SUCCESSFUL");
+                Menu menu = new Menu();
+                Stage stage = new Stage();
+                menu.start(stage);
+                actualStage.close();
             }
-
+            else {
+                System.out.println();
+            }
         }
     }
 
@@ -168,7 +176,6 @@ public class DataHandler {
             String[] arrString = s.split(";");
             String name = arrString[0];
             comboBox.getItems().add(name);
-
         }
     }
 }
