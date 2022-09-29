@@ -52,10 +52,17 @@ public class MenuInputPopup extends Application {
         menuMethods.setInputTextFieldStyle(inputButtonUrl);
         inputButtonUrl.setPrefColumnCount(20);
 
+        Button chooseFile = new Button("Datei auswählen");
+        chooseFile.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'");
+
+        chooseFile.setOnAction(actionEvent -> {
+            DataHandler.saveData(stage, DataHandler.getInputFromTextField(inputButtonName, inputButtonUrl));
+        });
+
         VBox inputBox = new VBox();
         inputBox.setStyle("-fx-padding: 15");
         inputBox.setSpacing(20);
-        inputBox.getChildren().addAll(inputButtonName, inputButtonUrl);
+        inputBox.getChildren().addAll(inputButtonName, inputButtonUrl, chooseFile);
 
         Button saveButton = new Button();
         ImageView saveButtonImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/save.png"))));
@@ -63,13 +70,6 @@ public class MenuInputPopup extends Application {
         saveButtonImageView.setPreserveRatio(true);
         saveButton.setGraphic(saveButtonImageView);
 
-
-        Button chooseFile = new Button("Datei auswählen");
-        chooseFile.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'");
-
-        chooseFile.setOnAction(actionEvent -> {
-            DataHandler.saveData(stage, DataHandler.getInputFromTextField(inputButtonName, inputButtonUrl));
-        });
 
         Button cancelButton = new Button();
         ImageView cancelButtonImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/delete.png"))));
@@ -85,8 +85,9 @@ public class MenuInputPopup extends Application {
         HBox buttonBox = new HBox();
         buttonBox.setStyle("-fx-alignment: center; -fx-padding: 10");
         buttonBox.setSpacing(10);
-        buttonBox.getChildren().addAll(cancelButton, saveButton, chooseFile);
+        buttonBox.getChildren().addAll(cancelButton, saveButton);
 
+        popupBorderPane.setStyle("-fx-background-image: url(loginBackground.png);-fx-background-position: center center;");
         popupBorderPane.setLeft(textBox);
         popupBorderPane.setRight(inputBox);
         popupBorderPane.setBottom(buttonBox);

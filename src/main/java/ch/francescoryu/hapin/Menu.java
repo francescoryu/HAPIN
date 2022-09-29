@@ -142,7 +142,9 @@ public class Menu extends Application {
         navButtonBox.getChildren().addAll(addButton, deleteButton, refreshButton);
 
         VBox navBox = new VBox();
-        navBox.setStyle("-fx-padding: 20; -fx-alignment: center");
+        navBox.setStyle("-fx-padding: 20; " +
+                "-fx-alignment: center;" +
+                "");
         navBox.setSpacing(10);
         navBox.setMinWidth(350);
         navBox.getChildren().addAll(linksText, scrollPane, navButtonBox);
@@ -155,7 +157,7 @@ public class Menu extends Application {
 
         BorderPane borderPane = new BorderPane();
         //borderPane.setStyle("-fx-background-color: linear-gradient(to top, #CBE1EF, #9ACDE0, #5EA9BE, #F3BFB3);");
-        borderPane.setStyle("-fx-background-image: url(menuBackground.png); -fx-background-position: center center");
+        borderPane.setStyle("-fx-background-image: url(menuBackground.png); -fx-background-size: cover");
         borderPane.setTop(welcomeBox);
         borderPane.setLeft(navBox);
         borderPane.setBottom(infoBox);
