@@ -11,6 +11,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -38,6 +39,10 @@ public class Login extends Application {
 
         Button showPwdButton = new Button();
         showPwdButton.setStyle("-fx-min-width: 20; -fx-min-height: 20");
+
+        showPwdButton.setOnAction(actionEvent -> {
+
+        });
 
         ImageView showPwdImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/showPwd.png"))));
         showPwdImageView.setFitHeight(20);
