@@ -13,6 +13,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.util.Objects;
 
@@ -92,14 +93,15 @@ public class MenuInputPopup extends Application {
         popupBorderPane.setRight(inputBox);
         popupBorderPane.setBottom(buttonBox);
         Scene scene = new Scene(popupBorderPane, 600, 300);
-        Stage stage1 = new Stage();
-        stage1.setTitle("Hinzufügen");
-        stage1.setScene(scene);
-        stage1.setResizable(false);
-        stage1.show();
+        // stage1 = new Stage();
+        stage.setTitle("Hinzufügen");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
 
         saveButton.setOnAction(actionEvent -> {
-            stage1.hide();
+            stage.hide();
         });
     }
 
