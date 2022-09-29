@@ -27,7 +27,7 @@ import java.util.Objects;
 /**
  * @author: Francesco Ryu
  * @version: 1.0
- * @date 08.09.2022
+ * @date 29.09.2022
  * @description GUI for the main application.
  */
 
