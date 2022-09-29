@@ -4,6 +4,8 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -11,6 +13,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Objects;
 
 public class Login extends Application {
     @Override
@@ -31,10 +36,18 @@ public class Login extends Application {
         pwdTextField.setMaxWidth(200);
         pwdTextField.setPromptText("Enter Password");
 
+        Button showPwdButton = new Button();
+        showPwdButton.setStyle("-fx-min-width: 20; -fx-min-height: 20");
+
+        ImageView showPwdImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/showPwd.png"))));
+        showPwdImageView.setFitHeight(20);
+        showPwdImageView.setPreserveRatio(true);
+        showPwdButton.setGraphic(showPwdImageView);
+
         VBox inputBox = new VBox();
-        inputBox.getChildren().addAll(userComboBox, pwdTextField);
-        inputBox.setSpacing(30);
-        inputBox.setStyle("-fx-padding: 10");
+        inputBox.getChildren().addAll(userComboBox, pwdTextField, showPwdButton);
+        inputBox.setSpacing(15);
+        inputBox.setStyle("-fx-padding: 5");
         inputBox.setAlignment(Pos.TOP_CENTER);
 
         Button loginButton = new Button("Login");
@@ -46,6 +59,7 @@ public class Login extends Application {
                 throw new RuntimeException(e);
             }
         });
+
 
         HBox buttonBox = new HBox(loginButton);
         buttonBox.setAlignment(Pos.TOP_CENTER);

@@ -122,6 +122,7 @@ public class DataHandler {
         }
     }
 
+
     public static void deleteButton(Button b, ArrayList<Button> buttons, GridPane pane) {
         pane.getChildren().remove(b);
         buttons.remove(b);
@@ -161,8 +162,7 @@ public class DataHandler {
                 Stage stage = new Stage();
                 menu.start(stage);
                 actualStage.close();
-            }
-            else {
+            } else {
                 System.out.println();
             }
         }
@@ -175,5 +175,9 @@ public class DataHandler {
             String name = arrString[0];
             comboBox.getItems().add(name);
         }
+    }
+
+    public static void makePwdVisible(TextField textField, PasswordField passwordField) {
+        textField.setText(passwordField.getText());
     }
 }
