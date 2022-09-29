@@ -36,7 +36,7 @@ public class Login extends Application {
         DataHandler.loadUserToComboBox(userComboBox);
         userComboBox.setMinWidth(200);
         userComboBox.setStyle("-fx-font-family: 'Times New Roman'; -fx-font-size: 15");
-        userComboBox.setPromptText("Select User");
+        userComboBox.setPromptText("Select user");
 
         PasswordField pwdTextField = new PasswordField();
         pwdTextField.setMaxWidth(200);
