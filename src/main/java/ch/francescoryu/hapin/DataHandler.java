@@ -30,8 +30,8 @@ import java.util.List;
 /**
  * @author: Francesco Ryu
  * @version: 1.0
- * @date 08.09.2022
- * @description A helping software for people who want to have everything compact(First project with JavaFx).
+ * @date 29.09.2022
+ * @description Anything that has to do with backend.
  */
 
 public class DataHandler {
@@ -163,7 +163,7 @@ public class DataHandler {
                 menu.start(stage);
                 actualStage.close();
             } else {
-                System.out.println();
+
             }
         }
     }
@@ -179,5 +179,9 @@ public class DataHandler {
 
     public static void makePwdVisible(TextField textField, PasswordField passwordField) {
         textField.setText(passwordField.getText());
+    }
+
+    public static void getUserName() {
+
     }
 }

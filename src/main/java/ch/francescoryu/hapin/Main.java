@@ -5,6 +5,7 @@ import javafx.application.Application;
 /**
  * @author: Francesco Ryu
  * @version: 1.0
+ * @date 29.09.2022
  * @description Main class to execute the application
  */
 

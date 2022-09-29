@@ -28,7 +28,7 @@ import java.util.Objects;
  * @author: Francesco Ryu
  * @version: 1.0
  * @date 08.09.2022
- * @description A helping software for people who want to have everything compact(First project with JavaFx).
+ * @description GUI for the main application.
  */
 
 public class Menu extends Application {
@@ -61,26 +61,26 @@ public class Menu extends Application {
         //--------------------------------------------------------------------------------------------------------------
 
         HBox welcomeBox = new HBox();
-        welcomeBox.setBorder(new Border(new BorderStroke(Color.MEDIUMORCHID, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
+        //welcomeBox.setBorder(new Border(new BorderStroke(Color.MEDIUMORCHID, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
+        welcomeBox.setStyle("-fx-padding: 10; -fx-alignment: center");
 
         Text welcomeText = new Text("Welcome! Have a nice day!");
-        welcomeText.setStyle("-fx-font-size: 60; -fx-padding: 20, 40; -fx-font-family: 'Microsoft Sans Serif'");
+        welcomeText.setStyle("-fx-font-size: 60; -fx-padding: 20, 40; -fx-font-family: 'Microsoft Sans Serif';");
         welcomeBox.getChildren().addAll(welcomeText);
-        welcomeBox.setStyle("-fx-padding: 10; -fx-alignment: center;");
 
         HBox infoBox = new HBox(3);
-        infoBox.setBorder(new Border(new BorderStroke(Color.MEDIUMORCHID, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
         infoBox.setSpacing(50);
-        infoBox.setStyle("-fx-alignment: center-right; -fx-font-size: 40; -fx-padding: 10");
+        infoBox.setStyle("-fx-alignment: center-right; -fx-font-size: 40; -fx-padding: 10; ");
         infoBox.getChildren().addAll(clock);
 
         //--------------------------------------------------------------------------------------------------------------
 
         GridPane gridPane = new GridPane();
-        gridPane.setStyle("-fx-background-color: #d2b0d9; -fx-padding: 10; -fx-alignment: center");
-        gridPane.setVgap(10);
-        gridPane.setHgap(20);
-
+        gridPane.setStyle("-fx-alignment: top-center; -fx-background-color: #ffdddd");
+        gridPane.setVgap(5);
+        /*gridPane.setVgap(10);
+        gridPane.setHgap(20);*/
+        //gridPane.setMinHeight(498);
 
 
 
@@ -90,9 +90,11 @@ public class Menu extends Application {
 
 
         ScrollPane scrollPane = new ScrollPane(gridPane);
-        scrollPane.setStyle("-fx-padding: 10; -fx-border-style: solid inside; -fx-border-width: 2; -fx-background-color: #d2b0d9;");
+        scrollPane.setStyle("-fx-border-color: black");
         scrollPane.setFitToWidth(true);
+        scrollPane.setFitToHeight(true);
         scrollPane.setMaxHeight(500);
+        scrollPane.setMinHeight(500);
 
         Button addButton = new Button();
         ImageView addButtonImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/add.png"))));
@@ -146,7 +148,7 @@ public class Menu extends Application {
                 "-fx-alignment: center;" +
                 "");
         navBox.setSpacing(10);
-        navBox.setMinWidth(350);
+        navBox.setMinWidth(280);
         navBox.getChildren().addAll(linksText, scrollPane, navButtonBox);
 
         //-------------------------------------------------------------------------------------------------------------

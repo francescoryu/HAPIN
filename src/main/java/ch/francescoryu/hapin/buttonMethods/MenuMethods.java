@@ -7,6 +7,7 @@ import javafx.scene.text.Text;
 /**
  * @author: Francesco Ryu
  * @version: 1.0
+ * @date 29.09.2022
  * @description methods for main menu
  */
 

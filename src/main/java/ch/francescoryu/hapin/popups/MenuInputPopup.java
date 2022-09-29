@@ -19,8 +19,8 @@ import java.util.Objects;
 /**
  * @author: Francesco Ryu
  * @version: 1.0
- * @date 08.09.2022
- * @description A helping software for people who want to have everything compact(First project with JavaFx).
+ * @date 29.09.2022
+ * @description GUI to add a new button.
  */
 
 public class MenuInputPopup extends Application {
