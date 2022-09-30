@@ -63,13 +63,14 @@ public class Menu extends Application {
         HBox welcomeBox = new HBox();
         //welcomeBox.setBorder(new Border(new BorderStroke(Color.MEDIUMORCHID, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
         welcomeBox.setStyle("-fx-padding: 10; -fx-alignment: center");
-
+        /*welcomeBox.setSpacing(50);
+        clock.setStyle("-fx-font-family: 'Microsoft Sans Serif'; -fx-font-size: 50;");
+        */
         Text welcomeText = new Text("Welcome! Have a nice day!");
         welcomeText.setStyle("-fx-font-size: 60; -fx-padding: 20, 40; -fx-font-family: 'Microsoft Sans Serif';");
-        welcomeBox.getChildren().addAll(welcomeText);
+        welcomeBox.getChildren().addAll(welcomeText, clock);
 
         HBox infoBox = new HBox(3);
-        infoBox.setSpacing(50);
         infoBox.setStyle("-fx-alignment: center-right; -fx-font-size: 40; -fx-padding: 10; ");
         infoBox.getChildren().addAll(clock);
 
