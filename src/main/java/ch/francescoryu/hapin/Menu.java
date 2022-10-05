@@ -1,7 +1,7 @@
 package ch.francescoryu.hapin;
 
 import ch.francescoryu.hapin.buttonMethods.MenuMethods;
-import ch.francescoryu.hapin.popups.MenuInputPopup;
+import ch.francescoryu.hapin.popups.ErrorPopup;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -9,13 +9,17 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -34,6 +38,9 @@ import java.util.Objects;
 public class Menu extends Application {
 
     private final ArrayList<Button> buttons = new ArrayList<>();
+
+    TextField inputButtonName;
+    TextField inputButtonUrl;
 
     @Override
     public void start(Stage stage) throws FileNotFoundException {
@@ -112,13 +119,7 @@ public class Menu extends Application {
         //--------------------------------------------------------------------------------------------------------------
 
         addButton.setOnAction(actionEvent -> {
-            MenuInputPopup menuInputPopup = new MenuInputPopup();
-            try {
-                menuInputPopup.start(new Stage());
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-
+            DataHandler.reloadButtonList(buttons, gridPane, deleteButton);
         });
 
         //--------------------------------------------------------------------------------------------------------------
@@ -129,20 +130,12 @@ public class Menu extends Application {
             throw new RuntimeException(e);
         }
 
-        Button refreshButton = new Button();
-        ImageView refreshButtonImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/refresh.png"))));
-        refreshButtonImageView.setFitHeight(35);
-        refreshButtonImageView.setPreserveRatio(true);
-        refreshButton.setGraphic(refreshButtonImageView);
 
-        refreshButton.setOnAction(actionEvent -> {
-            DataHandler.reloadButtonList(buttons, gridPane, deleteButton);
-        });
 
         HBox navButtonBox = new HBox();
         navButtonBox.setStyle("-fx-alignment: center; -fx-padding: 20");
         navButtonBox.setSpacing(10);
-        navButtonBox.getChildren().addAll(addButton, deleteButton, refreshButton);
+        navButtonBox.getChildren().addAll(addButton, deleteButton);
 
         VBox navBox = new VBox();
         navBox.setStyle("-fx-padding: 20; " +
@@ -152,9 +145,115 @@ public class Menu extends Application {
         navBox.setMinWidth(280);
         navBox.getChildren().addAll(linksText, scrollPane, navButtonBox);
 
-        //-------------------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------------------
 
+        VBox placeBox = new VBox();
+        placeBox.setMinWidth(280);
 
+        //--------------------------------------------------------------------------------------------------------------
+
+        BorderPane popupBorderPane = new BorderPane();
+
+        Text buttonNameText = new Text("Button Name: ");
+        menuMethods.setPopUpStyle(buttonNameText);
+        Text urlText = new Text("Pfad eingeben: ");
+        menuMethods.setPopUpStyle(urlText);
+        Text imgText = new Text("Bild hinzufügen: ");
+        menuMethods.setPopUpStyle(imgText);
+
+        VBox textBox = new VBox();
+        textBox.setStyle("-fx-padding: 20");
+        textBox.setSpacing(35);
+        textBox.getChildren().addAll(buttonNameText, urlText, imgText);
+
+        inputButtonName = new TextField();
+        inputButtonName.setPrefColumnCount(20);
+        menuMethods.setInputTextFieldStyle(inputButtonName);
+
+        inputButtonUrl = new TextField();
+        menuMethods.setInputTextFieldStyle(inputButtonUrl);
+        inputButtonUrl.setPrefColumnCount(20);
+
+        Button chooseFile = new Button("Datei auswählen");
+        chooseFile.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'");
+
+        chooseFile.setOnAction(actionEvent -> {
+            DataHandler.saveData(stage, DataHandler.getInputFromTextField(inputButtonName, inputButtonUrl));
+        });
+
+        VBox inputBox = new VBox();
+        inputBox.setStyle("-fx-padding: 15");
+        inputBox.setSpacing(20);
+        inputBox.getChildren().addAll(inputButtonName, inputButtonUrl, chooseFile);
+
+        Button saveButton = new Button();
+        ImageView saveButtonImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/save.png"))));
+        saveButtonImageView.setFitHeight(25);
+        saveButtonImageView.setPreserveRatio(true);
+        saveButton.setGraphic(saveButtonImageView);
+
+        Button clearButton = new Button();
+        ImageView clearButtonImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/delete.png"))));
+        clearButtonImageView.setFitHeight(25);
+        clearButtonImageView.setPreserveRatio(true);
+        clearButton.setGraphic(clearButtonImageView);
+
+        clearButton.setOnAction(actionEvent -> {
+            inputButtonName.setText("");
+            inputButtonUrl.setText("");
+        });
+
+        Button cancelButton = new Button();
+        ImageView cancelButtonImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/cancel.png"))));
+        cancelButtonImageView.setFitHeight(25);
+        cancelButtonImageView.setPreserveRatio(true);
+        cancelButton.setGraphic(cancelButtonImageView);
+
+        HBox buttonBox = new HBox();
+        buttonBox.setStyle("-fx-alignment: center; -fx-padding: 10");
+        buttonBox.setSpacing(10);
+        buttonBox.getChildren().addAll(cancelButton, clearButton, saveButton);
+
+        popupBorderPane.setStyle("-fx-background-position: center center;" +
+                "-fx-border-color: black;" +
+                "-fx-border-width: 2;" +
+                "-fx-background-image: url(loginBackground.png)");
+        popupBorderPane.setLeft(textBox);
+        popupBorderPane.setRight(inputBox);
+        popupBorderPane.setBottom(buttonBox);
+        popupBorderPane.setMaxSize(300, 200);
+
+        HBox addButtonBox = new HBox();
+        addButtonBox.setStyle("-fx-border-color: black; -fx-alignment: center");
+        addButtonBox.getChildren().add(popupBorderPane);
+        addButtonBox.setVisible(false);
+
+        cancelButton.setOnAction(actionEvent -> {
+            addButtonBox.setVisible(false);
+        });
+
+        saveButton.setOnAction(actionEvent -> {
+            if (inputButtonName.getText() == "" || inputButtonUrl.getText() == "") {
+                ErrorPopup errorPopup = new ErrorPopup();
+                Stage errorStage = new Stage();
+                try {
+                    errorPopup.start(errorStage);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+            else {
+                addButtonBox.setVisible(false);
+                DataHandler.reloadButtonList(buttons, gridPane, deleteButton);
+            }
+        });
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        addButton.setOnAction(actionEvent -> {
+            addButtonBox.setVisible(true);
+        });
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -162,7 +261,9 @@ public class Menu extends Application {
         //borderPane.setStyle("-fx-background-color: linear-gradient(to top, #CBE1EF, #9ACDE0, #5EA9BE, #F3BFB3);");
         borderPane.setStyle("-fx-background-image: url(menuBackground.png); -fx-background-size: cover");
         borderPane.setTop(welcomeBox);
+        borderPane.setCenter(addButtonBox);
         borderPane.setLeft(navBox);
+        borderPane.setRight(placeBox);
         borderPane.setBottom(infoBox);
 
         //--------------------------------------------------------------------------------------------------------------

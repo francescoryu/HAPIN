@@ -1,1 +1,2 @@
 Google;google.ch;src/main/resources/buttonImages/google.png
+VR AG;vrag.ch;src/main/resources/buttonImages/vrag.jpg

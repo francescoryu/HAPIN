@@ -39,6 +39,9 @@ public class DataHandler {
     static String saveFilePath = "src/main/resources/save.txt";
     static String loginFilePath = "src/main/resources/login.txt";
 
+    ArrayList<Button> buttons = new ArrayList<>();
+    Button button = new Button();
+
     public static void reloadButtonList(ArrayList<Button> buttons, GridPane gridPane, Button deleteButton) {
         gridPane.getChildren().removeAll(buttons);
         buttons.clear();
@@ -49,10 +52,14 @@ public class DataHandler {
         }
     }
 
-
     public static void saveData(Stage stage, String input) {
         FileChooser fileChooser = new FileChooser();
         File selectedFile = fileChooser.showOpenDialog(stage);
+
+        if (selectedFile.getName() == null) {
+            System.out.println("SUPPER");
+        }
+
         fileChooser.setInitialDirectory(new File("src/main/resources/buttonImages/" + selectedFile.getName()));
         Path from = Paths.get(selectedFile.toURI());
         try {
@@ -182,6 +189,26 @@ public class DataHandler {
     }
 
     public static void getUserName() {
+
+    }
+
+    public void setButtons(ArrayList<Button> buttons) {
+        this.buttons = buttons;
+    }
+
+    public ArrayList<Button> getButtons() {
+        return buttons;
+    }
+
+    public void setButton(Button button) {
+        this.button = button;
+    }
+
+    public Button getButton() {
+        return button;
+    }
+
+    public void checkEmptyInputs(TextField textField1, TextField textField2) {
 
     }
 }
