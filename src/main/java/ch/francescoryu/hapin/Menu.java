@@ -224,7 +224,7 @@ public class Menu extends Application {
         popupBorderPane.setMaxSize(300, 200);
 
         HBox addButtonBox = new HBox();
-        addButtonBox.setStyle("-fx-border-color: black; -fx-alignment: center");
+        addButtonBox.setStyle("-fx-alignment: center");
         addButtonBox.getChildren().add(popupBorderPane);
         addButtonBox.setVisible(false);
 

@@ -3,10 +3,7 @@ package ch.francescoryu.hapin;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -42,12 +39,11 @@ public class Login extends Application {
         pwdTextField.setMaxWidth(200);
         pwdTextField.setPromptText("Enter Password");
 
+
+        Label showPwdLabel = new Label();
+
         Button showPwdButton = new Button();
         showPwdButton.setStyle("-fx-min-width: 20; -fx-min-height: 20");
-
-        showPwdButton.setOnAction(actionEvent -> {
-
-        });
 
         ImageView showPwdImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/showPwd.png"))));
         showPwdImageView.setFitHeight(20);
@@ -60,11 +56,16 @@ public class Login extends Application {
         inputBox.setStyle("-fx-padding: 5");
         inputBox.setAlignment(Pos.TOP_CENTER);
 
+        showPwdButton.setOnAction(actionEvent -> {
+
+        });
+
         Button loginButton = new Button("Login");
         loginButton.setStyle("-fx-font-family: 'Times New Roman'; -fx-font-size: 15");
         loginButton.setOnAction(actionEvent -> {
             try {
                 DataHandler.checkLoginData(userComboBox.getValue(), pwdTextField, stage);
+                DataHandler.setUserName(userComboBox.getValue());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

@@ -38,6 +38,7 @@ public class DataHandler {
 
     static String saveFilePath = "src/main/resources/save.txt";
     static String loginFilePath = "src/main/resources/login.txt";
+    static String userName;
 
     ArrayList<Button> buttons = new ArrayList<>();
     Button button = new Button();
@@ -188,27 +189,12 @@ public class DataHandler {
         textField.setText(passwordField.getText());
     }
 
-    public static void getUserName() {
-
+    public static void setUserName(String userNameValue) {
+        userName = userNameValue;
+        System.out.println(userName);
     }
 
-    public void setButtons(ArrayList<Button> buttons) {
-        this.buttons = buttons;
-    }
-
-    public ArrayList<Button> getButtons() {
-        return buttons;
-    }
-
-    public void setButton(Button button) {
-        this.button = button;
-    }
-
-    public Button getButton() {
-        return button;
-    }
-
-    public void checkEmptyInputs(TextField textField1, TextField textField2) {
-
+    public static String getUserName() {
+        return userName;
     }
 }
