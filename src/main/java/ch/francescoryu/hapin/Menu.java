@@ -91,10 +91,7 @@ public class Menu extends Application {
         //gridPane.setMinHeight(498);
 
 
-
         //--------------------------------------------------------------------------------------------------------------
-
-
 
 
         ScrollPane scrollPane = new ScrollPane(gridPane);
@@ -120,6 +117,7 @@ public class Menu extends Application {
 
         addButton.setOnAction(actionEvent -> {
             DataHandler.reloadButtonList(buttons, gridPane, deleteButton);
+
         });
 
         //--------------------------------------------------------------------------------------------------------------
@@ -129,7 +127,6 @@ public class Menu extends Application {
         } catch (IOException | URISyntaxException e) {
             throw new RuntimeException(e);
         }
-
 
 
         HBox navButtonBox = new HBox();
@@ -241,9 +238,7 @@ public class Menu extends Application {
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
-            }
-
-            else {
+            } else {
                 addButtonBox.setVisible(false);
                 DataHandler.reloadButtonList(buttons, gridPane, deleteButton);
             }

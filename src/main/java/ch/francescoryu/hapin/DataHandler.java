@@ -57,9 +57,9 @@ public class DataHandler {
         FileChooser fileChooser = new FileChooser();
         File selectedFile = fileChooser.showOpenDialog(stage);
 
-        if (selectedFile.getName() == null) {
-            System.out.println("SUPPER");
-        }
+        File file = new File("src/main/resources/buttonImages/" + selectedFile.getName());
+
+
 
         fileChooser.setInitialDirectory(new File("src/main/resources/buttonImages/" + selectedFile.getName()));
         Path from = Paths.get(selectedFile.toURI());
@@ -72,7 +72,8 @@ public class DataHandler {
             System.out.println("ERROR");
             e.printStackTrace();
         }
-        if (selectedFile != null) {
+        if (selectedFile.exists()) {
+
             Path to = Paths.get("src/main/resources/buttonImages/" + selectedFile.getName());
             try {
                 Files.copy(from, to);
@@ -80,6 +81,7 @@ public class DataHandler {
                 throw new RuntimeException(e);
             }
         }
+
     }
 
     public static String getInputFromTextField(TextField inputButtonName, TextField inputButtonUrl) {
@@ -183,6 +185,10 @@ public class DataHandler {
             String name = arrString[0];
             comboBox.getItems().add(name);
         }
+    }
+
+    public static void refreshGridPane(GridPane gridPane) {
+        gridPane.getChildren().clear();
     }
 
     public static void makePwdVisible(TextField textField, PasswordField passwordField) {
