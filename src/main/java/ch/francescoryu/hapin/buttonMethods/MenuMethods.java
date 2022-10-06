@@ -35,7 +35,7 @@ public class MenuMethods {
     }
 
     public void setInputTextFieldStyle(TextField textField) {
-        textField.setStyle("-fx-font-size: 18;" +
+        textField.setStyle("-fx-font-size: 16;" +
                 "-fx-font-family: 'Microsoft Sans Serif'");
     }
 }

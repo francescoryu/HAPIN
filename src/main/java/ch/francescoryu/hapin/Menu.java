@@ -6,12 +6,17 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -44,6 +49,8 @@ public class Menu extends Application {
 
     @Override
     public void start(Stage stage) throws FileNotFoundException {
+
+
         MenuMethods menuMethods = new MenuMethods();
         //--------------------------------------------------------------------------------------------------------------
 
@@ -95,7 +102,7 @@ public class Menu extends Application {
 
 
         ScrollPane scrollPane = new ScrollPane(gridPane);
-        scrollPane.setStyle("-fx-border-color: black");
+        scrollPane.setStyle("-fx-border-color: black; -fx-border-width: 2");
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
         scrollPane.setMaxHeight(500);
@@ -135,9 +142,8 @@ public class Menu extends Application {
         navButtonBox.getChildren().addAll(addButton, deleteButton);
 
         VBox navBox = new VBox();
-        navBox.setStyle("-fx-padding: 20; " +
-                "-fx-alignment: center;" +
-                "");
+        navBox.setStyle("-fx-padding: 20; -fx-border-radius: 15; -fx-border-width: 2; -fx-border-color: black");
+        navBox.setMaxHeight(1);
         navBox.setSpacing(10);
         navBox.setMinWidth(280);
         navBox.getChildren().addAll(linksText, scrollPane, navButtonBox);
@@ -151,11 +157,14 @@ public class Menu extends Application {
 
         BorderPane popupBorderPane = new BorderPane();
 
+        Text addButtonLabel = new Text("Add button");
+        menuMethods.setLabelStyle(addButtonLabel);
+
         Text buttonNameText = new Text("Button Name: ");
         menuMethods.setPopUpStyle(buttonNameText);
-        Text urlText = new Text("Pfad eingeben: ");
+        Text urlText = new Text("URL: ");
         menuMethods.setPopUpStyle(urlText);
-        Text imgText = new Text("Bild hinzufügen: ");
+        Text imgText = new Text("Add Icon: ");
         menuMethods.setPopUpStyle(imgText);
 
         VBox textBox = new VBox();
@@ -211,19 +220,27 @@ public class Menu extends Application {
         buttonBox.setSpacing(10);
         buttonBox.getChildren().addAll(cancelButton, clearButton, saveButton);
 
-        popupBorderPane.setStyle("-fx-background-position: center center;" +
-                "-fx-border-color: black;" +
-                "-fx-border-width: 2;" +
-                "-fx-background-image: url(loginBackground.png)");
+        popupBorderPane.setStyle("");
         popupBorderPane.setLeft(textBox);
         popupBorderPane.setRight(inputBox);
         popupBorderPane.setBottom(buttonBox);
         popupBorderPane.setMaxSize(300, 200);
 
-        HBox addButtonBox = new HBox();
-        addButtonBox.setStyle("-fx-alignment: center");
-        addButtonBox.getChildren().add(popupBorderPane);
+        VBox addButtonBox = new VBox();
+        addButtonBox.getChildren().addAll(addButtonLabel, popupBorderPane);
+        addButtonBox.setStyle("-fx-padding: 20; -fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 15");
+        addButtonBox.setAlignment(Pos.TOP_LEFT);
+        addButtonBox.setSpacing(10);
         addButtonBox.setVisible(false);
+
+        GridPane centerGP = new GridPane();
+        centerGP.addColumn(3);
+        centerGP.addRow(3);
+        centerGP.getChildren().addAll(addButtonBox);
+
+        VBox centerBox = new VBox();
+        centerBox.getChildren().addAll(centerGP);
+        centerBox.setVisible(true);
 
         cancelButton.setOnAction(actionEvent -> {
             addButtonBox.setVisible(false);
@@ -241,6 +258,8 @@ public class Menu extends Application {
             } else {
                 addButtonBox.setVisible(false);
                 DataHandler.reloadButtonList(buttons, gridPane, deleteButton);
+                inputButtonName.setText("");
+                inputButtonUrl.setText("");
             }
         });
 
@@ -254,9 +273,9 @@ public class Menu extends Application {
 
         BorderPane borderPane = new BorderPane();
         //borderPane.setStyle("-fx-background-color: linear-gradient(to top, #CBE1EF, #9ACDE0, #5EA9BE, #F3BFB3);");
-        borderPane.setStyle("-fx-background-image: url(menuBackground.png); -fx-background-size: cover");
+        borderPane.setStyle("-fx-background-image: url(menuBackground.png); -fx-background-size: cover;");
         borderPane.setTop(welcomeBox);
-        borderPane.setCenter(addButtonBox);
+        borderPane.setCenter(centerBox);
         borderPane.setLeft(navBox);
         borderPane.setRight(placeBox);
         borderPane.setBottom(infoBox);
@@ -264,6 +283,11 @@ public class Menu extends Application {
         //--------------------------------------------------------------------------------------------------------------
 
         Scene scene = new Scene(borderPane);
+        scene.setOnKeyPressed(keyEvent -> {
+            if (keyEvent.getCode() == KeyCode.F11) {
+                stage.setFullScreen(true);
+            }
+        });
         stage.setTitle("HAPIN");
         stage.setScene(scene);
         stage.setMaximized(true);

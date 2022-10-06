@@ -1,7 +1,6 @@
 package ch.francescoryu.hapin;
 
 import ch.francescoryu.hapin.buttonMethods.MenuMethods;
-import javafx.application.Application;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
@@ -11,7 +10,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 import java.awt.*;
@@ -203,4 +201,10 @@ public class DataHandler {
     public static String getUserName() {
         return userName;
     }
+
+    public static void setFullscreen(Stage stage) {
+
+
+    }
 }
+
