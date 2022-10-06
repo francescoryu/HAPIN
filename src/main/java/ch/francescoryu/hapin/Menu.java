@@ -142,7 +142,7 @@ public class Menu extends Application {
         navButtonBox.getChildren().addAll(addButton, deleteButton);
 
         VBox navBox = new VBox();
-        navBox.setStyle("-fx-padding: 20; -fx-border-radius: 15; -fx-border-width: 2; -fx-border-color: black");
+        navBox.setStyle("-fx-padding: 20; -fx-border-radius: 15; -fx-border-width: 2; -fx-border-color: black;");
         navBox.setMaxHeight(1);
         navBox.setSpacing(10);
         navBox.setMinWidth(280);
@@ -180,7 +180,7 @@ public class Menu extends Application {
         menuMethods.setInputTextFieldStyle(inputButtonUrl);
         inputButtonUrl.setPrefColumnCount(20);
 
-        Button chooseFile = new Button("Datei auswählen");
+        Button chooseFile = new Button("Select File");
         chooseFile.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'");
 
         chooseFile.setOnAction(actionEvent -> {
@@ -189,7 +189,7 @@ public class Menu extends Application {
 
         VBox inputBox = new VBox();
         inputBox.setStyle("-fx-padding: 15");
-        inputBox.setSpacing(20);
+        inputBox.setSpacing(26);
         inputBox.getChildren().addAll(inputButtonName, inputButtonUrl, chooseFile);
 
         Button saveButton = new Button();
@@ -229,21 +229,17 @@ public class Menu extends Application {
         VBox addButtonBox = new VBox();
         addButtonBox.getChildren().addAll(addButtonLabel, popupBorderPane);
         addButtonBox.setStyle("-fx-padding: 20; -fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 15");
-        addButtonBox.setAlignment(Pos.TOP_LEFT);
+        addButtonBox.setAlignment(Pos.CENTER);
         addButtonBox.setSpacing(10);
-        addButtonBox.setVisible(false);
+        addButtonBox.setMaxWidth(1);
 
-        GridPane centerGP = new GridPane();
-        centerGP.addColumn(3);
-        centerGP.addRow(3);
-        centerGP.getChildren().addAll(addButtonBox);
-
-        VBox centerBox = new VBox();
-        centerBox.getChildren().addAll(centerGP);
-        centerBox.setVisible(true);
+        VBox wholeAddButtonBox = new VBox();
+        wholeAddButtonBox.getChildren().addAll(addButtonBox);
+        wholeAddButtonBox.setStyle("-fx-alignment: center");
+        wholeAddButtonBox.setVisible(false);
 
         cancelButton.setOnAction(actionEvent -> {
-            addButtonBox.setVisible(false);
+            wholeAddButtonBox.setVisible(false);
         });
 
         saveButton.setOnAction(actionEvent -> {
@@ -256,7 +252,7 @@ public class Menu extends Application {
                     throw new RuntimeException(e);
                 }
             } else {
-                addButtonBox.setVisible(false);
+                wholeAddButtonBox.setVisible(false);
                 DataHandler.reloadButtonList(buttons, gridPane, deleteButton);
                 inputButtonName.setText("");
                 inputButtonUrl.setText("");
@@ -266,16 +262,16 @@ public class Menu extends Application {
         //--------------------------------------------------------------------------------------------------------------
 
         addButton.setOnAction(actionEvent -> {
-            addButtonBox.setVisible(true);
+            wholeAddButtonBox.setVisible(true);
         });
 
         //--------------------------------------------------------------------------------------------------------------
 
         BorderPane borderPane = new BorderPane();
         //borderPane.setStyle("-fx-background-color: linear-gradient(to top, #CBE1EF, #9ACDE0, #5EA9BE, #F3BFB3);");
-        borderPane.setStyle("-fx-background-image: url(menuBackground.png); -fx-background-size: cover;");
+        borderPane.setStyle("-fx-background-image: url(menuBackground.png); -fx-background-size: cover; -fx-alignment: center");
         borderPane.setTop(welcomeBox);
-        borderPane.setCenter(centerBox);
+        borderPane.setCenter(wholeAddButtonBox);
         borderPane.setLeft(navBox);
         borderPane.setRight(placeBox);
         borderPane.setBottom(infoBox);
