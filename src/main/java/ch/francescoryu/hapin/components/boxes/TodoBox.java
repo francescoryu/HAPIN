@@ -33,15 +33,10 @@ public class TodoBox extends VBox {
         Text todoLabel = new Text("ToDo-List");
         menuMethods.setLabelStyle(todoLabel);
 
-        GridPane highGridPane = new GridPane();
 
-        GridPane mediumGridPane = new GridPane();
-        GridPane lowGridPane = new GridPane();
 
         GridPane gridPane = new GridPane();
-        gridPane.add(highGridPane, 0, 0);
-        gridPane.add(mediumGridPane, 0, 1);
-        gridPane.add(lowGridPane, 0, 2);
+
 
         DeleteButton deleteButton = new DeleteButton();
 
@@ -59,7 +54,7 @@ public class TodoBox extends VBox {
 
         //--------------------------------------------------------------------------------------------------------------
 
-        DataHandler.readTodoFile(highGridPane, mediumGridPane, lowGridPane, priority, deleteButton);
+        DataHandler.readTodoFile(gridPane, deleteButton, buttons);
 
         TextField inputTodoList = new TextField();
         inputTodoList.setPromptText("e.g. buy milk");
@@ -69,7 +64,7 @@ public class TodoBox extends VBox {
         addTodoButton.setOnAction(actionEvent -> {
             DataHandler.writeTodoFile(inputTodoList, priority);
             try {
-                DataHandler.readTodoFile(highGridPane, mediumGridPane, lowGridPane, priority, deleteButton);
+                DataHandler.readTodoFile(gridPane, deleteButton, buttons);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

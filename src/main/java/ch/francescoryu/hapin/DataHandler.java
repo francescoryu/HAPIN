@@ -1,6 +1,7 @@
 package ch.francescoryu.hapin;
 
 import ch.francescoryu.hapin.buttonMethods.MenuMethods;
+import ch.francescoryu.hapin.components.buttons.DeleteButton;
 import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -123,7 +124,8 @@ public class DataHandler {
         myWriter.close();
     }
 
-    public static void readTodoFile(GridPane high, GridPane med, GridPane low, ComboBox<String> comboBox, Button deleteButton) throws IOException {
+
+    public static void readTodoFile(GridPane gridPane, Button deleteButton, ArrayList<Button> buttons) throws IOException {
         List<String> todoLines = Files.readAllLines(new File(todoFilePath).toPath());
         int i = 0;
         for (String s : todoLines) {
@@ -131,55 +133,44 @@ public class DataHandler {
             Button button1 = new Button(arr[1]);
             button1.setCursor(Cursor.HAND);
             button1.setBackground(null);
+            button1.setOnAction(actionEvent -> {
+                deleteButton.setOnAction(actionEvent1 -> {
+                    gridPane.getChildren().remove(button1);
+                    buttons.remove(button1);
+                    try {
+                        remTodoButtonFromFile(button1, gridPane);
+                        reloadButtonTodoFromFile(gridPane, buttons, deleteButton);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+            });
 
             if (Objects.equals(arr[0], "1")) {
                 button1.setStyle("-fx-text-fill: red; -fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'");
-                high.add(button1, 0, i);
-                button1.setOnAction(actionEvent -> {
-                    button1.setStyle("-fx-text-fill: red; -fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-background-color: lightgrey");
-                    deleteButton.setOnAction(actionEvent1 -> {
-                        try {
-                            remTodoButtonFromFile(button1, high);
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                    });
-                });
+
             } else if (Objects.equals(arr[0], "2")) {
                 button1.setStyle("-fx-text-fill: orange; -fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'");
-                med.add(button1, 0, i);
-                button1.setOnAction(actionEvent -> {
-                    button1.setStyle("-fx-text-fill: orange; -fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-background-color: lightgrey");
-                    deleteButton.setOnAction(actionEvent1 -> {
-                        try {
-                            remTodoButtonFromFile(button1, med);
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                    });
-                });
+
 
             } else if (Objects.equals(arr[0], "3")) {
                 button1.setStyle("-fx-text-fill: green; -fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'");
-                low.add(button1, 0, i);
-                button1.setOnAction(actionEvent -> {
-                    button1.setStyle("-fx-text-fill: green; -fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-background-color: lightgrey");
-                    deleteButton.setOnAction(actionEvent1 -> {
-                        try {
-                            remTodoButtonFromFile(button1, low);
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                    });
-                });
+
             }
+            buttons.add(button1);
+            gridPane.add(button1, 0, i);
             i++;
         }
     }
 
     public static void remTodoButtonFromFile(Button button, GridPane gridPane) throws IOException {
-        gridPane.getChildren().remove(button);
         remButtonFromFile(button.getText(), todoFilePath, 1);
+
+    }
+    public static void reloadButtonTodoFromFile(GridPane gridPane, ArrayList<Button> buttons, Button deleteButton) throws IOException {
+        gridPane.getChildren().removeAll(buttons);
+        buttons.clear();
+        readTodoFile(gridPane, deleteButton, buttons);
     }
 
     public static void createButtons(ArrayList<Button> buttons, GridPane gridPane, boolean withLink, Button deleteButton) throws IOException, URISyntaxException {
@@ -210,7 +201,7 @@ public class DataHandler {
                         deleteButton.setOnAction(actionEvent -> {
                             System.out.println("rechts");
                             System.out.println(b.getText());
-                            deleteButton(b, buttons, gridPane);
+                            deleteButton(b, buttons, gridPane, saveFilePath);
                             removeImage(arr[2]);
                         });
                     }
@@ -224,11 +215,11 @@ public class DataHandler {
     }
 
 
-    public static void deleteButton(Button b, ArrayList<Button> buttons, GridPane pane) {
+    public static void deleteButton(Button b, ArrayList<Button> buttons, GridPane pane, String path) {
         pane.getChildren().remove(b);
         buttons.remove(b);
         try {
-            remButtonFromFile(b.getText(), saveFilePath, 0);
+            remButtonFromFile(b.getText(), path, 0);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
