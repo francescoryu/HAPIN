@@ -48,7 +48,7 @@ public class Menu extends Application {
     TextField inputButtonUrl;
 
     @Override
-    public void start(Stage stage) throws FileNotFoundException {
+    public void start(Stage stage) throws IOException {
 
 
         MenuMethods menuMethods = new MenuMethods();

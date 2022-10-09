@@ -1,14 +1,18 @@
 package ch.francescoryu.hapin;
 
 import ch.francescoryu.hapin.buttonMethods.MenuMethods;
+import javafx.scene.Cursor;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.PasswordField;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -24,6 +28,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author: Francesco Ryu
@@ -86,6 +91,66 @@ public class DataHandler {
         System.out.println(inputFromTextField);
 
         return inputFromTextField;
+    }
+
+    public static void writeTodoFile(TextField textField, ComboBox<String> comboBox) {
+
+        if (textField.getText().matches("")) {
+            textField.setPromptText("You need to type something");
+        } else {
+            try {
+
+                if (comboBox.getValue() == "High") {
+                    writeFile(textField.getText() + ";High");
+                }
+
+                else if (comboBox.getValue() == "Medium") {
+                    writeFile(textField.getText() + ";Medium");
+                }
+                else if (comboBox.getValue() == "Low") {
+                    writeFile(textField.getText() + ";Low");
+                }
+
+                else {
+
+                }
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        textField.setText("");
+    }
+
+    public static void writeFile(String text) throws IOException {
+        BufferedWriter myWriter = Files.newBufferedWriter(Path.of(todoFilePath), StandardOpenOption.APPEND);
+        myWriter.write(text);
+        myWriter.newLine();
+        myWriter.close();
+    }
+
+    public static void readTodoFile(GridPane content, ComboBox<String> comboBox) throws IOException {
+        List<String> todoLines = Files.readAllLines(new File(todoFilePath).toPath());
+        int i = 0;
+        for (String s : todoLines) {
+            String[] arr = s.split(";");
+            Button button1 = new Button(i+1 + ". " + arr[0]);
+            button1.setCursor(Cursor.HAND);
+            button1.setBackground(null);
+
+            if (Objects.equals(arr[1], "High")) {
+                button1.setStyle("-fx-text-fill: red; -fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'");
+            }
+            else if (Objects.equals(arr[1], "Medium")) {
+                button1.setStyle("-fx-text-fill: orange; -fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'");
+            }
+
+            else if (Objects.equals(arr[1], "Low")) {
+                button1.setStyle("-fx-text-fill: green; -fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'");
+            }
+            content.add(button1, 0, i);
+            i++;
+        }
     }
 
     public static void createButtons(ArrayList<Button> buttons, GridPane gridPane, boolean withLink, Button deleteButton) throws IOException, URISyntaxException {
