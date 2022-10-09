@@ -23,7 +23,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TodoBox extends VBox {
-    ArrayList<Button> buttons = new ArrayList<>();
+    ArrayList<Button> highButtons = new ArrayList<>();
+    ArrayList<Button> medButtons = new ArrayList<>();
+    ArrayList<Button> lowButtons = new ArrayList<>();
     Text text = new Text();
 
     public TodoBox() throws IOException {
@@ -36,6 +38,13 @@ public class TodoBox extends VBox {
 
 
         GridPane gridPane = new GridPane();
+        GridPane high = new GridPane();
+        GridPane med = new GridPane();
+        GridPane low = new GridPane();
+
+        gridPane.add(high, 0, 0);
+        gridPane.add(med, 0, 1);
+        gridPane.add(low, 0, 2);
 
 
         DeleteButton deleteButton = new DeleteButton();
@@ -54,7 +63,7 @@ public class TodoBox extends VBox {
 
         //--------------------------------------------------------------------------------------------------------------
 
-        DataHandler.readTodoFile(gridPane, deleteButton, buttons);
+        DataHandler.readTodoFile(high, med, low, deleteButton, highButtons, medButtons, lowButtons);
 
         TextField inputTodoList = new TextField();
         inputTodoList.setPromptText("e.g. buy milk");
@@ -64,7 +73,7 @@ public class TodoBox extends VBox {
         addTodoButton.setOnAction(actionEvent -> {
             DataHandler.writeTodoFile(inputTodoList, priority);
             try {
-                DataHandler.readTodoFile(gridPane, deleteButton, buttons);
+                DataHandler.readTodoFile(high, med, low, deleteButton, highButtons, medButtons, lowButtons);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
