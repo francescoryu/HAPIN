@@ -1,22 +1,22 @@
 package ch.francescoryu.hapin;
 
 import ch.francescoryu.hapin.buttonMethods.MenuMethods;
+import ch.francescoryu.hapin.components.buttons.AddButton;
+import ch.francescoryu.hapin.components.boxes.TodoBox;
+import ch.francescoryu.hapin.components.buttons.DeleteButton;
 import ch.francescoryu.hapin.popups.ErrorPopup;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -90,9 +90,9 @@ public class Menu extends Application {
 
         //--------------------------------------------------------------------------------------------------------------
 
-        GridPane gridPane = new GridPane();
-        gridPane.setStyle("-fx-alignment: top-center; -fx-background-color: #ffdddd");
-        gridPane.setVgap(5);
+        GridPane buttonGridPane = new GridPane();
+        buttonGridPane.setStyle("-fx-alignment: top-center; -fx-background-color: #ffdddd");
+        buttonGridPane.setVgap(5);
         /*gridPane.setVgap(10);
         gridPane.setHgap(20);*/
         //gridPane.setMinHeight(498);
@@ -101,36 +101,27 @@ public class Menu extends Application {
         //--------------------------------------------------------------------------------------------------------------
 
 
-        ScrollPane scrollPane = new ScrollPane(gridPane);
-        scrollPane.setStyle("-fx-border-color: black; -fx-border-width: 2");
-        scrollPane.setFitToWidth(true);
-        scrollPane.setFitToHeight(true);
-        scrollPane.setMaxHeight(500);
-        scrollPane.setMinHeight(500);
+        ScrollPane buttonScrollPane = new ScrollPane(buttonGridPane);
+        buttonScrollPane.setStyle("-fx-border-color: black; -fx-border-width: 2");
+        buttonScrollPane.setFitToWidth(true);
+        buttonScrollPane.setFitToHeight(true);
+        buttonScrollPane.setMaxHeight(500);
+        buttonScrollPane.setMinHeight(500);
 
-        Button addButton = new Button();
-        ImageView addButtonImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/add.png"))));
-        addButtonImageView.setFitHeight(35);
-        addButtonImageView.setPreserveRatio(true);
-        addButton.setGraphic(addButtonImageView);
+        AddButton addButton = new AddButton();
 
-        Button deleteButton = new Button();
-        ImageView deleteButtonImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/delete.png"))));
-        deleteButtonImageView.setFitHeight(35);
-        deleteButtonImageView.setPreserveRatio(true);
-        deleteButton.setGraphic(deleteButtonImageView);
-
+        DeleteButton deleteButton = new DeleteButton();
         //--------------------------------------------------------------------------------------------------------------
 
         addButton.setOnAction(actionEvent -> {
-            DataHandler.reloadButtonList(buttons, gridPane, deleteButton);
+            DataHandler.reloadButtonList(buttons, buttonGridPane, deleteButton);
 
         });
 
         //--------------------------------------------------------------------------------------------------------------
 
         try {
-            DataHandler.createButtons(buttons, gridPane, true, deleteButton);
+            DataHandler.createButtons(buttons, buttonGridPane, true, deleteButton);
         } catch (IOException | URISyntaxException e) {
             throw new RuntimeException(e);
         }
@@ -143,15 +134,13 @@ public class Menu extends Application {
 
         VBox navBox = new VBox();
         navBox.setStyle("-fx-padding: 20; -fx-border-radius: 15; -fx-border-width: 2; -fx-border-color: black;");
-        navBox.setMaxHeight(1);
         navBox.setSpacing(10);
         navBox.setMinWidth(280);
-        navBox.getChildren().addAll(linksText, scrollPane, navButtonBox);
+        navBox.getChildren().addAll(linksText, buttonScrollPane, navButtonBox);
 
         //--------------------------------------------------------------------------------------------------------------
 
-        VBox placeBox = new VBox();
-        placeBox.setMinWidth(280);
+        TodoBox todoBox = new TodoBox();
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -184,7 +173,7 @@ public class Menu extends Application {
         chooseFile.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'");
 
         chooseFile.setOnAction(actionEvent -> {
-            DataHandler.saveData(stage, DataHandler.getInputFromTextField(inputButtonName, inputButtonUrl));
+            DataHandler.saveButtonData(stage, DataHandler.getInputFromTextField(inputButtonName, inputButtonUrl));
         });
 
         VBox inputBox = new VBox();
@@ -236,14 +225,33 @@ public class Menu extends Application {
         VBox wholeAddButtonBox = new VBox();
         wholeAddButtonBox.getChildren().addAll(addButtonBox);
         wholeAddButtonBox.setStyle("-fx-alignment: center");
-        wholeAddButtonBox.setVisible(false);
+
+        //--------------------------------------------------------------------------------------------------------------
+
+
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        BorderPane borderPane = new BorderPane();
+        //borderPane.setStyle("-fx-background-color: linear-gradient(to top, #CBE1EF, #9ACDE0, #5EA9BE, #F3BFB3);");
+        borderPane.setStyle("-fx-background-image: url(menuBackground.png); -fx-background-size: cover; -fx-alignment: center");
+        borderPane.setTop(welcomeBox);
+        borderPane.setLeft(navBox);
+        borderPane.setRight(todoBox);
+        borderPane.setBottom(infoBox);
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        addButton.setOnAction(actionEvent -> {
+            borderPane.setCenter(wholeAddButtonBox);
+        });
 
         cancelButton.setOnAction(actionEvent -> {
-            wholeAddButtonBox.setVisible(false);
+            borderPane.getChildren().remove(wholeAddButtonBox);
         });
 
         saveButton.setOnAction(actionEvent -> {
-            if (inputButtonName.getText() == "" || inputButtonUrl.getText() == "") {
+            if (Objects.equals(inputButtonName.getText(), "") || Objects.equals(inputButtonUrl.getText(), "")) {
                 ErrorPopup errorPopup = new ErrorPopup();
                 Stage errorStage = new Stage();
                 try {
@@ -252,29 +260,12 @@ public class Menu extends Application {
                     throw new RuntimeException(e);
                 }
             } else {
-                wholeAddButtonBox.setVisible(false);
-                DataHandler.reloadButtonList(buttons, gridPane, deleteButton);
+                borderPane.getChildren().remove(wholeAddButtonBox);
+                DataHandler.reloadButtonList(buttons, buttonGridPane, deleteButton);
                 inputButtonName.setText("");
                 inputButtonUrl.setText("");
             }
         });
-
-        //--------------------------------------------------------------------------------------------------------------
-
-        addButton.setOnAction(actionEvent -> {
-            wholeAddButtonBox.setVisible(true);
-        });
-
-        //--------------------------------------------------------------------------------------------------------------
-
-        BorderPane borderPane = new BorderPane();
-        //borderPane.setStyle("-fx-background-color: linear-gradient(to top, #CBE1EF, #9ACDE0, #5EA9BE, #F3BFB3);");
-        borderPane.setStyle("-fx-background-image: url(menuBackground.png); -fx-background-size: cover; -fx-alignment: center");
-        borderPane.setTop(welcomeBox);
-        borderPane.setCenter(wholeAddButtonBox);
-        borderPane.setLeft(navBox);
-        borderPane.setRight(placeBox);
-        borderPane.setBottom(infoBox);
 
         //--------------------------------------------------------------------------------------------------------------
 

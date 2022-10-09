@@ -57,7 +57,7 @@ public class MenuInputPopup extends Application {
         chooseFile.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'");
 
         chooseFile.setOnAction(actionEvent -> {
-            DataHandler.saveData(stage, DataHandler.getInputFromTextField(inputButtonName, inputButtonUrl));
+            DataHandler.saveButtonData(stage, DataHandler.getInputFromTextField(inputButtonName, inputButtonUrl));
         });
 
         VBox inputBox = new VBox();

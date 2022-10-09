@@ -34,8 +34,9 @@ import java.util.List;
 
 public class DataHandler {
 
-    static String saveFilePath = "src/main/resources/save.txt";
-    static String loginFilePath = "src/main/resources/login.txt";
+    static String saveFilePath = "src/main/resources/txt-files/save.txt";
+    static String loginFilePath = "src/main/resources/txt-files/login.txt";
+    static String todoFilePath = "src/main/resources/txt-files/todo.txt";
     static String userName;
 
     ArrayList<Button> buttons = new ArrayList<>();
@@ -51,13 +52,11 @@ public class DataHandler {
         }
     }
 
-    public static void saveData(Stage stage, String input) {
+    public static void saveButtonData(Stage stage, String input) {
         FileChooser fileChooser = new FileChooser();
         File selectedFile = fileChooser.showOpenDialog(stage);
 
         File file = new File("src/main/resources/buttonImages/" + selectedFile.getName());
-
-
 
         fileChooser.setInitialDirectory(new File("src/main/resources/buttonImages/" + selectedFile.getName()));
         Path from = Paths.get(selectedFile.toURI());
