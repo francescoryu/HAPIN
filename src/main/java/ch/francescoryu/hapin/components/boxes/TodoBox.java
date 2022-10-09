@@ -4,6 +4,7 @@ import ch.francescoryu.hapin.DataHandler;
 import ch.francescoryu.hapin.buttonMethods.MenuMethods;
 import ch.francescoryu.hapin.components.buttons.AddButton;
 import ch.francescoryu.hapin.components.buttons.DeleteButton;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollPane;
@@ -32,13 +33,22 @@ public class TodoBox extends VBox {
         Text todoLabel = new Text("ToDo-List");
         menuMethods.setLabelStyle(todoLabel);
 
+        GridPane highGridPane = new GridPane();
+
+        GridPane mediumGridPane = new GridPane();
+        GridPane lowGridPane = new GridPane();
+
         GridPane gridPane = new GridPane();
+        gridPane.add(highGridPane, 0, 0);
+        gridPane.add(mediumGridPane, 0, 1);
+        gridPane.add(lowGridPane, 0, 2);
+
+        DeleteButton deleteButton = new DeleteButton();
 
         ScrollPane todoScrollPane = new ScrollPane(gridPane);
-        todoScrollPane.setMinWidth(350);
-        todoScrollPane.setMaxWidth(350);
-        todoScrollPane.setMaxHeight(500);
-        todoScrollPane.setMinHeight(500);
+        todoScrollPane.setStyle("-fx-border-color: black; -fx-border-width: 2;");
+        todoScrollPane.setMinWidth(300);
+        todoScrollPane.setMinHeight(250);
 
         ComboBox<String> priority = new ComboBox<>();
         priority.getItems().addAll("High", "Medium", "Low");
@@ -49,7 +59,7 @@ public class TodoBox extends VBox {
 
         //--------------------------------------------------------------------------------------------------------------
 
-        DataHandler.readTodoFile(gridPane, priority);
+        DataHandler.readTodoFile(highGridPane, mediumGridPane, lowGridPane, priority, deleteButton);
 
         TextField inputTodoList = new TextField();
         inputTodoList.setPromptText("e.g. buy milk");
@@ -59,7 +69,7 @@ public class TodoBox extends VBox {
         addTodoButton.setOnAction(actionEvent -> {
             DataHandler.writeTodoFile(inputTodoList, priority);
             try {
-                DataHandler.readTodoFile(gridPane, priority);
+                DataHandler.readTodoFile(highGridPane, mediumGridPane, lowGridPane, priority, deleteButton);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -76,11 +86,16 @@ public class TodoBox extends VBox {
         buttonTodoBox.setSpacing(10);
         buttonTodoBox.getChildren().addAll(priority, addTodoButton, clearTodoButton);
 
+        HBox buttonDeleteBox = new HBox();
+        buttonDeleteBox.setStyle("-fx-alignment: center");
+        buttonDeleteBox.getChildren().addAll(deleteButton);
+
         setMinWidth(400);
         setMaxWidth(400);
-        setStyle("-fx-padding: 20; -fx-border-radius: 15; -fx-border-width: 2; -fx-border-color: black;");
+        setStyle("-fx-padding: 20;");
         setSpacing(10);
-        getChildren().addAll(todoLabel, inputTodoList, buttonTodoBox, todoScrollPane);
+        setAlignment(Pos.TOP_CENTER);
+        getChildren().addAll(todoLabel, inputTodoList, buttonTodoBox, todoScrollPane, buttonDeleteBox);
     }
 
 }

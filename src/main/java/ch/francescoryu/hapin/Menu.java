@@ -91,7 +91,7 @@ public class Menu extends Application {
         //--------------------------------------------------------------------------------------------------------------
 
         GridPane buttonGridPane = new GridPane();
-        buttonGridPane.setStyle("-fx-alignment: top-center; -fx-background-color: #ffdddd");
+        buttonGridPane.setStyle("-fx-alignment: top-center; -fx-border-color: black; -fx-border-width: 2; -fx-padding: 10");
         buttonGridPane.setVgap(5);
         /*gridPane.setVgap(10);
         gridPane.setHgap(20);*/
@@ -102,11 +102,9 @@ public class Menu extends Application {
 
 
         ScrollPane buttonScrollPane = new ScrollPane(buttonGridPane);
-        buttonScrollPane.setStyle("-fx-border-color: black; -fx-border-width: 2");
         buttonScrollPane.setFitToWidth(true);
         buttonScrollPane.setFitToHeight(true);
-        buttonScrollPane.setMaxHeight(500);
-        buttonScrollPane.setMinHeight(500);
+        buttonScrollPane.setMinHeight(250);
 
         AddButton addButton = new AddButton();
 
@@ -133,9 +131,10 @@ public class Menu extends Application {
         navButtonBox.getChildren().addAll(addButton, deleteButton);
 
         VBox navBox = new VBox();
-        navBox.setStyle("-fx-padding: 20; -fx-border-radius: 15; -fx-border-width: 2; -fx-border-color: black;");
+        navBox.setStyle("-fx-padding: 20;");
         navBox.setSpacing(10);
         navBox.setMinWidth(280);
+        navBox.setAlignment(Pos.TOP_CENTER);
         navBox.getChildren().addAll(linksText, buttonScrollPane, navButtonBox);
 
         //--------------------------------------------------------------------------------------------------------------
