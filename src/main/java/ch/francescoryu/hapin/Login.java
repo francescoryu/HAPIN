@@ -2,6 +2,7 @@ package ch.francescoryu.hapin;
 
 import javafx.application.Application;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -31,6 +32,7 @@ public class Login extends Application {
         loginLabelBox.setAlignment(Pos.TOP_CENTER);
 
         ComboBox<String> userComboBox = new ComboBox<>();
+        userComboBox.setCursor(Cursor.HAND);
         DataHandler.loadUserToComboBox(userComboBox);
         userComboBox.setMinWidth(200);
         userComboBox.setStyle("-fx-font-family: 'Times New Roman'; -fx-font-size: 15");
@@ -62,6 +64,7 @@ public class Login extends Application {
         });
 
         Button loginButton = new Button("Login");
+        loginButton.setCursor(Cursor.HAND);
         loginButton.setStyle("-fx-font-family: 'Times New Roman'; -fx-font-size: 15");
         loginButton.setOnAction(actionEvent -> {
             try {

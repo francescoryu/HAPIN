@@ -1,5 +1,6 @@
 package ch.francescoryu.hapin.buttonMethods;
 
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
@@ -15,10 +16,12 @@ public class MenuMethods {
     public static void setButtonStyle(Button button) {
         button.setStyle("-fx-font-size: 25; " +
                 "-fx-font-family: 'Microsoft Sans Serif'; " +
-                "-fx-background-radius: 10; " +
+                "-fx-background-radius: 5; " +
                 "-fx-border-width: 2;  " +
-                "-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );" +
+                //"-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );" +
                 "-fx-min-width: 180");
+
+        button.setCursor(Cursor.HAND);
 
         button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     }

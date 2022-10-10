@@ -185,6 +185,8 @@ public class DataHandler {
         int j = 5;
         List<String> lines = Files.readAllLines(new File(saveFilePath).toPath());
 
+        gridPane.getChildren().removeAll(buttons);
+
         for (String s : lines) {
             String[] arr = s.split(";");
             Button b = new Button(arr[0]);
@@ -209,7 +211,7 @@ public class DataHandler {
                         deleteButton.setOnAction(actionEvent -> {
                             System.out.println("rechts");
                             System.out.println(b.getText());
-                            deleteButton(b, buttons, gridPane, saveFilePath);
+                            deleteButton(b, buttons, gridPane, saveFilePath, deleteButton);
                             removeImage(arr[2]);
                         });
                     }
@@ -222,13 +224,18 @@ public class DataHandler {
         }
     }
 
+    public static void reloadNavButton(GridPane pane, ArrayList<Button> buttons, Button deleteButton) throws IOException, URISyntaxException {
+        pane.getChildren().removeAll(buttons);
+        createButtons(buttons, pane, true, deleteButton);
+    }
 
-    public static void deleteButton(Button b, ArrayList<Button> buttons, GridPane pane, String path) {
+    public static void deleteButton(Button b, ArrayList<Button> buttons, GridPane pane, String path, Button deleteButton) {
         pane.getChildren().remove(b);
         buttons.remove(b);
         try {
             remButtonFromFile(b.getText(), path, 0);
-        } catch (IOException e) {
+            reloadNavButton(pane, buttons, deleteButton);
+        } catch (IOException | URISyntaxException e) {
             throw new RuntimeException(e);
         }
     }

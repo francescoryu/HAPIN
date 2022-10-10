@@ -6,6 +6,7 @@ import ch.francescoryu.hapin.components.buttons.AddButton;
 import ch.francescoryu.hapin.components.buttons.DeleteButton;
 import ch.francescoryu.hapin.components.buttons.DeleteEverythingButton;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollPane;
@@ -39,13 +40,6 @@ public class TodoBox extends VBox {
         ArrayList<Button> buttons = new ArrayList<>();
 
         GridPane gridPane = new GridPane();
-        GridPane high = new GridPane();
-        GridPane med = new GridPane();
-        GridPane low = new GridPane();
-
-        gridPane.add(high, 0, 0);
-        gridPane.add(med, 0, 1);
-        gridPane.add(low, 0, 2);
 
 
         DeleteButton deleteButton = new DeleteButton();
@@ -66,6 +60,7 @@ public class TodoBox extends VBox {
         todoScrollPane.setMinHeight(250);
 
         ComboBox<String> priority = new ComboBox<>();
+        priority.setCursor(Cursor.HAND);
         priority.getItems().addAll("High", "Medium", "Low");
         priority.setPromptText("choose priority");
         priority.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'");

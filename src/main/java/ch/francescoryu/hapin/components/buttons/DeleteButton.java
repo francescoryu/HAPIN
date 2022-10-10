@@ -1,6 +1,7 @@
 package ch.francescoryu.hapin.components.buttons;
 
 import ch.francescoryu.hapin.Menu;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -13,6 +14,7 @@ public class DeleteButton extends Button {
         deleteButtonImageView.setFitHeight(35);
         deleteButtonImageView.setPreserveRatio(true);
         setGraphic(deleteButtonImageView);
+        setCursor(Cursor.HAND);
 
     }
 }

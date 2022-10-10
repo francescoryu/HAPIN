@@ -2,6 +2,8 @@ package ch.francescoryu.hapin;
 
 import javafx.application.Application;
 
+import javax.swing.*;
+
 /**
  * @author: Francesco Ryu
  * @version: 1.0
@@ -10,7 +12,7 @@ import javafx.application.Application;
  */
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         Application.launch(Login.class, args);
     }
 }

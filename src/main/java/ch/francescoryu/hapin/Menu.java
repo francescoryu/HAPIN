@@ -1,6 +1,7 @@
 package ch.francescoryu.hapin;
 
 import ch.francescoryu.hapin.buttonMethods.MenuMethods;
+import ch.francescoryu.hapin.components.boxes.CenterBox;
 import ch.francescoryu.hapin.components.buttons.AddButton;
 import ch.francescoryu.hapin.components.boxes.TodoBox;
 import ch.francescoryu.hapin.components.buttons.DeleteButton;
@@ -10,6 +11,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
@@ -56,7 +58,6 @@ public class Menu extends Application {
         //--------------------------------------------------------------------------------------------------------------
 
 
-
         //--------------------------------------------------------------------------------------------------------------
 
         Text linksText = new Text("Hyperlinks");
@@ -84,12 +85,15 @@ public class Menu extends Application {
         //--------------------------------------------------------------------------------------------------------------
 
         GridPane buttonGridPane = new GridPane();
-        buttonGridPane.setStyle("-fx-alignment: top-center; -fx-border-color: black; -fx-border-width: 2; -fx-padding: 10");
+        buttonGridPane.setStyle("-fx-alignment: center; -fx-border-color: black; -fx-border-width: 2; -fx-padding: 0 0 15 0");
         buttonGridPane.setVgap(5);
         /*gridPane.setVgap(10);
         gridPane.setHgap(20);*/
         //gridPane.setMinHeight(498);
 
+        //--------------------------------------------------------------------------------------------------------------
+
+        CenterBox centerBox = new CenterBox();
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -97,7 +101,8 @@ public class Menu extends Application {
         ScrollPane buttonScrollPane = new ScrollPane(buttonGridPane);
         buttonScrollPane.setFitToWidth(true);
         buttonScrollPane.setFitToHeight(true);
-        buttonScrollPane.setMinHeight(250);
+        //buttonScrollPane.setMinHeight(250);
+        buttonScrollPane.setMaxWidth(250);
 
         AddButton addButton = new AddButton();
 
@@ -126,7 +131,8 @@ public class Menu extends Application {
         VBox navBox = new VBox();
         navBox.setStyle("-fx-padding: 20;");
         navBox.setSpacing(10);
-        navBox.setMinWidth(280);
+        navBox.setMinWidth(400);
+        navBox.setMaxWidth(400);
         navBox.setAlignment(Pos.TOP_CENTER);
         navBox.getChildren().addAll(linksText, buttonScrollPane, navButtonBox);
 
@@ -162,6 +168,7 @@ public class Menu extends Application {
         inputButtonUrl.setPrefColumnCount(20);
 
         Button chooseFile = new Button("Select File");
+        chooseFile.setCursor(Cursor.HAND);
         chooseFile.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'");
 
         chooseFile.setOnAction(actionEvent -> {
@@ -174,12 +181,14 @@ public class Menu extends Application {
         inputBox.getChildren().addAll(inputButtonName, inputButtonUrl, chooseFile);
 
         Button saveButton = new Button();
+        saveButton.setCursor(Cursor.HAND);
         ImageView saveButtonImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/save.png"))));
         saveButtonImageView.setFitHeight(25);
         saveButtonImageView.setPreserveRatio(true);
         saveButton.setGraphic(saveButtonImageView);
 
         Button clearButton = new Button();
+        clearButton.setCursor(Cursor.HAND);
         ImageView clearButtonImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/delete.png"))));
         clearButtonImageView.setFitHeight(25);
         clearButtonImageView.setPreserveRatio(true);
@@ -191,6 +200,7 @@ public class Menu extends Application {
         });
 
         Button cancelButton = new Button();
+        cancelButton.setCursor(Cursor.HAND);
         ImageView cancelButtonImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/cancel.png"))));
         cancelButtonImageView.setFitHeight(25);
         cancelButtonImageView.setPreserveRatio(true);
@@ -226,19 +236,22 @@ public class Menu extends Application {
         BorderPane borderPane = new BorderPane();
         //borderPane.setStyle("-fx-background-color: linear-gradient(to top, #CBE1EF, #9ACDE0, #5EA9BE, #F3BFB3);");
         borderPane.setStyle("-fx-background-image: url(menuBackground.png); -fx-background-size: cover; -fx-alignment: center");
-        borderPane.setTop(welcomeBox);
+        //borderPane.setTop(welcomeBox);
         borderPane.setLeft(navBox);
+        borderPane.setCenter(centerBox);
         borderPane.setRight(todoBox);
-        borderPane.setBottom(infoBox);
+        //borderPane.setBottom(infoBox);
 
         //--------------------------------------------------------------------------------------------------------------
 
         addButton.setOnAction(actionEvent -> {
             borderPane.setCenter(wholeAddButtonBox);
+            borderPane.getChildren().remove(centerBox);
         });
 
         cancelButton.setOnAction(actionEvent -> {
             borderPane.getChildren().remove(wholeAddButtonBox);
+            borderPane.setCenter(centerBox);
         });
 
         saveButton.setOnAction(actionEvent -> {
@@ -255,6 +268,7 @@ public class Menu extends Application {
                 DataHandler.reloadButtonList(buttons, buttonGridPane, deleteButton);
                 inputButtonName.setText("");
                 inputButtonUrl.setText("");
+                borderPane.setCenter(centerBox);
             }
         });
 
