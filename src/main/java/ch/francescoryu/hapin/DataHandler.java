@@ -16,9 +16,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.awt.*;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
@@ -94,7 +92,6 @@ public class DataHandler {
     }
 
     public static void writeTodoFile(TextField textField, ComboBox<String> comboBox, ArrayList<Button> buttons, GridPane gridPane) throws IOException {
-
         if (textField.getText().matches("")) {
             textField.setPromptText("You need to type something");
         } else {
@@ -107,39 +104,50 @@ public class DataHandler {
             }
         }
         textField.setText("");
-        readTodoFile(gridPane, buttons);
     }
 
-   public static void reloadTodoFile(Button button, GridPane gridPane, ArrayList<Button> buttons) throws IOException {
-        buttons.remove(button);
-        gridPane.getChildren().remove(button);
 
-        readTodoFile(gridPane, buttons);
+    public static void deleteTodo(Button b, ArrayList<Button> buttons, GridPane pane, String path) {
+        pane.getChildren().remove(b);
+        buttons.remove(b);
+        try {
+            remButtonFromFile(b.getText(), path, 1);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public static void clearTodoFile(GridPane gridPane, ArrayList<Button> buttons) {
-        buttons.remove(buttons);
-        gridPane.getChildren().remove(buttons);
-    }
-
-    public static void readTodoFile(GridPane gridPane, ArrayList<Button> buttons) throws IOException {
+    public static void readTodoFile(GridPane gridPane, ArrayList<Button> buttons, Button deleteButton) throws IOException {
         List<String> lines = Files.readAllLines(new File(todoFilePath).toPath());
         int i = 0;
-        clearTodoFile(gridPane, buttons);
+        gridPane.getChildren().removeAll(buttons);
         Collections.sort(lines);
         for (String s : lines) {
             String[] arr = s.split(";");
             Button button1 = new Button(arr[1]);
+
+            button1.setCursor(Cursor.HAND);
+
+            button1.setOnAction(actionEvent -> {
+                button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: black; -fx-background-color: lightgrey");
+                deleteButton.setOnAction(actionEvent1 -> {
+                    deleteTodo(button1, buttons, gridPane, todoFilePath);
+                });
+            });
+
             button1.setBackground(null);
             if (Objects.equals(arr[0], "1")) {
                 button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: red");
-            }
-            else if (Objects.equals(arr[0], "2")) {
+
+            } else if (Objects.equals(arr[0], "2")) {
                 button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: orange;");
-            }
-            else if (Objects.equals(arr[0], "3")) {
+
+            } else if (Objects.equals(arr[0], "3")) {
                 button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: green");
+
             }
+
+            buttons.add(button1);
             gridPane.add(button1, 0, i);
             i++;
         }

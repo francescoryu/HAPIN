@@ -64,7 +64,8 @@ public class TodoBox extends VBox {
         //--------------------------------------------------------------------------------------------------------------
 
 
-        DataHandler.readTodoFile(gridPane, buttons);
+        DataHandler.readTodoFile(gridPane, buttons, deleteButton);
+
 
 
         TextField inputTodoList = new TextField();
@@ -74,8 +75,8 @@ public class TodoBox extends VBox {
         AddButton addTodoButton = new AddButton();
         addTodoButton.setOnAction(actionEvent -> {
             try {
-                DataHandler.clearTodoFile(gridPane, buttons);
                 DataHandler.writeTodoFile(inputTodoList, priority, buttons, gridPane);
+                DataHandler.readTodoFile(gridPane, buttons, deleteButton);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
