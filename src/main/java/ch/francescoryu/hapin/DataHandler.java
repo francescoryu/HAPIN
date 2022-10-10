@@ -93,115 +93,65 @@ public class DataHandler {
         return inputFromTextField;
     }
 
-    public static void writeTodoFile(TextField textField, ComboBox<String> comboBox) {
+    public static void writeTodoFile(TextField textField, ComboBox<String> comboBox, ArrayList<Button> buttons, GridPane gridPane) throws IOException {
 
         if (textField.getText().matches("")) {
             textField.setPromptText("You need to type something");
         } else {
-            try {
-
-                if (comboBox.getValue() == "High") {
-                    writeFile("1;" + textField.getText());
-                } else if (comboBox.getValue() == "Medium") {
-                    writeFile("2;" + textField.getText());
-                } else if (comboBox.getValue() == "Low") {
-                    writeFile("3;" + textField.getText());
-                } else {
-
-                }
-
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            if (comboBox.getValue().matches("High")) {
+                writeFile("1;" + textField.getText());
+            } else if (comboBox.getValue().matches("Medium")) {
+                writeFile("2;" + textField.getText());
+            } else if (comboBox.getValue().matches("Low")) {
+                writeFile("3;" + textField.getText());
             }
         }
         textField.setText("");
+        readTodoFile(gridPane, buttons);
     }
 
-    public static void writeFile(String text) throws IOException {
-        BufferedWriter myWriter = Files.newBufferedWriter(Path.of(todoFilePath), StandardOpenOption.APPEND);
-        myWriter.write(text);
-        myWriter.newLine();
-        myWriter.close();
-    }
+   /* public static void reloadTodoFile(Button button, GridPane gridPane, ArrayList<Button> buttons) throws IOException {
+        buttons.remove(button);
+        gridPane.getChildren().remove(button);
 
+        readTodoFile(gridPane, buttons);
+    }*/
 
-    public static void readTodoFile(GridPane high, GridPane med, GridPane low, Button deleteButton, ArrayList<Button> highButtons, ArrayList<Button> medButtons, ArrayList<Button> lowButtons) throws IOException {
-        List<String> todoLines = Files.readAllLines(new File(todoFilePath).toPath());
+    public static void readTodoFile(GridPane gridPane, ArrayList<Button> buttons) throws IOException {
+        List<String> lines = Files.readAllLines(new File(todoFilePath).toPath());
         int i = 0;
-        for (String s : todoLines) {
+        Collections.sort(lines);
+        for (String s : lines) {
             String[] arr = s.split(";");
             Button button1 = new Button(arr[1]);
-            button1.setCursor(Cursor.HAND);
             button1.setBackground(null);
-
             if (Objects.equals(arr[0], "1")) {
-                button1.setStyle("-fx-text-fill: red; -fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'");
-                high.add(button1, 0, i);
-                i++;
-                button1.setOnAction(actionEvent -> {
-                    deleteButton.setOnAction(actionEvent1 -> {
-                        high.getChildren().remove(button1);
-                        highButtons.remove(button1);
-                        try {
-                            remTodoButtonFromFile(button1, high);
-                            reloadButtonTodoFromFile(high, med, low, highButtons, medButtons, lowButtons, deleteButton);
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                    });
-                });
-            } else if (Objects.equals(arr[0], "2")) {
-                button1.setStyle("-fx-text-fill: orange; -fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'");
-                med.add(button1, 0, i);
-                i++;
-                button1.setOnAction(actionEvent -> {
-                    deleteButton.setOnAction(actionEvent1 -> {
-                        med.getChildren().remove(button1);
-                        medButtons.remove(button1);
-                        try {
-                            remTodoButtonFromFile(button1, med);
-                            reloadButtonTodoFromFile(high, med, low, highButtons, medButtons, lowButtons, deleteButton);
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                    });
-                });
-
-            } else if (Objects.equals(arr[0], "3")) {
-                button1.setStyle("-fx-text-fill: green; -fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'");
-                low.add(button1, 0, i);
-                i++;
-                button1.setOnAction(actionEvent -> {
-                    deleteButton.setOnAction(actionEvent1 -> {
-                        low.getChildren().remove(button1);
-                        lowButtons.remove(button1);
-                        try {
-                            remTodoButtonFromFile(button1, low);
-                            reloadButtonTodoFromFile(high, med, low, highButtons, medButtons, lowButtons, deleteButton);
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                    });
-                });
+                button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: red");
             }
+            else if (Objects.equals(arr[0], "2")) {
+                button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: orange;");
+            }
+            else if (Objects.equals(arr[0], "3")) {
+                button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: green");
+            }
+            gridPane.add(button1, 0, i);
+            i++;
+        }
+
+    }
+
+    public static void writeFile(String input) {
+        try {
+            BufferedWriter myWriter = Files.newBufferedWriter(Path.of(todoFilePath), StandardOpenOption.APPEND);
+            myWriter.write(input);
+            myWriter.newLine();
+            myWriter.close();
+        } catch (IOException e) {
+            System.out.println("ERROR");
+            e.printStackTrace();
         }
     }
 
-    public static void remTodoButtonFromFile(Button button, GridPane gridPane) throws IOException {
-        remButtonFromFile(button.getText(), todoFilePath, 1);
-        gridPane.getChildren().remove(button);
-
-    }
-
-    public static void reloadButtonTodoFromFile(GridPane high, GridPane med, GridPane low, ArrayList<Button> highButtons, ArrayList<Button> medButtons, ArrayList<Button> lowButtons, Button deleteButton) throws IOException {
-        high.getChildren().removeAll(highButtons);
-        med.getChildren().removeAll(medButtons);
-        low.getChildren().removeAll(lowButtons);
-        highButtons.clear();
-        medButtons.clear();
-        lowButtons.clear();
-        readTodoFile(high, med, low, deleteButton, highButtons, medButtons, lowButtons);
-    }
 
     public static void createButtons(ArrayList<Button> buttons, GridPane gridPane, boolean withLink, Button deleteButton) throws IOException, URISyntaxException {
         int j = 5;
@@ -299,26 +249,9 @@ public class DataHandler {
         }
     }
 
-    public static void refreshGridPane(GridPane gridPane) {
-        gridPane.getChildren().clear();
-    }
-
-    public static void makePwdVisible(TextField textField, PasswordField passwordField) {
-        textField.setText(passwordField.getText());
-    }
-
     public static void setUserName(String userNameValue) {
         userName = userNameValue;
         System.out.println(userName);
-    }
-
-    public static String getUserName() {
-        return userName;
-    }
-
-    public static void setFullscreen(Stage stage) {
-
-
     }
 }
 

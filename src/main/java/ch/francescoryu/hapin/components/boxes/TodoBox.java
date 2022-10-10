@@ -23,10 +23,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TodoBox extends VBox {
-    ArrayList<Button> highButtons = new ArrayList<>();
-    ArrayList<Button> medButtons = new ArrayList<>();
-    ArrayList<Button> lowButtons = new ArrayList<>();
+
     Text text = new Text();
+
+    static String todoFile = "src/main/resources/txt-files/todo.txt";
 
     public TodoBox() throws IOException {
 
@@ -35,7 +35,7 @@ public class TodoBox extends VBox {
         Text todoLabel = new Text("ToDo-List");
         menuMethods.setLabelStyle(todoLabel);
 
-
+        ArrayList<Button> buttons = new ArrayList<>();
 
         GridPane gridPane = new GridPane();
         GridPane high = new GridPane();
@@ -63,7 +63,9 @@ public class TodoBox extends VBox {
 
         //--------------------------------------------------------------------------------------------------------------
 
-        DataHandler.readTodoFile(high, med, low, deleteButton, highButtons, medButtons, lowButtons);
+
+        DataHandler.readTodoFile(gridPane, buttons);
+
 
         TextField inputTodoList = new TextField();
         inputTodoList.setPromptText("e.g. buy milk");
@@ -71,12 +73,12 @@ public class TodoBox extends VBox {
 
         AddButton addTodoButton = new AddButton();
         addTodoButton.setOnAction(actionEvent -> {
-            DataHandler.writeTodoFile(inputTodoList, priority);
             try {
-                DataHandler.readTodoFile(high, med, low, deleteButton, highButtons, medButtons, lowButtons);
+                DataHandler.writeTodoFile(inputTodoList, priority, buttons, gridPane);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+
         });
 
         DeleteButton clearTodoButton = new DeleteButton();
