@@ -74,6 +74,7 @@ public class TodoBox extends VBox {
         AddButton addTodoButton = new AddButton();
         addTodoButton.setOnAction(actionEvent -> {
             try {
+                DataHandler.clearTodoFile(gridPane, buttons);
                 DataHandler.writeTodoFile(inputTodoList, priority, buttons, gridPane);
             } catch (IOException e) {
                 throw new RuntimeException(e);

@@ -110,16 +110,22 @@ public class DataHandler {
         readTodoFile(gridPane, buttons);
     }
 
-   /* public static void reloadTodoFile(Button button, GridPane gridPane, ArrayList<Button> buttons) throws IOException {
+   public static void reloadTodoFile(Button button, GridPane gridPane, ArrayList<Button> buttons) throws IOException {
         buttons.remove(button);
         gridPane.getChildren().remove(button);
 
         readTodoFile(gridPane, buttons);
-    }*/
+    }
+
+    public static void clearTodoFile(GridPane gridPane, ArrayList<Button> buttons) {
+        buttons.remove(buttons);
+        gridPane.getChildren().remove(buttons);
+    }
 
     public static void readTodoFile(GridPane gridPane, ArrayList<Button> buttons) throws IOException {
         List<String> lines = Files.readAllLines(new File(todoFilePath).toPath());
         int i = 0;
+        clearTodoFile(gridPane, buttons);
         Collections.sort(lines);
         for (String s : lines) {
             String[] arr = s.split(";");
