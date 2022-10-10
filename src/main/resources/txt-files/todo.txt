@@ -1,0 +1,4 @@
+1;play fifa
+3;study
+1;program
+2;study finances

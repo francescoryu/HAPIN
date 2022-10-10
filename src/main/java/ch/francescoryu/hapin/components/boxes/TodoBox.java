@@ -4,6 +4,7 @@ import ch.francescoryu.hapin.DataHandler;
 import ch.francescoryu.hapin.buttonMethods.MenuMethods;
 import ch.francescoryu.hapin.components.buttons.AddButton;
 import ch.francescoryu.hapin.components.buttons.DeleteButton;
+import ch.francescoryu.hapin.components.buttons.DeleteEverythingButton;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -48,6 +49,16 @@ public class TodoBox extends VBox {
 
 
         DeleteButton deleteButton = new DeleteButton();
+
+        DeleteEverythingButton deleteEverythingButton = new DeleteEverythingButton();
+        deleteEverythingButton.setOnAction(actionEvent -> {
+            try {
+                DataHandler.deleteWholeTodoFile(gridPane, buttons, deleteEverythingButton);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
 
         ScrollPane todoScrollPane = new ScrollPane(gridPane);
         todoScrollPane.setStyle("-fx-border-color: black; -fx-border-width: 2;");
@@ -95,8 +106,9 @@ public class TodoBox extends VBox {
         buttonTodoBox.getChildren().addAll(priority, addTodoButton, clearTodoButton);
 
         HBox buttonDeleteBox = new HBox();
+        buttonDeleteBox.setSpacing(10);
         buttonDeleteBox.setStyle("-fx-alignment: center");
-        buttonDeleteBox.getChildren().addAll(deleteButton);
+        buttonDeleteBox.getChildren().addAll(deleteButton, deleteEverythingButton);
 
         setMinWidth(400);
         setMaxWidth(400);

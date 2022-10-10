@@ -2,6 +2,9 @@ package ch.francescoryu.hapin;
 
 import ch.francescoryu.hapin.buttonMethods.MenuMethods;
 import ch.francescoryu.hapin.components.buttons.DeleteButton;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -14,6 +17,7 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.awt.*;
 import java.io.*;
@@ -23,10 +27,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.text.DateFormat;
+import java.util.*;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * @author: Francesco Ryu
@@ -131,11 +134,9 @@ public class DataHandler {
             button1.setOnAction(actionEvent -> {
                 if (Objects.equals(arr[0], "1")) {
                     button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: red; -fx-background-color: lightgrey");
-                }
-                else if (Objects.equals(arr[0], "2")) {
+                } else if (Objects.equals(arr[0], "2")) {
                     button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: orange; -fx-background-color: lightgrey");
-                }
-                else if (Objects.equals(arr[0], "3")) {
+                } else if (Objects.equals(arr[0], "3")) {
                     button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: green; -fx-background-color: lightgrey");
                 }
                 deleteButton.setOnAction(actionEvent1 -> {
@@ -172,6 +173,11 @@ public class DataHandler {
             System.out.println("ERROR");
             e.printStackTrace();
         }
+    }
+
+    public static void deleteWholeTodoFile(GridPane gridPane, ArrayList<Button> buttons, Button deleteButton) throws IOException {
+        new FileWriter(todoFilePath, false).close();
+        readTodoFile(gridPane, buttons, deleteButton);
     }
 
 
@@ -274,6 +280,20 @@ public class DataHandler {
     public static void setUserName(String userNameValue) {
         userName = userNameValue;
         System.out.println(userName);
+    }
+
+    public static Text createClock() {
+        final Text clock = new Text();
+        final DateFormat format = DateFormat.getInstance();
+        final Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
+            final Calendar cal = Calendar.getInstance();
+            clock.setText(format.format(cal.getTime()));
+        }));
+
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
+
+        return clock;
     }
 }
 

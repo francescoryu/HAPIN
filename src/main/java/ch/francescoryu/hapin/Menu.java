@@ -11,6 +11,7 @@ import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -54,15 +55,7 @@ public class Menu extends Application {
         MenuMethods menuMethods = new MenuMethods();
         //--------------------------------------------------------------------------------------------------------------
 
-        final Text clock = new Text();
-        final DateFormat format = DateFormat.getInstance();
-        final Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
-            final Calendar cal = Calendar.getInstance();
-            clock.setText(format.format(cal.getTime()));
-        }));
 
-        timeline.setCycleCount(Animation.INDEFINITE);
-        timeline.play();
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -82,11 +75,11 @@ public class Menu extends Application {
         */
         Text welcomeText = new Text("Welcome! Have a nice day!");
         welcomeText.setStyle("-fx-font-size: 60; -fx-padding: 20, 40; -fx-font-family: 'Microsoft Sans Serif';");
-        welcomeBox.getChildren().addAll(welcomeText, clock);
+        welcomeBox.getChildren().addAll(welcomeText);
 
         HBox infoBox = new HBox(3);
         infoBox.setStyle("-fx-alignment: center-right; -fx-font-size: 40; -fx-padding: 10; ");
-        infoBox.getChildren().addAll(clock);
+        infoBox.getChildren().addAll(DataHandler.createClock());
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -226,7 +219,6 @@ public class Menu extends Application {
         wholeAddButtonBox.setStyle("-fx-alignment: center");
 
         //--------------------------------------------------------------------------------------------------------------
-
 
 
         //--------------------------------------------------------------------------------------------------------------
