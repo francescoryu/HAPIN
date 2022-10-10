@@ -129,7 +129,15 @@ public class DataHandler {
             button1.setCursor(Cursor.HAND);
 
             button1.setOnAction(actionEvent -> {
-                button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: black; -fx-background-color: lightgrey");
+                if (Objects.equals(arr[0], "1")) {
+                    button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: red; -fx-background-color: lightgrey");
+                }
+                else if (Objects.equals(arr[0], "2")) {
+                    button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: orange; -fx-background-color: lightgrey");
+                }
+                else if (Objects.equals(arr[0], "3")) {
+                    button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: green; -fx-background-color: lightgrey");
+                }
                 deleteButton.setOnAction(actionEvent1 -> {
                     deleteTodo(button1, buttons, gridPane, todoFilePath);
                 });
