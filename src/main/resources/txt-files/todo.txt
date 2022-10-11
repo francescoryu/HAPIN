@@ -1,2 +1,5 @@
 1;Play fifa
-3;Study
+1;Go to doc tmrw
+2;do smth productive
+3;study
+1;play bus sim

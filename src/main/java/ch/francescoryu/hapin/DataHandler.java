@@ -111,7 +111,7 @@ public class DataHandler {
     }
 
 
-    public static void deleteTodo(Button b, ArrayList<Button> buttons, GridPane pane, String path) {
+    public static void deleteTodo(Button b, ArrayList<Button> buttons, GridPane pane, String path, Button deleteButton) throws IOException {
         pane.getChildren().remove(b);
         buttons.remove(b);
         try {
@@ -121,10 +121,15 @@ public class DataHandler {
         }
     }
 
+    public static void reloadTodo(ArrayList<Button> buttons, GridPane gridPane, Button deleteButton) throws IOException {
+        gridPane.getChildren().removeAll(buttons);
+        buttons.clear();
+    }
+
     public static void readTodoFile(GridPane gridPane, ArrayList<Button> buttons, Button deleteButton) throws IOException {
         List<String> lines = Files.readAllLines(new File(todoFilePath).toPath());
         int i = 0;
-        gridPane.getChildren().removeAll(buttons);
+        reloadTodo(buttons, gridPane, deleteButton);
         Collections.sort(lines);
         for (String s : lines) {
             String[] arr = s.split(";");
@@ -141,7 +146,11 @@ public class DataHandler {
                     button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: green; -fx-background-color: darkgrey; -fx-padding: 0");
                 }
                 deleteButton.setOnAction(actionEvent1 -> {
-                    deleteTodo(button1, buttons, gridPane, todoFilePath);
+                    try {
+                        deleteTodo(button1, buttons, gridPane, todoFilePath, deleteButton);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 });
             });
 

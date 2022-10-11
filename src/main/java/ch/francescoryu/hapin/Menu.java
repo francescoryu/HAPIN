@@ -106,6 +106,7 @@ public class Menu extends Application {
         buttonScrollPane.setFitToHeight(true);
         //buttonScrollPane.setMinHeight(250);
         buttonScrollPane.setMaxWidth(250);
+        buttonScrollPane.setMinHeight(300);
         buttonScrollPane.getStyleClass().addAll(".scroll-bar", ".scroll-pane");
         buttonScrollPane.setStyle("-fx-background-color: transparent; -fx-background: transparent;");
 
@@ -140,6 +141,7 @@ public class Menu extends Application {
         navBox.setMaxWidth(400);
         navBox.setAlignment(Pos.TOP_CENTER);
         navBox.getChildren().addAll(linksText, buttonScrollPane, navButtonBox);
+
 
         //--------------------------------------------------------------------------------------------------------------
 
