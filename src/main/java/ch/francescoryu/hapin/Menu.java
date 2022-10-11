@@ -15,6 +15,7 @@ import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -60,8 +61,11 @@ public class Menu extends Application {
 
         //--------------------------------------------------------------------------------------------------------------
 
-        Text linksText = new Text("Hyperlinks");
-        menuMethods.setLabelStyle(linksText);
+        Label linksText = new Label("Hyperlinks");
+        linksText.setStyle("-fx-font-size: 30; " +
+                "-fx-font-family: 'Microsoft Sans Serif'; " +
+                "-fx-text-alignment: center;" +
+                "-fx-text-fill: #cfcfcf;");
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -85,7 +89,7 @@ public class Menu extends Application {
         //--------------------------------------------------------------------------------------------------------------
 
         GridPane buttonGridPane = new GridPane();
-        buttonGridPane.setStyle("-fx-alignment: center; -fx-border-color: black; -fx-border-width: 2; -fx-padding: 0 0 15 0");
+        buttonGridPane.setStyle("-fx-alignment: center; -fx-padding: 0 0 15 0; -fx-background-color: transparent");
         buttonGridPane.setVgap(5);
         /*gridPane.setVgap(10);
         gridPane.setHgap(20);*/
@@ -103,6 +107,7 @@ public class Menu extends Application {
         buttonScrollPane.setFitToHeight(true);
         //buttonScrollPane.setMinHeight(250);
         buttonScrollPane.setMaxWidth(250);
+        buttonScrollPane.setStyle("-fx-background-color: transparent; -fx-background: transparent;");
 
         AddButton addButton = new AddButton();
 
@@ -129,7 +134,7 @@ public class Menu extends Application {
         navButtonBox.getChildren().addAll(addButton, deleteButton);
 
         VBox navBox = new VBox();
-        navBox.setStyle("-fx-padding: 20;");
+        navBox.setStyle("-fx-padding: 20; -fx-background-color: black");
         navBox.setSpacing(10);
         navBox.setMinWidth(400);
         navBox.setMaxWidth(400);

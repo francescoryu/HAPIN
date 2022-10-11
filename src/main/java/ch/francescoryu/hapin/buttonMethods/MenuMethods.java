@@ -19,7 +19,10 @@ public class MenuMethods {
                 "-fx-background-radius: 5; " +
                 "-fx-border-width: 2;  " +
                 //"-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );" +
-                "-fx-min-width: 180");
+                "-fx-min-width: 180;" +
+                "-fx-text-fill: #cfcfcf;" +
+                "-fx-background-color: black;" +
+                "-fx-border-color: white");
 
         button.setCursor(Cursor.HAND);
 
@@ -29,16 +32,22 @@ public class MenuMethods {
     public void setLabelStyle(Text text) {
         text.setStyle("-fx-font-size: 30; " +
                 "-fx-font-family: 'Microsoft Sans Serif'; " +
-                "-fx-text-alignment: center");
+                "-fx-text-alignment: center;" +
+                "-fx-text-fill: #cfcfcf");
     }
 
     public void setPopUpStyle(Text text) {
         text.setStyle("-fx-font-size: 20;" +
-                "-fx-font-family: 'Microsoft Sans Serif'");
+                "-fx-font-family: 'Microsoft Sans Serif';" +
+                "-fx-text-fill: #cfcfcf");
     }
 
     public void setInputTextFieldStyle(TextField textField) {
         textField.setStyle("-fx-font-size: 16;" +
-                "-fx-font-family: 'Microsoft Sans Serif'");
+                "-fx-font-family: 'Microsoft Sans Serif';" +
+                "-fx-text-fill: #cfcfcf;" +
+                "-fx-control-inner-background: black;" +
+                "-fx-border-color: white;" +
+                "-fx-border-width: 1");
     }
 }

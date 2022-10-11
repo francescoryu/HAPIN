@@ -5,6 +5,7 @@ import ch.francescoryu.hapin.components.buttons.DeleteButton;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -128,31 +129,31 @@ public class DataHandler {
         for (String s : lines) {
             String[] arr = s.split(";");
             Button button1 = new Button(arr[1]);
-
+            button1.setMinWidth(350);
+            button1.setAlignment(Pos.CENTER_LEFT);
             button1.setCursor(Cursor.HAND);
 
             button1.setOnAction(actionEvent -> {
                 if (Objects.equals(arr[0], "1")) {
-                    button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: red; -fx-background-color: lightgrey");
+                    button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: #ff5454; -fx-background-color: lightgrey;");
                 } else if (Objects.equals(arr[0], "2")) {
-                    button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: orange; -fx-background-color: lightgrey");
+                    button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: orange; -fx-background-color: lightgrey;");
                 } else if (Objects.equals(arr[0], "3")) {
-                    button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: green; -fx-background-color: lightgrey");
+                    button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: green; -fx-background-color: lightgrey;");
                 }
                 deleteButton.setOnAction(actionEvent1 -> {
                     deleteTodo(button1, buttons, gridPane, todoFilePath);
                 });
             });
 
-            button1.setBackground(null);
             if (Objects.equals(arr[0], "1")) {
-                button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: red");
+                button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: #ff5454; -fx-background-color: transparent; -fx-background: transparent");
 
             } else if (Objects.equals(arr[0], "2")) {
-                button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: orange;");
+                button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: orange; -fx-background-color: transparent; -fx-background: transparent");
 
             } else if (Objects.equals(arr[0], "3")) {
-                button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: green");
+                button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: green; -fx-background-color: transparent; -fx-background: transparent");
 
             }
 

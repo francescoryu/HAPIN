@@ -7,10 +7,7 @@ import ch.francescoryu.hapin.components.buttons.DeleteButton;
 import ch.francescoryu.hapin.components.buttons.DeleteEverythingButton;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -26,7 +23,6 @@ import java.util.List;
 
 public class TodoBox extends VBox {
 
-    Text text = new Text();
 
     static String todoFile = "src/main/resources/txt-files/todo.txt";
 
@@ -34,8 +30,11 @@ public class TodoBox extends VBox {
 
         MenuMethods menuMethods = new MenuMethods();
 
-        Text todoLabel = new Text("ToDo-List");
-        menuMethods.setLabelStyle(todoLabel);
+        Label todoLabel = new Label("ToDo-List");
+        todoLabel.setStyle("-fx-font-size: 30; " +
+                "-fx-font-family: 'Microsoft Sans Serif'; " +
+                "-fx-text-alignment: center;" +
+                "-fx-text-fill: #cfcfcf");
 
         ArrayList<Button> buttons = new ArrayList<>();
 
@@ -55,7 +54,7 @@ public class TodoBox extends VBox {
 
 
         ScrollPane todoScrollPane = new ScrollPane(gridPane);
-        todoScrollPane.setStyle("-fx-border-color: black; -fx-border-width: 2;");
+        todoScrollPane.setStyle("-fx-background-color: transparent; -fx-background: transparent");
         todoScrollPane.setMinWidth(300);
         todoScrollPane.setMinHeight(250);
 
@@ -63,7 +62,13 @@ public class TodoBox extends VBox {
         priority.setCursor(Cursor.HAND);
         priority.getItems().addAll("High", "Medium", "Low");
         priority.setPromptText("choose priority");
-        priority.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'");
+        priority.setStyle("-fx-font-size: 20; " +
+                "-fx-font-family: 'Microsoft Sans Serif'; " +
+                "-fx-border-color: white; " +
+                "-fx-border-width: 1;" +
+                "-fx-prompt-text-fill: #cfcfcf;" +
+                "-fx-background-color: transparent;" +
+                "-fx-background: transparent;");
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -71,7 +76,6 @@ public class TodoBox extends VBox {
 
 
         DataHandler.readTodoFile(gridPane, buttons, deleteButton);
-
 
 
         TextField inputTodoList = new TextField();
@@ -107,7 +111,7 @@ public class TodoBox extends VBox {
 
         setMinWidth(400);
         setMaxWidth(400);
-        setStyle("-fx-padding: 20;");
+        setStyle("-fx-padding: 20; -fx-background-color: black");
         setSpacing(10);
         setAlignment(Pos.TOP_CENTER);
         getChildren().addAll(todoLabel, inputTodoList, buttonTodoBox, todoScrollPane, buttonDeleteBox);

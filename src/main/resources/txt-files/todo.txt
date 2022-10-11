@@ -1,5 +1,4 @@
-1;play fifa
-1;buy book
-2;Do smth productive
+1;Play fifa
+2;dgg
+1;Program
 3;study
-2;Play fortnite
