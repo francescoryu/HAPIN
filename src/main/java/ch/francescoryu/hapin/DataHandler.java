@@ -116,6 +116,7 @@ public class DataHandler {
         buttons.remove(b);
         try {
             remButtonFromFile(b.getText(), path, 1);
+            readTodoFile(pane, buttons, deleteButton);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -129,7 +130,7 @@ public class DataHandler {
     public static void readTodoFile(GridPane gridPane, ArrayList<Button> buttons, Button deleteButton) throws IOException {
         List<String> lines = Files.readAllLines(new File(todoFilePath).toPath());
         int i = 0;
-        reloadTodo(buttons, gridPane, deleteButton);
+        gridPane.getChildren().removeAll(buttons);
         Collections.sort(lines);
         for (String s : lines) {
             String[] arr = s.split(";");
