@@ -23,7 +23,7 @@ public class MenuMethods {
                 "-fx-min-width: 180;" +
                 "-fx-text-fill: #cfcfcf;" +
                 "-fx-background-color: black;" +
-                "-fx-border-color: white");
+                "-fx-border-color: #737373");
 
         button.setCursor(Cursor.HAND);
 
@@ -38,7 +38,7 @@ public class MenuMethods {
                 //"-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );" +
                 "-fx-text-fill: black;" +
                 "-fx-background-color: darkgrey;" +
-                "-fx-border-color: white");
+                "-fx-border-color: #737373");
 
         button.setCursor(Cursor.HAND);
 
@@ -63,7 +63,7 @@ public class MenuMethods {
                 "-fx-font-family: 'Microsoft Sans Serif';" +
                 "-fx-text-fill: #cfcfcf;" +
                 "-fx-control-inner-background: black;" +
-                "-fx-border-color: white;" +
-                "-fx-border-width: 1");
+                "-fx-border-color: #737373;" +
+                "-fx-border-width: 2");
     }
 }

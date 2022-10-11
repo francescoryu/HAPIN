@@ -10,6 +10,8 @@
 
 .combo-box {
     -fx-background-color: black;
+    -fx-border-width: 2;
+    -fx-border-color: #737373;
 }
 
 .combo-box-base .text {

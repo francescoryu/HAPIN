@@ -38,7 +38,7 @@ public class TodoBox extends VBox {
 
         GridPane gridPane = new GridPane();
 
-
+        gridPane.setVgap(10);
 
         DeleteButton deleteButton = new DeleteButton();
 
@@ -64,8 +64,8 @@ public class TodoBox extends VBox {
         priority.setPromptText("choose priority");
         priority.setStyle("-fx-font-size: 20; " +
                 "-fx-font-family: 'Microsoft Sans Serif'; " +
-                "-fx-border-color: white; " +
-                "-fx-border-width: 1;" +
+                "-fx-border-color: #737373; " +
+                "-fx-border-width: 2;" +
                 "-fx-pref-height: 45");
         priority.setCursor(Cursor.HAND);
 
@@ -79,7 +79,12 @@ public class TodoBox extends VBox {
 
         TextField inputTodoList = new TextField();
         inputTodoList.setPromptText("e.g. buy milk");
-        menuMethods.setInputTextFieldStyle(inputTodoList);
+        inputTodoList.setStyle("-fx-font-size: 20;" +
+                "-fx-font-family: 'Microsoft Sans Serif';" +
+                "-fx-text-fill: #cfcfcf;" +
+                "-fx-control-inner-background: black;" +
+                "-fx-border-color: #737373;" +
+                "-fx-border-width: 2");
 
         AddButton addTodoButton = new AddButton();
         addTodoButton.setOnAction(actionEvent -> {
@@ -100,7 +105,7 @@ public class TodoBox extends VBox {
 
         HBox buttonTodoBox = new HBox();
         buttonTodoBox.setStyle("-fx-alignment: center");
-        buttonTodoBox.setSpacing(10);
+        buttonTodoBox.setSpacing(22);
         buttonTodoBox.getChildren().addAll(priority, addTodoButton, clearTodoButton);
 
         HBox buttonDeleteBox = new HBox();

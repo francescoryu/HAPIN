@@ -174,7 +174,7 @@ public class Menu extends Application {
 
         Button chooseFile = new Button("Select File");
         chooseFile.setCursor(Cursor.HAND);
-        chooseFile.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-background-color: black; -fx-text-fill: #cfcfcf; -fx-border-color: white; -fx-border-width: 1");
+        chooseFile.setStyle("-fx-font-size: 16; -fx-font-family: 'Microsoft Sans Serif'; -fx-background-color: black; -fx-text-fill: #cfcfcf; -fx-border-color: #737373; -fx-border-width: 2");
 
         chooseFile.setOnAction(actionEvent -> {
             DataHandler.saveButtonData(stage, DataHandler.getInputFromTextField(inputButtonName, inputButtonUrl));
@@ -182,13 +182,13 @@ public class Menu extends Application {
 
         VBox inputBox = new VBox();
         inputBox.setStyle("-fx-padding: 15");
-        inputBox.setSpacing(26);
+        inputBox.setSpacing(24);
         inputBox.getChildren().addAll(inputButtonName, inputButtonUrl, chooseFile);
 
         Button saveButton = new Button();
         saveButton.setCursor(Cursor.HAND);
         ImageView saveButtonImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/save.png"))));
-        saveButton.setStyle("-fx-background-color: black; -fx-border-color: white; -fx-border-width: 1");
+        saveButton.setStyle("-fx-background-color: black; -fx-border-color: #737373; -fx-border-width: 2");
         saveButtonImageView.setFitHeight(25);
         saveButtonImageView.setPreserveRatio(true);
         saveButton.setGraphic(saveButtonImageView);
@@ -196,7 +196,7 @@ public class Menu extends Application {
         Button clearButton = new Button();
         clearButton.setCursor(Cursor.HAND);
         ImageView clearButtonImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/delete.png"))));
-        clearButton.setStyle("-fx-background-color: black; -fx-border-color: white; -fx-border-width: 1");
+        clearButton.setStyle("-fx-background-color: black; -fx-border-color: #737373; -fx-border-width: 2");
         clearButtonImageView.setFitHeight(25);
         clearButtonImageView.setPreserveRatio(true);
         clearButton.setGraphic(clearButtonImageView);
@@ -209,7 +209,7 @@ public class Menu extends Application {
         Button cancelButton = new Button();
         cancelButton.setCursor(Cursor.HAND);
         ImageView cancelButtonImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/cancel.png"))));
-        cancelButton.setStyle("-fx-background-color: black; -fx-border-color: white; -fx-border-width: 1");
+        cancelButton.setStyle("-fx-background-color: black; -fx-border-color: #737373; -fx-border-width: 2");
         cancelButtonImageView.setFitHeight(25);
         cancelButtonImageView.setPreserveRatio(true);
         cancelButton.setGraphic(cancelButtonImageView);
@@ -227,7 +227,7 @@ public class Menu extends Application {
 
         VBox addButtonBox = new VBox();
         addButtonBox.getChildren().addAll(addButtonLabel, popupBorderPane);
-        addButtonBox.setStyle("-fx-padding: 20; -fx-border-color: white; -fx-border-width: 1;");
+        addButtonBox.setStyle("-fx-padding: 20; -fx-border-color: #737373; -fx-border-width: 2;");
         addButtonBox.setAlignment(Pos.CENTER);
         addButtonBox.setSpacing(10);
         addButtonBox.setMaxWidth(1);

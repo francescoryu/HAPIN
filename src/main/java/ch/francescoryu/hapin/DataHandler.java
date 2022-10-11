@@ -134,11 +134,11 @@ public class DataHandler {
 
             button1.setOnAction(actionEvent -> {
                 if (Objects.equals(arr[0], "1")) {
-                    button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: #ff5454; -fx-background-color: lightgrey;");
+                    button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: #ff5454; -fx-background-color: darkgrey; -fx-padding: 0");
                 } else if (Objects.equals(arr[0], "2")) {
-                    button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: orange; -fx-background-color: lightgrey;");
+                    button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: orange; -fx-background-color: darkgrey; -fx-padding: 0");
                 } else if (Objects.equals(arr[0], "3")) {
-                    button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: green; -fx-background-color: lightgrey;");
+                    button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: green; -fx-background-color: darkgrey; -fx-padding: 0");
                 }
                 deleteButton.setOnAction(actionEvent1 -> {
                     deleteTodo(button1, buttons, gridPane, todoFilePath);
@@ -146,13 +146,13 @@ public class DataHandler {
             });
 
             if (Objects.equals(arr[0], "1")) {
-                button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: #ff5454; -fx-background-color: transparent; -fx-background: transparent");
+                button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: #ff5454; -fx-background-color: transparent; -fx-background: transparent; -fx-padding: 0");
 
             } else if (Objects.equals(arr[0], "2")) {
-                button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: orange; -fx-background-color: transparent; -fx-background: transparent");
+                button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: orange; -fx-background-color: transparent; -fx-background: transparent; -fx-padding: 0");
 
             } else if (Objects.equals(arr[0], "3")) {
-                button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: green; -fx-background-color: transparent; -fx-background: transparent");
+                button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: green; -fx-background-color: transparent; -fx-background: transparent; -fx-padding: 0");
 
             }
 
