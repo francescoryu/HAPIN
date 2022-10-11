@@ -11,22 +11,20 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
-import java.util.List;
 
 public class TodoBox extends VBox {
 
 
     static String todoFile = "src/main/resources/txt-files/todo.txt";
 
+    //String css = this.getClass().getResource("css/style.css").toExternalForm();
+
     public TodoBox() throws IOException {
+
+        getStylesheets().add(TodoBox.class.getResource("/css/style.css").toExternalForm());
 
         MenuMethods menuMethods = new MenuMethods();
 
@@ -60,6 +58,7 @@ public class TodoBox extends VBox {
 
         ComboBox<String> priority = new ComboBox<>();
         priority.setCursor(Cursor.HAND);
+        priority.getStyleClass().addAll(".combo-box", ".combo-box-base");
         priority.getItems().addAll("High", "Medium", "Low");
         priority.setPromptText("choose priority");
         priority.setStyle("-fx-font-size: 20; " +
@@ -105,6 +104,7 @@ public class TodoBox extends VBox {
         buttonDeleteBox.setSpacing(10);
         buttonDeleteBox.setStyle("-fx-alignment: center");
         buttonDeleteBox.getChildren().addAll(deleteButton, deleteEverythingButton);
+
 
         setMinWidth(400);
         setMaxWidth(400);
