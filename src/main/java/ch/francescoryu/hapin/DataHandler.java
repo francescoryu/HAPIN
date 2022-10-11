@@ -209,6 +209,7 @@ public class DataHandler {
                 });
                 b.setOnMouseClicked(mouseEvent -> {
                     if (mouseEvent.getButton() == MouseButton.SECONDARY) {
+                        MenuMethods.setSelectedButtonStyle(b);
                         deleteButton.setOnAction(actionEvent -> {
                             System.out.println("rechts");
                             System.out.println(b.getText());

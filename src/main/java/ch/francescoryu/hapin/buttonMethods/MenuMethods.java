@@ -30,6 +30,22 @@ public class MenuMethods {
         button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     }
 
+    public static void setSelectedButtonStyle(Button button) {
+        button.setStyle("-fx-font-size: 25; " +
+                "-fx-font-family: 'Microsoft Sans Serif'; " +
+                "-fx-background-radius: 5; " +
+                "-fx-border-width: 2;  " +
+                //"-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );" +
+                "-fx-min-width: 180;" +
+                "-fx-text-fill: black;" +
+                "-fx-background-color: darkgrey;" +
+                "-fx-border-color: white");
+
+        button.setCursor(Cursor.HAND);
+
+        button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    }
+
     public void setLabelStyle(Label text) {
         text.setStyle("-fx-font-size: 30; " +
                 "-fx-font-family: 'Microsoft Sans Serif'; " +
