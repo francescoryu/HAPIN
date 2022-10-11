@@ -64,7 +64,8 @@ public class TodoBox extends VBox {
         priority.setStyle("-fx-font-size: 20; " +
                 "-fx-font-family: 'Microsoft Sans Serif'; " +
                 "-fx-border-color: white; " +
-                "-fx-border-width: 1;");
+                "-fx-border-width: 1;" +
+                "-fx-pref-height: 45");
 
         //--------------------------------------------------------------------------------------------------------------
 
