@@ -2,6 +2,7 @@ package ch.francescoryu.hapin.buttonMethods;
 
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
@@ -29,14 +30,14 @@ public class MenuMethods {
         button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     }
 
-    public void setLabelStyle(Text text) {
+    public void setLabelStyle(Label text) {
         text.setStyle("-fx-font-size: 30; " +
                 "-fx-font-family: 'Microsoft Sans Serif'; " +
                 "-fx-text-alignment: center;" +
                 "-fx-text-fill: #cfcfcf");
     }
 
-    public void setPopUpStyle(Text text) {
+    public void setPopUpStyle(Label text) {
         text.setStyle("-fx-font-size: 20;" +
                 "-fx-font-family: 'Microsoft Sans Serif';" +
                 "-fx-text-fill: #cfcfcf");

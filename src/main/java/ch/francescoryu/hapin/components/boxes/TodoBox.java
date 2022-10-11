@@ -65,10 +65,7 @@ public class TodoBox extends VBox {
         priority.setStyle("-fx-font-size: 20; " +
                 "-fx-font-family: 'Microsoft Sans Serif'; " +
                 "-fx-border-color: white; " +
-                "-fx-border-width: 1;" +
-                "-fx-prompt-text-fill: #cfcfcf;" +
-                "-fx-background-color: transparent;" +
-                "-fx-background: transparent;");
+                "-fx-border-width: 1;");
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -111,7 +108,7 @@ public class TodoBox extends VBox {
 
         setMinWidth(400);
         setMaxWidth(400);
-        setStyle("-fx-padding: 20; -fx-background-color: black");
+        setStyle("-fx-padding: 20;");
         setSpacing(10);
         setAlignment(Pos.TOP_CENTER);
         getChildren().addAll(todoLabel, inputTodoList, buttonTodoBox, todoScrollPane, buttonDeleteBox);

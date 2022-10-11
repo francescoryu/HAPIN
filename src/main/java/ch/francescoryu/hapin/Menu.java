@@ -134,7 +134,7 @@ public class Menu extends Application {
         navButtonBox.getChildren().addAll(addButton, deleteButton);
 
         VBox navBox = new VBox();
-        navBox.setStyle("-fx-padding: 20; -fx-background-color: black");
+        navBox.setStyle("-fx-padding: 20;");
         navBox.setSpacing(10);
         navBox.setMinWidth(400);
         navBox.setMaxWidth(400);
@@ -149,14 +149,14 @@ public class Menu extends Application {
 
         BorderPane popupBorderPane = new BorderPane();
 
-        Text addButtonLabel = new Text("Add button");
+        Label addButtonLabel = new Label("Add button");
         menuMethods.setLabelStyle(addButtonLabel);
 
-        Text buttonNameText = new Text("Button Name: ");
+        Label buttonNameText = new Label("Button Name: ");
         menuMethods.setPopUpStyle(buttonNameText);
-        Text urlText = new Text("URL: ");
+        Label urlText = new Label("URL: ");
         menuMethods.setPopUpStyle(urlText);
-        Text imgText = new Text("Add Icon: ");
+        Label imgText = new Label("Add Icon: ");
         menuMethods.setPopUpStyle(imgText);
 
         VBox textBox = new VBox();
@@ -174,7 +174,7 @@ public class Menu extends Application {
 
         Button chooseFile = new Button("Select File");
         chooseFile.setCursor(Cursor.HAND);
-        chooseFile.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'");
+        chooseFile.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-background-color: black; -fx-text-fill: #cfcfcf; -fx-border-color: white; -fx-border-width: 1");
 
         chooseFile.setOnAction(actionEvent -> {
             DataHandler.saveButtonData(stage, DataHandler.getInputFromTextField(inputButtonName, inputButtonUrl));
@@ -188,6 +188,7 @@ public class Menu extends Application {
         Button saveButton = new Button();
         saveButton.setCursor(Cursor.HAND);
         ImageView saveButtonImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/save.png"))));
+        saveButton.setStyle("-fx-background-color: black; -fx-border-color: white; -fx-border-width: 1");
         saveButtonImageView.setFitHeight(25);
         saveButtonImageView.setPreserveRatio(true);
         saveButton.setGraphic(saveButtonImageView);
@@ -195,6 +196,7 @@ public class Menu extends Application {
         Button clearButton = new Button();
         clearButton.setCursor(Cursor.HAND);
         ImageView clearButtonImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/delete.png"))));
+        clearButton.setStyle("-fx-background-color: black; -fx-border-color: white; -fx-border-width: 1");
         clearButtonImageView.setFitHeight(25);
         clearButtonImageView.setPreserveRatio(true);
         clearButton.setGraphic(clearButtonImageView);
@@ -207,6 +209,7 @@ public class Menu extends Application {
         Button cancelButton = new Button();
         cancelButton.setCursor(Cursor.HAND);
         ImageView cancelButtonImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/cancel.png"))));
+        cancelButton.setStyle("-fx-background-color: black; -fx-border-color: white; -fx-border-width: 1");
         cancelButtonImageView.setFitHeight(25);
         cancelButtonImageView.setPreserveRatio(true);
         cancelButton.setGraphic(cancelButtonImageView);
@@ -224,7 +227,7 @@ public class Menu extends Application {
 
         VBox addButtonBox = new VBox();
         addButtonBox.getChildren().addAll(addButtonLabel, popupBorderPane);
-        addButtonBox.setStyle("-fx-padding: 20; -fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 15");
+        addButtonBox.setStyle("-fx-padding: 20; -fx-border-color: white; -fx-border-width: 1;");
         addButtonBox.setAlignment(Pos.CENTER);
         addButtonBox.setSpacing(10);
         addButtonBox.setMaxWidth(1);
@@ -239,8 +242,9 @@ public class Menu extends Application {
         //--------------------------------------------------------------------------------------------------------------
 
         BorderPane borderPane = new BorderPane();
-        //borderPane.setStyle("-fx-background-color: linear-gradient(to top, #CBE1EF, #9ACDE0, #5EA9BE, #F3BFB3);");
-        borderPane.setStyle("-fx-background-image: url(menuBackground.png); -fx-background-size: cover; -fx-alignment: center");
+        borderPane.setStyle("-fx-background-color: linear-gradient(to right bottom, #11002b, #3f0028);");
+        //borderPane.setStyle("-fx-background-image: url(menuBackground.png); -fx-background-size: cover; -fx-alignment: center");
+        //borderPane.setStyle("-fx-background-color: black");
         //borderPane.setTop(welcomeBox);
         borderPane.setLeft(navBox);
         borderPane.setCenter(centerBox);
