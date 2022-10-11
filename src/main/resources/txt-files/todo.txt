@@ -1,4 +1,4 @@
+3;Study
+1;Go To Doc Tmrw
+2;Do smth productive
 1;Play fifa
-1;Program
-3;study
-2;Be productive

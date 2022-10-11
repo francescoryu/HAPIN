@@ -129,7 +129,6 @@ public class DataHandler {
         for (String s : lines) {
             String[] arr = s.split(";");
             Button button1 = new Button(arr[1]);
-            button1.setMinWidth(350);
             button1.setAlignment(Pos.CENTER_LEFT);
             button1.setCursor(Cursor.HAND);
 

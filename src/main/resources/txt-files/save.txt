@@ -1,4 +1,5 @@
-Google;google.ch;src/main/resources/buttonImages/google.png
+Google;google.com;src/main/resources/buttonImages/google.png
+Youtube;youtube.com;src/main/resources/buttonImages/youtube.png
 VR AG;vrag.ch;src/main/resources/buttonImages/vrag.jpg
 Gmail;gmail.com;src/main/resources/buttonImages/gmail.png
-Youtube;youtube.com;src/main/resources/buttonImages/youtube.png
+Java;java.com;src/main/resources/buttonImages/226777.png

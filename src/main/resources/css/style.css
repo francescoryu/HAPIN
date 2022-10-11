@@ -3,10 +3,34 @@
     -fx-background-color: black;
 }
 
+.combo-box .list-view:hover .list-cell:hover {
+    -fx-background-color: #565656;
+    -fx-cursor: hand;
+}
+
 .combo-box {
     -fx-background-color: black;
 }
 
-.combo-box-base .text{
+.combo-box-base .text {
     -fx-fill: "#cfcfcf";
 }
+
+.scroll-pane .corner {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:horizontal, .scroll-bar:vertical {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:horizontal .thumb, .scroll-bar:vertical .thumb {
+    -fx-background-color: black;
+    -fx-pref-width: 4;
+}
+
+.increment-button, .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+

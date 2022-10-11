@@ -39,6 +39,7 @@ public class TodoBox extends VBox {
         GridPane gridPane = new GridPane();
 
 
+
         DeleteButton deleteButton = new DeleteButton();
 
         DeleteEverythingButton deleteEverythingButton = new DeleteEverythingButton();
@@ -53,11 +54,11 @@ public class TodoBox extends VBox {
 
         ScrollPane todoScrollPane = new ScrollPane(gridPane);
         todoScrollPane.setStyle("-fx-background-color: transparent; -fx-background: transparent");
+        todoScrollPane.getStyleClass().addAll(".scroll-bar", ".scroll-pane");
         todoScrollPane.setMinWidth(300);
-        todoScrollPane.setMinHeight(250);
+
 
         ComboBox<String> priority = new ComboBox<>();
-        priority.setCursor(Cursor.HAND);
         priority.getStyleClass().addAll(".combo-box", ".combo-box-base");
         priority.getItems().addAll("High", "Medium", "Low");
         priority.setPromptText("choose priority");
@@ -66,6 +67,7 @@ public class TodoBox extends VBox {
                 "-fx-border-color: white; " +
                 "-fx-border-width: 1;" +
                 "-fx-pref-height: 45");
+        priority.setCursor(Cursor.HAND);
 
         //--------------------------------------------------------------------------------------------------------------
 

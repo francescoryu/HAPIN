@@ -54,7 +54,6 @@ public class Menu extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-
         MenuMethods menuMethods = new MenuMethods();
         //--------------------------------------------------------------------------------------------------------------
 
@@ -89,8 +88,8 @@ public class Menu extends Application {
         //--------------------------------------------------------------------------------------------------------------
 
         GridPane buttonGridPane = new GridPane();
-        buttonGridPane.setStyle("-fx-alignment: center; -fx-padding: 0 0 15 0; -fx-background-color: transparent");
-        buttonGridPane.setVgap(5);
+        buttonGridPane.setStyle("-fx-alignment: center; -fx-padding: 0 0 25 0; -fx-background-color: transparent");
+        buttonGridPane.setVgap(10);
         /*gridPane.setVgap(10);
         gridPane.setHgap(20);*/
         //gridPane.setMinHeight(498);
@@ -107,6 +106,7 @@ public class Menu extends Application {
         buttonScrollPane.setFitToHeight(true);
         //buttonScrollPane.setMinHeight(250);
         buttonScrollPane.setMaxWidth(250);
+        buttonScrollPane.getStyleClass().addAll(".scroll-bar", ".scroll-pane");
         buttonScrollPane.setStyle("-fx-background-color: transparent; -fx-background: transparent;");
 
         AddButton addButton = new AddButton();
@@ -242,6 +242,7 @@ public class Menu extends Application {
         //--------------------------------------------------------------------------------------------------------------
 
         BorderPane borderPane = new BorderPane();
+        borderPane.getStylesheets().add(TodoBox.class.getResource("/css/style.css").toExternalForm());
         borderPane.setStyle("-fx-background-color: linear-gradient(to right bottom, #11002b, #3f0028);");
         //borderPane.setStyle("-fx-background-image: url(menuBackground.png); -fx-background-size: cover; -fx-alignment: center");
         //borderPane.setStyle("-fx-background-color: black");

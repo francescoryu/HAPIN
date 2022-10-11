@@ -36,7 +36,6 @@ public class MenuMethods {
                 "-fx-background-radius: 5; " +
                 "-fx-border-width: 2;  " +
                 //"-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );" +
-                "-fx-min-width: 180;" +
                 "-fx-text-fill: black;" +
                 "-fx-background-color: darkgrey;" +
                 "-fx-border-color: white");
