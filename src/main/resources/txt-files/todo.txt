@@ -1,4 +1,0 @@
-3;study
-2;play bus sim
-1;Go to doc tmrw
-1;Play fifa

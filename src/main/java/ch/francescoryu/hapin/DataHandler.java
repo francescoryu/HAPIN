@@ -1,6 +1,7 @@
 package ch.francescoryu.hapin;
 
 import ch.francescoryu.hapin.buttonMethods.MenuMethods;
+import ch.francescoryu.hapin.components.boxes.TodoBox;
 import ch.francescoryu.hapin.components.buttons.DeleteButton;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -50,6 +51,7 @@ public class DataHandler {
     Button button = new Button();
 
     public static void reloadButtonList(ArrayList<Button> buttons, GridPane gridPane, Button deleteButton) {
+
         gridPane.getChildren().removeAll(buttons);
         buttons.clear();
         try {
@@ -90,7 +92,6 @@ public class DataHandler {
 
     public static String getInputFromTextField(TextField inputButtonName, TextField inputButtonUrl) {
         String inputFromTextField = inputButtonName.getText() + ";" + inputButtonUrl.getText();
-        System.out.println(inputFromTextField);
 
         return inputFromTextField;
     }
@@ -180,7 +181,6 @@ public class DataHandler {
             myWriter.newLine();
             myWriter.close();
         } catch (IOException e) {
-            System.out.println("ERROR");
             e.printStackTrace();
         }
     }
@@ -197,9 +197,12 @@ public class DataHandler {
 
         gridPane.getChildren().removeAll(buttons);
 
+        gridPane.getStylesheets().add(TodoBox.class.getResource("/css/style.css").toExternalForm());
+
         for (String s : lines) {
             String[] arr = s.split(";");
             Button b = new Button(arr[0]);
+            b.getStyleClass().addAll(".button");
 
             ImageView imageView = new ImageView(new Image(Files.newInputStream(Paths.get(arr[2]))));
             imageView.setFitHeight(25);
@@ -220,8 +223,6 @@ public class DataHandler {
                     if (mouseEvent.getButton() == MouseButton.SECONDARY) {
                         MenuMethods.setSelectedButtonStyle(b);
                         deleteButton.setOnAction(actionEvent -> {
-                            System.out.println("rechts");
-                            System.out.println(b.getText());
                             deleteButton(b, buttons, gridPane, saveFilePath, deleteButton);
                             removeImage(arr[2]);
                         });
@@ -266,7 +267,6 @@ public class DataHandler {
     private static void removeImage(String arr) {
         File deletingFile = new File(arr);
         deletingFile.delete();
-        System.out.println("SUCCESSFULLY DELETED FILE");
     }
 
     public static void checkLoginData(String userName, PasswordField pwdField, Stage actualStage) throws IOException {
@@ -275,7 +275,6 @@ public class DataHandler {
             String[] arrString = s.split(";");
 
             if (userName.equals(arrString[0]) && pwdField.getText().equals(arrString[1])) {
-                System.out.println("SUCCESSFUL");
                 Menu menu = new Menu();
                 Stage stage = new Stage();
                 menu.start(stage);
@@ -297,7 +296,6 @@ public class DataHandler {
 
     public static void setUserName(String userNameValue) {
         userName = userNameValue;
-        System.out.println(userName);
     }
 
     public static Text createClock() {
