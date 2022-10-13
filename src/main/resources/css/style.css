@@ -36,7 +36,7 @@
     -fx-border-color: transparent;
 }
 
-.button:pressed {
+.hyperlink .button:pressed {
     -fx-font-size: 25;
     -fx-font-family: 'Microsoft Sans Serif';
     -fx-background-radius: 5;

@@ -1,19 +1,15 @@
 package ch.francescoryu.hapin;
 
 import ch.francescoryu.hapin.buttonMethods.MenuMethods;
-import ch.francescoryu.hapin.components.boxes.CenterBox;
-import ch.francescoryu.hapin.components.buttons.AddButton;
+import ch.francescoryu.hapin.components.boxes.BalanceBox;
 import ch.francescoryu.hapin.components.boxes.TodoBox;
+import ch.francescoryu.hapin.components.buttons.AddButton;
 import ch.francescoryu.hapin.components.buttons.DeleteButton;
 import ch.francescoryu.hapin.popups.ErrorPopup;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -27,14 +23,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Objects;
 
 /**
@@ -69,6 +61,7 @@ public class Menu extends Application {
         //--------------------------------------------------------------------------------------------------------------
 
 
+
         //--------------------------------------------------------------------------------------------------------------
 
         HBox welcomeBox = new HBox();
@@ -96,7 +89,11 @@ public class Menu extends Application {
 
         //--------------------------------------------------------------------------------------------------------------
 
-        CenterBox centerBox = new CenterBox();
+        BalanceBox balanceBox = new BalanceBox();
+
+        VBox centerBox = new VBox();
+        centerBox.setAlignment(Pos.TOP_CENTER);
+        centerBox.getChildren().addAll(balanceBox);
 
         //--------------------------------------------------------------------------------------------------------------
 

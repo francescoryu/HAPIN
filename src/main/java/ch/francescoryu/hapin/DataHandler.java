@@ -202,7 +202,7 @@ public class DataHandler {
         for (String s : lines) {
             String[] arr = s.split(";");
             Button b = new Button(arr[0]);
-            b.getStyleClass().addAll(".button");
+            b.getStyleClass().addAll(".hyperlink");
 
             ImageView imageView = new ImageView(new Image(Files.newInputStream(Paths.get(arr[2]))));
             imageView.setFitHeight(25);
