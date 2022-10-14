@@ -64,16 +64,6 @@ public class Menu extends Application {
 
         //--------------------------------------------------------------------------------------------------------------
 
-        HBox welcomeBox = new HBox();
-        //welcomeBox.setBorder(new Border(new BorderStroke(Color.MEDIUMORCHID, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
-        welcomeBox.setStyle("-fx-padding: 10; -fx-alignment: center");
-        /*welcomeBox.setSpacing(50);
-        clock.setStyle("-fx-font-family: 'Microsoft Sans Serif'; -fx-font-size: 50;");
-        */
-        Text welcomeText = new Text("Welcome! Have a nice day!");
-        welcomeText.setStyle("-fx-font-size: 60; -fx-padding: 20, 40; -fx-font-family: 'Microsoft Sans Serif';");
-        welcomeBox.getChildren().addAll(welcomeText);
-
         HBox infoBox = new HBox(3);
         infoBox.setStyle("-fx-alignment: center-right; -fx-font-size: 40; -fx-padding: 10; ");
         infoBox.getChildren().addAll(DataHandler.createClock());
@@ -81,35 +71,35 @@ public class Menu extends Application {
         //--------------------------------------------------------------------------------------------------------------
 
         GridPane buttonGridPane = new GridPane();
-        buttonGridPane.setStyle("-fx-alignment: center; -fx-padding: 0 0 25 0; -fx-background-color: transparent");
+        //buttonGridPane.setStyle(" -fx-border-color: red;");
+        buttonGridPane.setAlignment(Pos.TOP_CENTER);
         buttonGridPane.setVgap(10);
-        /*gridPane.setVgap(10);
-        gridPane.setHgap(20);*/
-        //gridPane.setMinHeight(498);
+        //buttonGridPane.setAlignment(Pos.CENTER);
+        buttonGridPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
         //--------------------------------------------------------------------------------------------------------------
-
-        BalanceBox balanceBox = new BalanceBox();
-        balanceBox.setMaxSize(300, 300);
-        VBox centerBox = new VBox();
-        centerBox.setAlignment(Pos.TOP_CENTER);
-        centerBox.getChildren().addAll(balanceBox);
 
         //--------------------------------------------------------------------------------------------------------------
 
 
-        ScrollPane buttonScrollPane = new ScrollPane(buttonGridPane);
+        ScrollPane buttonScrollPane = new ScrollPane();
+        buttonScrollPane.setMaxWidth(300);
         buttonScrollPane.setFitToWidth(true);
-        buttonScrollPane.setFitToHeight(true);
-        //buttonScrollPane.setMinHeight(250);
-        buttonScrollPane.setMaxWidth(250);
-        buttonScrollPane.setMinHeight(300);
+        buttonScrollPane.setContent(buttonGridPane);
         buttonScrollPane.getStyleClass().addAll(".scroll-bar", ".scroll-pane");
-        buttonScrollPane.setStyle("-fx-background-color: transparent; -fx-background: transparent;");
+        buttonScrollPane.setStyle("-fx-background-color: transparent; -fx-background: transparent; -fx-padding: 10");
 
         AddButton addButton = new AddButton();
 
         DeleteButton deleteButton = new DeleteButton();
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        BalanceBox balanceBox = new BalanceBox();
+        VBox centerBox = new VBox();
+        centerBox.setAlignment(Pos.TOP_CENTER);
+        centerBox.getChildren().addAll(balanceBox);
+
         //--------------------------------------------------------------------------------------------------------------
 
         addButton.setOnAction(actionEvent -> {
@@ -149,7 +139,7 @@ public class Menu extends Application {
         BorderPane popupBorderPane = new BorderPane();
 
         Label addButtonLabel = new Label("Add button");
-        menuMethods.setLabelStyle(addButtonLabel);
+        MenuMethods.setLabelStyle(addButtonLabel);
 
         Label buttonNameText = new Label("Button Name: ");
         menuMethods.setPopUpStyle(buttonNameText);
@@ -240,27 +230,27 @@ public class Menu extends Application {
 
         //--------------------------------------------------------------------------------------------------------------
 
-        BorderPane borderPane = new BorderPane();
-        borderPane.getStylesheets().add(TodoBox.class.getResource("/css/style.css").toExternalForm());
-        borderPane.setStyle("-fx-background-color: linear-gradient(to right bottom, #11002b, #3f0028);");
+        BorderPane wholeBorderPane = new BorderPane();
+        wholeBorderPane.getStylesheets().add(TodoBox.class.getResource("/css/style.css").toExternalForm());
+        wholeBorderPane.setStyle("-fx-background-color: linear-gradient(to right bottom, #11002b, #3f0028);");
         //borderPane.setStyle("-fx-background-image: url(menuBackground.png); -fx-background-size: cover; -fx-alignment: center");
         //borderPane.setStyle("-fx-background-color: black");
         //borderPane.setTop(welcomeBox);
-        borderPane.setLeft(navBox);
-        borderPane.setCenter(centerBox);
-        borderPane.setRight(todoBox);
+        wholeBorderPane.setLeft(navBox);
+        wholeBorderPane.setCenter(centerBox);
+        wholeBorderPane.setRight(todoBox);
         //borderPane.setBottom(infoBox);
 
         //--------------------------------------------------------------------------------------------------------------
 
         addButton.setOnAction(actionEvent -> {
-            borderPane.setCenter(wholeAddButtonBox);
-            borderPane.getChildren().remove(centerBox);
+            wholeBorderPane.setCenter(wholeAddButtonBox);
+            wholeBorderPane.getChildren().remove(centerBox);
         });
 
         cancelButton.setOnAction(actionEvent -> {
-            borderPane.getChildren().remove(wholeAddButtonBox);
-            borderPane.setCenter(centerBox);
+            wholeBorderPane.getChildren().remove(wholeAddButtonBox);
+            wholeBorderPane.setCenter(centerBox);
         });
 
         saveButton.setOnAction(actionEvent -> {
@@ -273,17 +263,17 @@ public class Menu extends Application {
                     throw new RuntimeException(e);
                 }
             } else {
-                borderPane.getChildren().remove(wholeAddButtonBox);
+                wholeBorderPane.getChildren().remove(wholeAddButtonBox);
                 DataHandler.reloadButtonList(buttons, buttonGridPane, deleteButton);
                 inputButtonName.setText("");
                 inputButtonUrl.setText("");
-                borderPane.setCenter(centerBox);
+                wholeBorderPane.setCenter(centerBox);
             }
         });
 
         //--------------------------------------------------------------------------------------------------------------
 
-        Scene scene = new Scene(borderPane);
+        Scene scene = new Scene(wholeBorderPane);
         scene.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode() == KeyCode.F11) {
                 stage.setFullScreen(true);

@@ -45,7 +45,7 @@ public class MenuMethods {
         button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     }
 
-    public void setLabelStyle(Label text) {
+    public static void setLabelStyle(Label text) {
         text.setStyle("-fx-font-size: 30; " +
                 "-fx-font-family: 'Microsoft Sans Serif'; " +
                 "-fx-text-alignment: center;" +

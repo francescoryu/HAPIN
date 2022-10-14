@@ -39,7 +39,6 @@
 .hyperlink .button:pressed {
     -fx-font-size: 25;
     -fx-font-family: 'Microsoft Sans Serif';
-    -fx-background-radius: 5;
     -fx-border-width: 2;
     -fx-min-width: 180;
     -fx-text-fill: black;

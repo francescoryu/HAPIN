@@ -192,16 +192,17 @@ public class DataHandler {
 
 
     public static void createButtons(ArrayList<Button> buttons, GridPane gridPane, boolean withLink, Button deleteButton) throws IOException, URISyntaxException {
-        int j = 5;
+        int j = 0;
         List<String> lines = Files.readAllLines(new File(saveFilePath).toPath());
 
         gridPane.getChildren().removeAll(buttons);
 
-        gridPane.getStylesheets().add(TodoBox.class.getResource("/css/style.css").toExternalForm());
+        //gridPane.getStylesheets().add(TodoBox.class.getResource("/css/style.css").toExternalForm());
 
         for (String s : lines) {
             String[] arr = s.split(";");
             Button b = new Button(arr[0]);
+            b.getStylesheets().add(TodoBox.class.getResource("/css/style.css").toExternalForm());
             b.getStyleClass().addAll(".hyperlink");
 
             ImageView imageView = new ImageView(new Image(Files.newInputStream(Paths.get(arr[2]))));
