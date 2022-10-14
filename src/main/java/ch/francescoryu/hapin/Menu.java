@@ -90,7 +90,7 @@ public class Menu extends Application {
         //--------------------------------------------------------------------------------------------------------------
 
         BalanceBox balanceBox = new BalanceBox();
-
+        balanceBox.setMaxSize(300, 300);
         VBox centerBox = new VBox();
         centerBox.setAlignment(Pos.TOP_CENTER);
         centerBox.getChildren().addAll(balanceBox);
