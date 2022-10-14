@@ -57,7 +57,6 @@ public class TodoBox extends VBox {
         todoScrollPane.setStyle("-fx-background-color: transparent; -fx-background: transparent");
         todoScrollPane.getStyleClass().addAll(".scroll-bar", ".scroll-pane");
         todoScrollPane.setMinWidth(300);
-        todoScrollPane.setMinHeight(300);
 
         gridPane.setMaxHeight(todoScrollPane.getMaxHeight() - 10);
 
