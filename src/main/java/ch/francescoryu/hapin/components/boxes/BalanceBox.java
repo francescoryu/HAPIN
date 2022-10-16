@@ -1,12 +1,15 @@
 package ch.francescoryu.hapin.components.boxes;
 
 import ch.francescoryu.hapin.buttonMethods.MenuMethods;
+import ch.francescoryu.hapin.components.buttons.AddButton;
+import ch.francescoryu.hapin.components.buttons.DeleteButton;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class BalanceBox extends VBox {
@@ -48,14 +51,23 @@ public class BalanceBox extends VBox {
         scrollPane.getStyleClass().addAll(".scroll-pane" , ".scroll-bar");
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
+        HBox buttonBox = new HBox();
+        buttonBox.setStyle("-fx-alignment: center;");
+        buttonBox.setSpacing(10);
+
+        AddButton addButton = new AddButton();
+        DeleteButton deleteButton = new DeleteButton();
+
+        buttonBox.getChildren().addAll(addButton, deleteButton);
+
         BorderPane borderPane = new BorderPane();
         borderPane.setCenter(scrollPane);
         borderPane.setStyle("-fx-alignment: center;");
-        getChildren().addAll(balanceLabel, borderPane);
+        getChildren().addAll(balanceLabel, borderPane, buttonBox);
         setSpacing(10);
         setAlignment(Pos.TOP_CENTER);
         setStyle("-fx-alignment: center; -fx-padding: 20");
-        setMaxHeight(400);
+        setMaxHeight(600);
         setMaxWidth(650);
     }
 }
