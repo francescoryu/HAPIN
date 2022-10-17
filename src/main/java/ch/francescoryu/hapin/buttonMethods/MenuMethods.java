@@ -52,13 +52,13 @@ public class MenuMethods {
                 "-fx-text-fill: #cfcfcf");
     }
 
-    public void setPopUpStyle(Label text) {
+    public static void setPopUpStyle(Label text) {
         text.setStyle("-fx-font-size: 20;" +
                 "-fx-font-family: 'Microsoft Sans Serif';" +
                 "-fx-text-fill: #cfcfcf");
     }
 
-    public void setInputTextFieldStyle(TextField textField) {
+    public static void setInputTextFieldStyle(TextField textField) {
         textField.setStyle("-fx-font-size: 16;" +
                 "-fx-font-family: 'Microsoft Sans Serif';" +
                 "-fx-text-fill: #cfcfcf;" +
