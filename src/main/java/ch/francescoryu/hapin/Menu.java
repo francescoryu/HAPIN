@@ -231,7 +231,7 @@ public class Menu extends Application {
         //--------------------------------------------------------------------------------------------------------------
 
         BorderPane wholeBorderPane = new BorderPane();
-        wholeBorderPane.getStylesheets().add(TodoBox.class.getResource("/css/style.css").toExternalForm());
+        wholeBorderPane.getStylesheets().add(Menu.class.getResource("/css/style.css").toExternalForm());
         wholeBorderPane.setStyle("-fx-background-color: linear-gradient(to right bottom, #11002b, #3f0028);");
         //borderPane.setStyle("-fx-background-image: url(menuBackground.png); -fx-background-size: cover; -fx-alignment: center");
         //borderPane.setStyle("-fx-background-color: black");

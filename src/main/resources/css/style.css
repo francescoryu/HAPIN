@@ -46,3 +46,8 @@
     -fx-border-color: #737373;
 }
 
+@font-face {
+    font-family: 'GoodDog';
+    //src: url("");
+}
+
