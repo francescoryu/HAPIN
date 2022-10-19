@@ -8,10 +8,15 @@ import ch.francescoryu.hapin.components.buttons.DeleteEverythingButton;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -20,7 +25,7 @@ public class TodoBox extends VBox {
 
     static String todoFile = "src/main/resources/txt-files/todo.txt";
 
-    //String css = this.getClass().getResource("css/style.css").toExternalForm();
+    Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
 
     public TodoBox() throws IOException {
 
@@ -119,6 +124,7 @@ public class TodoBox extends VBox {
 
         setMinWidth(400);
         setMaxWidth(400);
+        setMaxHeight(size.getHeight() / 2);
         setStyle("-fx-padding: 20;");
         setSpacing(10);
         setAlignment(Pos.TOP_CENTER);

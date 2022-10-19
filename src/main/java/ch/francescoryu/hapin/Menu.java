@@ -24,6 +24,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -42,6 +43,8 @@ public class Menu extends Application {
 
     TextField inputButtonName;
     TextField inputButtonUrl;
+
+    Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -98,6 +101,8 @@ public class Menu extends Application {
 
         BalanceBox balanceBox = new BalanceBox();
         VBox centerBox = new VBox();
+        centerBox.setStyle("-fx-border-color: white");
+        centerBox.setMaxHeight(size.getHeight() / 2);
         centerBox.setAlignment(Pos.TOP_CENTER);
         centerBox.getChildren().addAll(balanceBox);
 
@@ -123,7 +128,8 @@ public class Menu extends Application {
         navButtonBox.getChildren().addAll(addButton, deleteButton);
 
         VBox navBox = new VBox();
-        navBox.setStyle("-fx-padding: 20;");
+        navBox.setStyle("-fx-padding: 20; -fx-border-color: white");
+        navBox.setMaxHeight(size.getHeight() / 2);
         navBox.setSpacing(10);
         navBox.setMinWidth(400);
         navBox.setMaxWidth(400);
@@ -134,10 +140,13 @@ public class Menu extends Application {
         //--------------------------------------------------------------------------------------------------------------
 
         TodoBox todoBox = new TodoBox();
+        todoBox.setStyle("-fx-border-color: white; -fx-padding: 20");
 
         //--------------------------------------------------------------------------------------------------------------
 
         BorderPane popupBorderPane = new BorderPane();
+
+
 
         Label addButtonLabel = new Label("Add button");
         MenuMethods.setLabelStyle(addButtonLabel);
@@ -224,7 +233,7 @@ public class Menu extends Application {
 
         VBox wholeAddButtonBox = new VBox();
         wholeAddButtonBox.getChildren().addAll(addButtonBox);
-        wholeAddButtonBox.setStyle("-fx-alignment: center");
+        wholeAddButtonBox.setStyle("-fx-alignment: center;");
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -234,13 +243,16 @@ public class Menu extends Application {
         BorderPane wholeBorderPane = new BorderPane();
         wholeBorderPane.getStylesheets().add(Menu.class.getResource("/css/style.css").toExternalForm());
         wholeBorderPane.setStyle("-fx-background-color: linear-gradient(to right bottom, #11002b, #3f0028);");
-        //borderPane.setStyle("-fx-background-image: url(menuBackground.png); -fx-background-size: cover; -fx-alignment: center");
-        //borderPane.setStyle("-fx-background-color: black");
-        //borderPane.setTop(welcomeBox);
+
+        //--------------------------------------------------------------------------------------------------------------
+
+
+
+        //--------------------------------------------------------------------------------------------------------------
+
         wholeBorderPane.setLeft(navBox);
         wholeBorderPane.setCenter(centerBox);
         wholeBorderPane.setRight(todoBox);
-        //borderPane.setBottom(infoBox);
 
         //--------------------------------------------------------------------------------------------------------------
 
