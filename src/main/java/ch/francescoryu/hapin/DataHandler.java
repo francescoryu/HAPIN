@@ -312,5 +312,41 @@ public class DataHandler {
 
         return clock;
     }
+
+    public static void createAccButtons(ArrayList<Button> buttons, GridPane gridPane, Button deleteButton) throws IOException {
+        gridPane.getChildren().removeAll(buttons);
+
+        File folder = new File(Paths.get("src/main/resources/AccFiles/").toUri());
+        File[] allFiles = folder.listFiles();
+
+        assert allFiles != null;
+        int btnCntr = 0;
+        int columnCntr = 0;
+        int rowCntr = 0;
+        for (File f : allFiles) {
+            if (btnCntr % 3 == 0) {
+                columnCntr++;
+                rowCntr = 0;
+            }
+            Button btn = new Button();
+            MenuMethods.setButtonStyle(btn);
+            String btnNameArr = f.getName();
+            btn.setText(btnNameArr);
+            buttons.add(btn);
+            gridPane.add(btn, rowCntr, columnCntr);
+            gridPane.setHgap(10);
+            gridPane.setVgap(10);
+            rowCntr++;
+            btnCntr++;
+
+            List<String> lines = Files.readAllLines(f.toPath());
+
+            btn.setOnAction(actionEvent -> {
+                for (String s : lines) {
+                    System.out.println(s);
+                }
+            });
+        }
+    }
 }
 

@@ -1,5 +1,6 @@
 package ch.francescoryu.hapin.components.boxes;
 
+import ch.francescoryu.hapin.DataHandler;
 import ch.francescoryu.hapin.Menu;
 import ch.francescoryu.hapin.buttonMethods.MenuMethods;
 import ch.francescoryu.hapin.components.buttons.AddButton;
@@ -17,13 +18,18 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class BalanceBox extends VBox {
     int rowCntr = 0;
     int columbCntr = 0;
 
-    public BalanceBox() {
+    ArrayList<Button> buttons = new ArrayList<>();
+
+    public BalanceBox() throws IOException {
 
         getStylesheets().add(TodoBox.class.getResource("/css/style.css").toExternalForm());
 
@@ -35,21 +41,6 @@ public class BalanceBox extends VBox {
         GridPane gridPane = new GridPane();
         gridPane.setAlignment(Pos.TOP_CENTER);
         gridPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-
-        for (int i = 0; i < 40; i++) {
-            if (i % 3 == 0) {
-                columbCntr++;
-                rowCntr = 0;
-            }
-
-            Button button = new Button();
-            MenuMethods.setButtonStyle(button);
-            button.setText("TEST " + i);
-            gridPane.add(button, rowCntr, columbCntr);
-            gridPane.setHgap(10);
-            gridPane.setVgap(10);
-            rowCntr++;
-        }
 
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setContent(gridPane);
@@ -65,6 +56,8 @@ public class BalanceBox extends VBox {
         AddButton addButton = new AddButton();
 
         DeleteButton deleteButton = new DeleteButton();
+
+        DataHandler.createAccButtons(buttons, gridPane, deleteButton);
 
         buttonBox.getChildren().addAll(addButton, deleteButton);
 
@@ -92,6 +85,8 @@ public class BalanceBox extends VBox {
         addBox.setAlignment(Pos.TOP_CENTER);
         addBox.getChildren().addAll(addAccountLabel, inputAccountName, saveButton);
         addBox.setMaxWidth(300);
+
+
 
         //--------------------------------------------------------------------------------------------------------------
 
