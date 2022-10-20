@@ -18,6 +18,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,6 +29,8 @@ public class BalanceBox extends VBox {
     int columbCntr = 0;
 
     ArrayList<Button> buttons = new ArrayList<>();
+
+    Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
 
     public BalanceBox() throws IOException {
 
@@ -98,7 +101,8 @@ public class BalanceBox extends VBox {
         setAlignment(Pos.TOP_CENTER);
         setStyle("-fx-alignment: center; -fx-padding: 20");
         setMaxHeight(600);
-        setMaxWidth(650);
+        setMinWidth(size.getWidth() / 3);
+        //setMaxWidth(650);
 
         //--------------------------------------------------------------------------------------------------------------
 

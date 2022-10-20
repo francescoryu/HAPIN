@@ -59,11 +59,9 @@ public class TodoBox extends VBox {
 
 
         ScrollPane todoScrollPane = new ScrollPane(gridPane);
-        todoScrollPane.setStyle("-fx-background-color: transparent; -fx-background: transparent");
+        todoScrollPane.setStyle("-fx-background-color: transparent; -fx-background: transparent; -fx-padding: 10");
         todoScrollPane.getStyleClass().addAll(".scroll-bar", ".scroll-pane");
-        todoScrollPane.setMinWidth(300);
 
-        gridPane.setMaxHeight(todoScrollPane.getMaxHeight() - 10);
 
 
         ComboBox<String> priority = new ComboBox<>();
@@ -92,7 +90,9 @@ public class TodoBox extends VBox {
                 "-fx-text-fill: #cfcfcf;" +
                 "-fx-control-inner-background: black;" +
                 "-fx-border-color: #737373;" +
-                "-fx-border-width: 2");
+                "-fx-border-width: 2;");
+        inputTodoList.setMaxWidth(360);
+
 
         AddButton addTodoButton = new AddButton();
         addTodoButton.setOnAction(actionEvent -> {
@@ -122,9 +122,8 @@ public class TodoBox extends VBox {
         buttonDeleteBox.getChildren().addAll(deleteButton, deleteEverythingButton);
 
 
-        setMinWidth(400);
-        setMaxWidth(400);
-        setMaxHeight(size.getHeight() / 2);
+        setPrefWidth(size.getWidth() / 3);
+        setPrefHeight(size.getHeight() / 2);
         setStyle("-fx-padding: 20;");
         setSpacing(10);
         setAlignment(Pos.TOP_CENTER);

@@ -129,10 +129,9 @@ public class Menu extends Application {
 
         VBox navBox = new VBox();
         navBox.setStyle("-fx-padding: 20; -fx-border-color: white");
-        navBox.setMaxHeight(size.getHeight() / 2);
+        navBox.setPrefHeight(size.getHeight() / 2);
         navBox.setSpacing(10);
-        navBox.setMinWidth(400);
-        navBox.setMaxWidth(400);
+        navBox.setPrefWidth(size.getWidth() / 3);
         navBox.setAlignment(Pos.TOP_CENTER);
         navBox.getChildren().addAll(linksText, buttonScrollPane, navButtonBox);
 
@@ -152,11 +151,11 @@ public class Menu extends Application {
         MenuMethods.setLabelStyle(addButtonLabel);
 
         Label buttonNameText = new Label("Button Name: ");
-        menuMethods.setPopUpStyle(buttonNameText);
+        MenuMethods.setPopUpStyle(buttonNameText);
         Label urlText = new Label("URL: ");
-        menuMethods.setPopUpStyle(urlText);
+        MenuMethods.setPopUpStyle(urlText);
         Label imgText = new Label("Add Icon: ");
-        menuMethods.setPopUpStyle(imgText);
+        MenuMethods.setPopUpStyle(imgText);
 
         VBox textBox = new VBox();
         textBox.setStyle("-fx-padding: 20");
@@ -165,10 +164,10 @@ public class Menu extends Application {
 
         inputButtonName = new TextField();
         inputButtonName.setPrefColumnCount(20);
-        menuMethods.setInputTextFieldStyle(inputButtonName);
+        MenuMethods.setInputTextFieldStyle(inputButtonName);
 
         inputButtonUrl = new TextField();
-        menuMethods.setInputTextFieldStyle(inputButtonUrl);
+        MenuMethods.setInputTextFieldStyle(inputButtonUrl);
         inputButtonUrl.setPrefColumnCount(20);
 
         Button chooseFile = new Button("Select File");
@@ -229,7 +228,8 @@ public class Menu extends Application {
         addButtonBox.setStyle("-fx-padding: 20; -fx-border-color: #737373; -fx-border-width: 2;");
         addButtonBox.setAlignment(Pos.CENTER);
         addButtonBox.setSpacing(10);
-        addButtonBox.setMaxWidth(1);
+        addButtonBox.setPrefHeight(size.getHeight() / 2);
+        addButtonBox.setPrefWidth(size.getWidth() / 3);
 
         VBox wholeAddButtonBox = new VBox();
         wholeAddButtonBox.getChildren().addAll(addButtonBox);
@@ -250,20 +250,31 @@ public class Menu extends Application {
 
         //--------------------------------------------------------------------------------------------------------------
 
-        wholeBorderPane.setLeft(navBox);
-        wholeBorderPane.setCenter(centerBox);
-        wholeBorderPane.setRight(todoBox);
+        HBox topBox = new HBox();
+        topBox.getChildren().addAll(navBox, centerBox, todoBox);
+        topBox.setStyle("-fx-border-color: white");
+
+        BorderPane topBorderPane = new BorderPane();
+        topBorderPane.getChildren().addAll();
+
+
+        //wholeBorderPane.setLeft(navBox);
+        wholeBorderPane.setTop(topBox);
+        wholeBorderPane.setTop(topBox);
+        //wholeBorderPane.setRight(todoBox);
+
+
 
         //--------------------------------------------------------------------------------------------------------------
 
         addButton.setOnAction(actionEvent -> {
-            wholeBorderPane.setCenter(wholeAddButtonBox);
-            wholeBorderPane.getChildren().remove(centerBox);
+            topBox.getChildren().removeAll(navBox, centerBox, todoBox);
+            topBox.getChildren().addAll(addButtonBox, centerBox, todoBox);
         });
 
         cancelButton.setOnAction(actionEvent -> {
-            wholeBorderPane.getChildren().remove(wholeAddButtonBox);
-            wholeBorderPane.setCenter(centerBox);
+            topBox.getChildren().removeAll(addButtonBox, centerBox, todoBox);
+            topBox.getChildren().addAll(navBox, centerBox, todoBox);
         });
 
         saveButton.setOnAction(actionEvent -> {
@@ -276,11 +287,11 @@ public class Menu extends Application {
                     throw new RuntimeException(e);
                 }
             } else {
-                wholeBorderPane.getChildren().remove(wholeAddButtonBox);
                 DataHandler.reloadButtonList(buttons, buttonGridPane, deleteButton);
                 inputButtonName.setText("");
                 inputButtonUrl.setText("");
-                wholeBorderPane.setCenter(centerBox);
+                topBox.getChildren().removeAll(addButtonBox, centerBox, todoBox);
+                topBox.getChildren().addAll(navBox, centerBox, todoBox);
             }
         });
 
