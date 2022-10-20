@@ -342,9 +342,21 @@ public class DataHandler {
             List<String> lines = Files.readAllLines(f.toPath());
 
             btn.setOnAction(actionEvent -> {
+                double endVal = 0;
                 for (String s : lines) {
-                    System.out.println(s);
+
+                    double prevVal = Double.parseDouble(s.split(";")[1]);
+
+                    if (s.matches("negative.+")) {
+                        endVal = endVal - prevVal;
+                    }
+
+                    if (s.matches("positive.+")) {
+                        endVal = endVal + prevVal;
+                    }
                 }
+
+                System.out.println(endVal);
             });
         }
     }

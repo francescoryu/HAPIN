@@ -1,4 +1,3 @@
-TEST.txt
-Lorem impressum
-dgjkdfjlkgjdg
-ajklafjlsdkjflskdjfklsd
+positive;1
+negative;5
+positive;3
