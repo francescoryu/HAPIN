@@ -1,6 +1,8 @@
 package ch.francescoryu.hapin;
 
 import ch.francescoryu.hapin.buttonMethods.MenuMethods;
+import ch.francescoryu.hapin.components.boxes.BalanceBox;
+import ch.francescoryu.hapin.components.boxes.ButtonBalanceBox;
 import ch.francescoryu.hapin.components.boxes.TodoBox;
 import ch.francescoryu.hapin.components.buttons.DeleteButton;
 import javafx.animation.Animation;
@@ -339,26 +341,43 @@ public class DataHandler {
             rowCntr++;
             btnCntr++;
 
-            List<String> lines = Files.readAllLines(f.toPath());
-
             btn.setOnAction(actionEvent -> {
-                double endVal = 0;
-                for (String s : lines) {
-
-                    double prevVal = Double.parseDouble(s.split(";")[1]);
-
-                    if (s.matches("negative.+")) {
-                        endVal = endVal - prevVal;
-                    }
-
-                    if (s.matches("positive.+")) {
-                        endVal = endVal + prevVal;
-                    }
+                try {
+                    createAccButtonVBox(f);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
-
-                System.out.println(endVal);
             });
         }
+    }
+
+    public static void createAccButtonVBox(File f) throws IOException {
+        double endVal = 0;
+
+        List<String> lines = Files.readAllLines(f.toPath());
+
+        int cntr = 0;
+
+        GridPane accButtonGridPane = new GridPane();
+        ButtonBalanceBox buttonBalanceBox = new ButtonBalanceBox();
+
+        for (String s : lines) {
+
+            Button accButton = new Button();
+
+            double currVal = Double.parseDouble(s);
+            System.out.println(currVal);
+            accButton.setText(s);
+
+            endVal = endVal + currVal;
+
+            accButtonGridPane.add(accButton, cntr, 0);
+
+        }
+
+        buttonBalanceBox.getChildren().add(accButtonGridPane);
+
+        System.out.println(endVal);
     }
 }
 

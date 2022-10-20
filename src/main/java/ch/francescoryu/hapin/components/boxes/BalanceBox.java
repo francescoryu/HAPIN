@@ -49,7 +49,7 @@ public class BalanceBox extends VBox {
         scrollPane.setContent(gridPane);
         scrollPane.setFitToWidth(true);
         scrollPane.setStyle("-fx-background-color: transparent; -fx-background: transparent");
-        scrollPane.getStyleClass().addAll(".scroll-pane" , ".scroll-bar");
+        scrollPane.getStyleClass().addAll(".scroll-pane", ".scroll-bar");
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
         HBox buttonBox = new HBox();
@@ -90,7 +90,6 @@ public class BalanceBox extends VBox {
         addBox.setMaxWidth(300);
 
 
-
         //--------------------------------------------------------------------------------------------------------------
 
         BorderPane borderPane = new BorderPane();
@@ -118,4 +117,10 @@ public class BalanceBox extends VBox {
             getChildren().addAll(balanceLabel, borderPane, buttonBox);
         });
     }
+
+    //------------------------------------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------------------------------
+
+
 }
