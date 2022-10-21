@@ -1,30 +1,32 @@
 package ch.francescoryu.hapin;
 
 import ch.francescoryu.hapin.buttonMethods.MenuMethods;
-import ch.francescoryu.hapin.components.boxes.BalanceBox;
-import ch.francescoryu.hapin.components.boxes.ButtonBalanceBox;
 import ch.francescoryu.hapin.components.boxes.TodoBox;
-import ch.francescoryu.hapin.components.buttons.DeleteButton;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
-import javafx.scene.control.*;
 import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.awt.*;
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
@@ -32,8 +34,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.text.DateFormat;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 
 /**
  * @author: Francesco Ryu
@@ -49,8 +51,7 @@ public class DataHandler {
     static String todoFilePath = "src/main/resources/txt-files/todo.txt";
     static String userName;
 
-    ArrayList<Button> buttons = new ArrayList<>();
-    Button button = new Button();
+    GridPane gridPane = new GridPane();
 
     public static void reloadButtonList(ArrayList<Button> buttons, GridPane gridPane, Button deleteButton) {
 
@@ -315,7 +316,7 @@ public class DataHandler {
         return clock;
     }
 
-    public static void createAccButtons(ArrayList<Button> buttons, GridPane gridPane, Button deleteButton) throws IOException {
+    public static void createAccButtons(ArrayList<Button> buttons, GridPane gridPane) throws IOException {
         gridPane.getChildren().removeAll(buttons);
 
         File folder = new File(Paths.get("src/main/resources/AccFiles/").toUri());
@@ -358,8 +359,7 @@ public class DataHandler {
 
         int cntr = 0;
 
-        GridPane accButtonGridPane = new GridPane();
-        ButtonBalanceBox buttonBalanceBox = new ButtonBalanceBox();
+        GridPane gridPane = new GridPane();
 
         for (String s : lines) {
 
@@ -371,13 +371,19 @@ public class DataHandler {
 
             endVal = endVal + currVal;
 
-            accButtonGridPane.add(accButton, cntr, 0);
-
+            gridPane.add(accButton, cntr, 0);
+            cntr++;
         }
-
-        buttonBalanceBox.getChildren().add(accButtonGridPane);
-
         System.out.println(endVal);
+    }
+
+    public GridPane getGridPane() {
+        return gridPane;
+    }
+
+    public void setGridPane(GridPane gridPane) {
+        this.gridPane = gridPane;
+        System.out.println("TEST");
     }
 }
 
