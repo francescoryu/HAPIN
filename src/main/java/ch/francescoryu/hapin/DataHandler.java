@@ -9,14 +9,14 @@ import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -316,7 +316,7 @@ public class DataHandler {
         return clock;
     }
 
-    public static void createAccButtons(ArrayList<Button> buttons, GridPane gridPane) throws IOException {
+    public static void createAccButtons(ArrayList<Button> buttons, GridPane gridPane, VBox vBox, Label balanceLabel, BorderPane borderPane, HBox buttonBox) throws IOException {
         gridPane.getChildren().removeAll(buttons);
 
         File folder = new File(Paths.get("src/main/resources/AccFiles/").toUri());
@@ -344,7 +344,8 @@ public class DataHandler {
 
             btn.setOnAction(actionEvent -> {
                 try {
-                    createAccButtonVBox(f);
+                    vBox.getChildren().removeAll(balanceLabel, borderPane, buttonBox);
+                    createAccButtonVBox(f, vBox);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -352,38 +353,53 @@ public class DataHandler {
         }
     }
 
-    public static void createAccButtonVBox(File f) throws IOException {
+    public static void createAccButtonVBox(File f, VBox vBox) throws IOException {
         double endVal = 0;
 
         List<String> lines = Files.readAllLines(f.toPath());
 
         int cntr = 0;
 
+        Label fileNameLabel = new Label(f.getName());
+        MenuMethods.setLabelStyle(fileNameLabel);
+
         GridPane gridPane = new GridPane();
+        gridPane.setStyle("-fx-background-color: white");
+
+        ScrollPane scrollPane = new ScrollPane(gridPane);
+        scrollPane.setStyle("-fx-background-color: transparent; -fx-background: transparent; -fx-border-color: white");
 
         for (String s : lines) {
 
-            Button accButton = new Button();
-
             double currVal = Double.parseDouble(s);
-            System.out.println(currVal);
-            accButton.setText(s);
+
+            TextField textField = new TextField();
+            String tempValRounded = String.format("%.2f", currVal);
+
+
+            if (currVal > 0) {
+                textField.setText("+" + tempValRounded);
+            } else {
+                textField.setText(tempValRounded);
+            }
 
             endVal = endVal + currVal;
 
-            gridPane.add(accButton, cntr, 0);
+            gridPane.add(textField, 0, cntr);
             cntr++;
         }
+        //scrollPane.setBackground(null);
+
+        TextField textField = new TextField();
+        Label totalLabel = new Label();
+        String totalValRounded = String.format("%.2f", endVal);
+
+        totalLabel.setText(totalValRounded);
+
         System.out.println(endVal);
-    }
-
-    public GridPane getGridPane() {
-        return gridPane;
-    }
-
-    public void setGridPane(GridPane gridPane) {
-        this.gridPane = gridPane;
-        System.out.println("TEST");
+        vBox.getChildren().addAll(fileNameLabel, scrollPane, totalLabel, textField);
+        vBox.setAlignment(Pos.TOP_CENTER);
+        vBox.setBackground(null);
     }
 }
 

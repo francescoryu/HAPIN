@@ -110,7 +110,6 @@ public class Menu extends Application {
 
         addButton.setOnAction(actionEvent -> {
             DataHandler.reloadButtonList(buttons, buttonGridPane, deleteButton);
-
         });
 
         //--------------------------------------------------------------------------------------------------------------
