@@ -27,6 +27,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
@@ -124,11 +125,6 @@ public class DataHandler {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public static void reloadTodo(ArrayList<Button> buttons, GridPane gridPane, Button deleteButton) throws IOException {
-        gridPane.getChildren().removeAll(buttons);
-        buttons.clear();
     }
 
     public static void readTodoFile(GridPane gridPane, ArrayList<Button> buttons, Button deleteButton) throws IOException {
@@ -364,23 +360,25 @@ public class DataHandler {
         MenuMethods.setLabelStyle(fileNameLabel);
 
         GridPane gridPane = new GridPane();
-        gridPane.setStyle("-fx-background-color: white");
+        gridPane.setAlignment(Pos.TOP_CENTER);
 
         ScrollPane scrollPane = new ScrollPane(gridPane);
-        scrollPane.setStyle("-fx-background-color: transparent; -fx-background: transparent; -fx-border-color: white");
+        scrollPane.setFitToWidth(true);
+        scrollPane.setStyle("-fx-background-color: transparent; -fx-background: transparent;");
+
 
         for (String s : lines) {
 
             double currVal = Double.parseDouble(s);
-
             TextField textField = new TextField();
+            textField.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-background-color: transparent; -fx-background: transparent;");
+            textField.setPrefColumnCount(20);
             String tempValRounded = String.format("%.2f", currVal);
-
 
             if (currVal > 0) {
                 textField.setText("+" + tempValRounded);
             } else {
-                textField.setText(tempValRounded);
+                textField.setText(String.valueOf(tempValRounded));
             }
 
             endVal = endVal + currVal;
@@ -391,14 +389,16 @@ public class DataHandler {
         //scrollPane.setBackground(null);
 
         TextField textField = new TextField();
+        textField.setPrefWidth(150);
+        textField.setMaxWidth(150);
         Label totalLabel = new Label();
         String totalValRounded = String.format("%.2f", endVal);
 
         totalLabel.setText(totalValRounded);
+        totalLabel.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'");
 
         System.out.println(endVal);
         vBox.getChildren().addAll(fileNameLabel, scrollPane, totalLabel, textField);
-        vBox.setAlignment(Pos.TOP_CENTER);
         vBox.setBackground(null);
     }
 }
