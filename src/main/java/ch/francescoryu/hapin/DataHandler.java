@@ -398,7 +398,14 @@ public class DataHandler {
         Label totalLabel = new Label();
         String totalValRounded = String.format("%.2f", endVal);
 
-        totalLabel.setText("Total: " + totalValRounded);
+        if (endVal > 0) {
+            totalLabel.setText("Total: +" + totalValRounded);
+        }
+
+        else {
+            totalLabel.setText("Total: " + totalValRounded);
+        }
+
         totalLabel.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: #d0d0d0; -fx-border-color: #d0d0d0; -fx-background-color: transparent; -fx-background: transparent; -fx-padding: 10");
 
         System.out.println(endVal);
