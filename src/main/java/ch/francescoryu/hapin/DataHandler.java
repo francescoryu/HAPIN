@@ -411,8 +411,8 @@ public class DataHandler {
         }
 
         TextField textField = new TextField();
-        textField.setPrefWidth(150);
-        textField.setMaxWidth(150);
+        textField.setPrefColumnCount(20);
+        textField.setStyle("-fx-font-size: 17; -fx-text-fill: #cfcfcf; -fx-background-color: black; -fx-border-color: #737373");
 
         Label totalLabel = new Label();
         Label newVal = new Label("Hinzufügen: ");

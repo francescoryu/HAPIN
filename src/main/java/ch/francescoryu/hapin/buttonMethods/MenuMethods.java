@@ -15,12 +15,11 @@ import javafx.scene.text.Text;
 
 public class MenuMethods {
     public static void setButtonStyle(Button button) {
-        button.setStyle("-fx-font-size: 25; " +
+        button.setStyle("-fx-font-size: 20; " +
                 "-fx-font-family: 'Microsoft Sans Serif'; " +
                 "-fx-background-radius: 5; " +
                 "-fx-border-width: 2;  " +
-                //"-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );" +
-                "-fx-min-width: 180;" +
+                "-fx-min-width: 140;" +
                 "-fx-text-fill: #cfcfcf;" +
                 "-fx-background-color: black;" +
                 "-fx-border-color: #737373");
