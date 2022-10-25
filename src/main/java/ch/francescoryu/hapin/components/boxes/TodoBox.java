@@ -94,7 +94,7 @@ public class TodoBox extends VBox {
         inputTodoList.setMaxWidth(360);
 
 
-        AddButton addTodoButton = new AddButton();
+        AddButton addTodoButton = new AddButton(35);
         addTodoButton.setOnAction(actionEvent -> {
             try {
                 DataHandler.writeTodoFile(inputTodoList, priority, buttons, gridPane);

@@ -2,21 +2,24 @@ package ch.francescoryu.hapin;
 
 import ch.francescoryu.hapin.buttonMethods.MenuMethods;
 import ch.francescoryu.hapin.components.boxes.TodoBox;
+import ch.francescoryu.hapin.components.buttons.SaveButton;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -27,7 +30,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
@@ -370,11 +372,18 @@ public class DataHandler {
         for (String s : lines) {
 
             double currVal = Double.parseDouble(s);
+
+            HBox hBox = new HBox();
+            hBox.setSpacing(5);
+            hBox.setAlignment(Pos.CENTER_LEFT);
+
             TextField textField = new TextField();
-            textField.setOnMouseClicked(mouseEvent -> {
-                System.out.println(textField.getText());
-            });
             textField.setPrefColumnCount(20);
+
+            SaveButton button = new SaveButton(20);
+
+            hBox.getChildren().addAll(textField, button);
+
             String tempValRounded = String.format("%.2f", currVal);
 
             if (currVal > 0) {
@@ -395,7 +404,8 @@ public class DataHandler {
 
             endVal = endVal + currVal;
 
-            gridPane.add(textField, 0, cntr);
+            gridPane.setVgap(5);
+            gridPane.add(hBox, 0, cntr);
             textFields.add(textField);
             cntr++;
         }

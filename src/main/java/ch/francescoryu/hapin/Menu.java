@@ -93,7 +93,7 @@ public class Menu extends Application {
         buttonScrollPane.getStyleClass().addAll(".scroll-bar", ".scroll-pane");
         buttonScrollPane.setStyle("-fx-background-color: transparent; -fx-background: transparent; -fx-padding: 10");
 
-        AddButton addButton = new AddButton();
+        AddButton addButton = new AddButton(35);
 
         DeleteButton deleteButton = new DeleteButton();
 

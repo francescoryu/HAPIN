@@ -56,7 +56,7 @@ public class BalanceBox extends VBox {
         buttonBox.setStyle("-fx-alignment: center;");
         buttonBox.setSpacing(10);
 
-        AddButton addButton = new AddButton();
+        AddButton addButton = new AddButton(35);
 
         DeleteButton deleteButton = new DeleteButton();
 

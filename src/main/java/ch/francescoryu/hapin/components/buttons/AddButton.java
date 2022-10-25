@@ -9,10 +9,10 @@ import javafx.scene.image.ImageView;
 import java.util.Objects;
 
 public class AddButton extends Button {
-    public AddButton() {
+    public AddButton(double d) {
         ImageView addButtonImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/add.png"))));
         setStyle("-fx-background-color: black;-fx-border-width: 2; -fx-border-color: #737373;");
-        addButtonImageView.setFitHeight(35);
+        addButtonImageView.setFitHeight(d);
         addButtonImageView.setPreserveRatio(true);
         setGraphic(addButtonImageView);
         setCursor(Cursor.HAND);
