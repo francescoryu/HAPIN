@@ -1,4 +1,4 @@
-1;Play fifa
-3;Eat
-2;Play bus sim
-1;study
+1;chill
+1;Fifa
+2;Bus sim
+3;programming

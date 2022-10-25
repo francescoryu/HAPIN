@@ -312,7 +312,7 @@ public class DataHandler {
         return clock;
     }
 
-    public static void createAccButtons(ArrayList<Button> buttons, GridPane gridPane, VBox vBox, Label balanceLabel, BorderPane borderPane, HBox buttonBox) throws IOException {
+    public static void createAccButtons(ArrayList<Button> buttons, GridPane gridPane, VBox vBox, Label balanceLabel, BorderPane borderPane, HBox buttonBox, ArrayList<TextField> textFields) throws IOException {
         gridPane.getChildren().removeAll(buttons);
 
         File folder = new File(Paths.get("src/main/resources/AccFiles/").toUri());
@@ -341,7 +341,7 @@ public class DataHandler {
             btn.setOnAction(actionEvent -> {
                 try {
                     vBox.getChildren().removeAll(balanceLabel, borderPane, buttonBox);
-                    createAccButtonVBox(f, vBox);
+                    createAccButtonVBox(f, vBox, textFields);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -349,7 +349,7 @@ public class DataHandler {
         }
     }
 
-    public static void createAccButtonVBox(File f, VBox vBox) throws IOException {
+    public static void createAccButtonVBox(File f, VBox vBox, ArrayList<TextField> textFields) throws IOException {
         double endVal = 0;
 
         List<String> lines = Files.readAllLines(f.toPath());
@@ -371,12 +371,13 @@ public class DataHandler {
 
             double currVal = Double.parseDouble(s);
             TextField textField = new TextField();
-            textField.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-background-color: transparent; -fx-background: transparent;");
+            textField.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-background-color: transparent; -fx-background: transparent; -fx-text-fill: white");
             textField.setPrefColumnCount(20);
             String tempValRounded = String.format("%.2f", currVal);
 
             if (currVal > 0) {
                 textField.setText("+" + tempValRounded);
+
             } else {
                 textField.setText(String.valueOf(tempValRounded));
             }
@@ -384,9 +385,9 @@ public class DataHandler {
             endVal = endVal + currVal;
 
             gridPane.add(textField, 0, cntr);
+            textFields.add(textField);
             cntr++;
         }
-        //scrollPane.setBackground(null);
 
         TextField textField = new TextField();
         textField.setPrefWidth(150);

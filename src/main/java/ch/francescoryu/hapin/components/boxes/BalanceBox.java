@@ -29,7 +29,7 @@ public class BalanceBox extends VBox {
     int columbCntr = 0;
 
     ArrayList<Button> buttons = new ArrayList<>();
-
+    ArrayList<TextField> textFields = new ArrayList<>();
     Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
 
     public BalanceBox() throws IOException {
@@ -119,7 +119,7 @@ public class BalanceBox extends VBox {
         //--------------------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------------------
 
-        DataHandler.createAccButtons(buttons, gridPane, this, balanceLabel, borderPane, buttonBox);
+        DataHandler.createAccButtons(buttons, gridPane, this, balanceLabel, borderPane, buttonBox, textFields);
     }
 
 }
