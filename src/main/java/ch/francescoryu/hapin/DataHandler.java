@@ -383,6 +383,8 @@ public class DataHandler {
 
             SaveButton button = new SaveButton(20);
             button.setOnAction(actionEvent -> {
+                lines.remove(s);
+                lines.add(textField.getText());
 
             });
 
