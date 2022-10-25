@@ -374,15 +374,23 @@ public class DataHandler {
             textField.setOnMouseClicked(mouseEvent -> {
                 System.out.println(textField.getText());
             });
-            textField.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-border-color: #d0d0d0; -fx-background-color: transparent; -fx-background: transparent; -fx-text-fill: #d0d0d0");
             textField.setPrefColumnCount(20);
             String tempValRounded = String.format("%.2f", currVal);
 
             if (currVal > 0) {
                 textField.setText("+" + tempValRounded);
+                textField.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-border-color: #d0d0d0; -fx-background-color: rgba(151,255,53,0.58); -fx-text-fill: #d0d0d0");
 
-            } else {
+            }
+
+            if (currVal < 0) {
+                textField.setText(tempValRounded);
+                textField.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-border-color: #d0d0d0; -fx-background-color: rgba(255,53,53,0.58); -fx-text-fill: #d0d0d0");
+            }
+
+            else if (currVal == 0) {
                 textField.setText(String.valueOf(tempValRounded));
+                textField.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-border-color: #d0d0d0; -fx-background-color: transparent; -fx-background: transparent; -fx-text-fill: #d0d0d0");
             }
 
             endVal = endVal + currVal;
@@ -395,21 +403,33 @@ public class DataHandler {
         TextField textField = new TextField();
         textField.setPrefWidth(150);
         textField.setMaxWidth(150);
+
         Label totalLabel = new Label();
+        Label newVal = new Label("Hinzufügen: ");
+        newVal.setStyle("-fx-font-family: 'Microsoft Sans Serif'; -fx-font-size: 20; -fx-text-fill: #d0d0d0;");
+
         String totalValRounded = String.format("%.2f", endVal);
 
         if (endVal > 0) {
             totalLabel.setText("Total: +" + totalValRounded);
+            totalLabel.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: #d0d0d0; -fx-border-color: #d0d0d0; -fx-background-color: rgba(151,255,53,0.58); -fx-padding: 10");
         }
 
-        else {
+        if (endVal < 0) {
             totalLabel.setText("Total: " + totalValRounded);
+            totalLabel.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: #d0d0d0; -fx-border-color: #d0d0d0; -fx-background-color: rgba(255,53,53,0.58); -fx-padding: 10");
         }
 
-        totalLabel.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: #d0d0d0; -fx-border-color: #d0d0d0; -fx-background-color: transparent; -fx-background: transparent; -fx-padding: 10");
+        else if (endVal == 0) {
+            totalLabel.setText("Total: " + totalValRounded);
+            totalLabel.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: #d0d0d0; -fx-border-color: #d0d0d0; -fx-background-color: transparent; -fx-background: transparent; -fx-padding: 10");
+        }
 
-        System.out.println(endVal);
-        vBox.getChildren().addAll(fileNameLabel, scrollPane, totalLabel, textField);
+        HBox hBox = new HBox();
+        hBox.setAlignment(Pos.CENTER);
+        hBox.getChildren().addAll(newVal, textField);
+
+        vBox.getChildren().addAll(fileNameLabel, scrollPane, totalLabel, hBox);
         vBox.setBackground(null);
     }
 }
