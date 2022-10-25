@@ -371,7 +371,10 @@ public class DataHandler {
 
             double currVal = Double.parseDouble(s);
             TextField textField = new TextField();
-            textField.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-background-color: transparent; -fx-background: transparent; -fx-text-fill: white");
+            textField.setOnMouseClicked(mouseEvent -> {
+                System.out.println(textField.getText());
+            });
+            textField.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-border-color: #d0d0d0; -fx-background-color: transparent; -fx-background: transparent; -fx-text-fill: #d0d0d0");
             textField.setPrefColumnCount(20);
             String tempValRounded = String.format("%.2f", currVal);
 
@@ -395,8 +398,8 @@ public class DataHandler {
         Label totalLabel = new Label();
         String totalValRounded = String.format("%.2f", endVal);
 
-        totalLabel.setText(totalValRounded);
-        totalLabel.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'");
+        totalLabel.setText("Total: " + totalValRounded);
+        totalLabel.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: #d0d0d0; -fx-border-color: #d0d0d0; -fx-background-color: transparent; -fx-background: transparent; -fx-padding: 10");
 
         System.out.println(endVal);
         vBox.getChildren().addAll(fileNameLabel, scrollPane, totalLabel, textField);
