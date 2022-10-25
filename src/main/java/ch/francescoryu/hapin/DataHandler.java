@@ -53,6 +53,7 @@ public class DataHandler {
     static String loginFilePath = "src/main/resources/txt-files/login.txt";
     static String todoFilePath = "src/main/resources/txt-files/todo.txt";
     static String userName;
+    static String txtFileFolder = "src/main/resources/AccFiles/";
 
     GridPane gridPane = new GridPane();
 
@@ -317,7 +318,7 @@ public class DataHandler {
     public static void createAccButtons(ArrayList<Button> buttons, GridPane gridPane, VBox vBox, Label balanceLabel, BorderPane borderPane, HBox buttonBox, ArrayList<TextField> textFields) throws IOException {
         gridPane.getChildren().removeAll(buttons);
 
-        File folder = new File(Paths.get("src/main/resources/AccFiles/").toUri());
+        File folder = new File(Paths.get(txtFileFolder).toUri());
         File[] allFiles = folder.listFiles();
 
         assert allFiles != null;
@@ -378,11 +379,11 @@ public class DataHandler {
             hBox.setAlignment(Pos.CENTER_LEFT);
 
             TextField textField = new TextField();
-            textField.setPrefColumnCount(20);
+            textField.setPrefColumnCount(15);
 
             SaveButton button = new SaveButton(20);
             button.setOnAction(actionEvent -> {
-                System.out.println(s);
+
             });
 
             hBox.getChildren().addAll(textField, button);
