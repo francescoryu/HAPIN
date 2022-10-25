@@ -381,6 +381,9 @@ public class DataHandler {
             textField.setPrefColumnCount(20);
 
             SaveButton button = new SaveButton(20);
+            button.setOnAction(actionEvent -> {
+                System.out.println(s);
+            });
 
             hBox.getChildren().addAll(textField, button);
 
