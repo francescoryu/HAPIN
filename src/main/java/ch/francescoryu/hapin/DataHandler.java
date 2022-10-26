@@ -410,9 +410,7 @@ public class DataHandler {
             if (currVal < 0) {
                 inputTextField.setText(String.valueOf(currVal));
                 inputTextField.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-border-color: #d0d0d0; -fx-background-color: rgba(255,53,53,0.58); -fx-text-fill: #d0d0d0");
-            }
-
-            else if (currVal == 0) {
+            } else if (currVal == 0) {
                 inputTextField.setText(String.valueOf(currVal));
                 inputTextField.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-border-color: #d0d0d0; -fx-background-color: transparent; -fx-background: transparent; -fx-text-fill: #d0d0d0");
             }
@@ -437,9 +435,7 @@ public class DataHandler {
         if (endVal < 0) {
             totalLabel.setText("Total: " + totalValRounded);
             totalLabel.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: #d0d0d0; -fx-border-color: #d0d0d0; -fx-background-color: rgba(255,53,53,0.58); -fx-padding: 10");
-        }
-
-        else if (endVal == 0) {
+        } else if (endVal == 0) {
             totalLabel.setText("Total: " + totalValRounded);
             totalLabel.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: #d0d0d0; -fx-border-color: #d0d0d0; -fx-background-color: transparent; -fx-background: transparent; -fx-padding: 10");
         }

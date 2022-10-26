@@ -1,3 +1,2 @@
 1;chill
 3;programming
-3;study
