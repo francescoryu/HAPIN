@@ -220,19 +220,18 @@ public class Menu extends Application {
         popupBorderPane.setLeft(textBox);
         popupBorderPane.setRight(inputBox);
         popupBorderPane.setBottom(buttonBox);
-        popupBorderPane.setMaxSize(300, 200);
+        //popupBorderPane.setMaxSize(300, 200);
 
         VBox addButtonBox = new VBox();
         addButtonBox.getChildren().addAll(addButtonLabel, popupBorderPane);
         addButtonBox.setStyle("-fx-padding: 20; -fx-border-color: #737373; -fx-border-width: 2;");
         addButtonBox.setAlignment(Pos.CENTER);
         addButtonBox.setSpacing(10);
-        addButtonBox.setPrefHeight(size.getHeight() / 2);
-        addButtonBox.setPrefWidth(size.getWidth() / 3);
 
         VBox wholeAddButtonBox = new VBox();
         wholeAddButtonBox.getChildren().addAll(addButtonBox);
         wholeAddButtonBox.setStyle("-fx-alignment: center;");
+
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -242,6 +241,8 @@ public class Menu extends Application {
         BorderPane wholeBorderPane = new BorderPane();
         wholeBorderPane.getStylesheets().add(Menu.class.getResource("/css/style.css").toExternalForm());
         wholeBorderPane.setStyle("-fx-background-color: linear-gradient(to right bottom, #11002b, #3f0028);");
+        wholeAddButtonBox.setPrefHeight(size.getHeight() / 2);
+        wholeAddButtonBox.setPrefWidth(size.getWidth() / 3);
 
         //--------------------------------------------------------------------------------------------------------------
 

@@ -26,12 +26,10 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.awt.*;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -52,8 +50,8 @@ public class DataHandler {
     static String saveFilePath = "src/main/resources/txt-files/save.txt";
     static String loginFilePath = "src/main/resources/txt-files/login.txt";
     static String todoFilePath = "src/main/resources/txt-files/todo.txt";
-    static String userName;
     static String txtFileFolder = "src/main/resources/AccFiles/";
+    static String userName;
 
     GridPane gridPane = new GridPane();
 
@@ -315,7 +313,7 @@ public class DataHandler {
         return clock;
     }
 
-    public static void createAccButtons(ArrayList<Button> buttons, GridPane gridPane, VBox vBox, Label balanceLabel, BorderPane borderPane, HBox buttonBox, ArrayList<TextField> textFields) throws IOException {
+    public static void createAccButtons(ArrayList<Button> buttons, GridPane gridPane, VBox vBox, Label balanceLabel, BorderPane borderPane, HBox buttonBox, ArrayList<HBox> hBoxes) throws IOException {
         gridPane.getChildren().removeAll(buttons);
 
         File folder = new File(Paths.get(txtFileFolder).toUri());
@@ -344,7 +342,7 @@ public class DataHandler {
             btn.setOnAction(actionEvent -> {
                 try {
                     vBox.getChildren().removeAll(balanceLabel, borderPane, buttonBox);
-                    createAccButtonVBox(f, vBox, textFields);
+                    createAccButtonVBox(f, vBox, hBoxes);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -352,7 +350,7 @@ public class DataHandler {
         }
     }
 
-    public static void createAccButtonVBox(File f, VBox vBox, ArrayList<TextField> textFields) throws IOException {
+    public static void createAccButtonVBox(File f, VBox vBox, ArrayList<HBox> hBoxes) throws IOException {
         double endVal = 0;
 
         List<String> lines = Files.readAllLines(f.toPath());
@@ -364,11 +362,21 @@ public class DataHandler {
 
         GridPane gridPane = new GridPane();
         gridPane.setAlignment(Pos.TOP_CENTER);
+        gridPane.getChildren().removeAll(hBoxes);
 
         ScrollPane scrollPane = new ScrollPane(gridPane);
         scrollPane.setFitToWidth(true);
         scrollPane.setStyle("-fx-background-color: transparent; -fx-background: transparent;");
 
+        TextField textField = new TextField();
+        textField.setPrefColumnCount(20);
+        textField.setStyle("-fx-font-size: 17; -fx-text-fill: #cfcfcf; -fx-background-color: black; -fx-border-color: #737373");
+
+        Label totalLabel = new Label();
+        Label newVal = new Label("Hinzufügen: ");
+        newVal.setStyle("-fx-font-family: 'Microsoft Sans Serif'; -fx-font-size: 20; -fx-text-fill: #d0d0d0;");
+
+        HBox inputHBox = new HBox();
 
         for (String s : lines) {
 
@@ -378,51 +386,46 @@ public class DataHandler {
             hBox.setSpacing(5);
             hBox.setAlignment(Pos.CENTER_LEFT);
 
-            TextField textField = new TextField();
-            textField.setPrefColumnCount(15);
+            TextField inputTextField = new TextField();
+            inputTextField.setPrefColumnCount(15);
 
             SaveButton button = new SaveButton(20);
-            button.setOnAction(actionEvent -> {
-                lines.remove(s);
-                lines.add(textField.getText());
 
+            button.setOnAction(actionEvent -> {
+                try {
+                    replaceLineInFile(s, inputTextField.getText(), f.getName(), gridPane, hBoxes, f, vBox, fileNameLabel, scrollPane, totalLabel, inputHBox);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             });
 
-            hBox.getChildren().addAll(textField, button);
-
-            String tempValRounded = String.format("%.2f", currVal);
+            hBox.getChildren().addAll(inputTextField, button);
 
             if (currVal > 0) {
-                textField.setText("+" + tempValRounded);
-                textField.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-border-color: #d0d0d0; -fx-background-color: rgba(151,255,53,0.58); -fx-text-fill: #d0d0d0");
+                inputTextField.setText(String.valueOf(currVal));
+                inputTextField.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-border-color: #d0d0d0; -fx-background-color: rgba(151,255,53,0.58); -fx-text-fill: #d0d0d0");
 
             }
 
             if (currVal < 0) {
-                textField.setText(tempValRounded);
-                textField.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-border-color: #d0d0d0; -fx-background-color: rgba(255,53,53,0.58); -fx-text-fill: #d0d0d0");
+                inputTextField.setText(String.valueOf(currVal));
+                inputTextField.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-border-color: #d0d0d0; -fx-background-color: rgba(255,53,53,0.58); -fx-text-fill: #d0d0d0");
             }
 
             else if (currVal == 0) {
-                textField.setText(String.valueOf(tempValRounded));
-                textField.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-border-color: #d0d0d0; -fx-background-color: transparent; -fx-background: transparent; -fx-text-fill: #d0d0d0");
+                inputTextField.setText(String.valueOf(currVal));
+                inputTextField.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-border-color: #d0d0d0; -fx-background-color: transparent; -fx-background: transparent; -fx-text-fill: #d0d0d0");
             }
 
             endVal = endVal + currVal;
 
             gridPane.setVgap(5);
             gridPane.add(hBox, 0, cntr);
-            textFields.add(textField);
+            hBoxes.add(hBox);
             cntr++;
+
+
         }
-
-        TextField textField = new TextField();
-        textField.setPrefColumnCount(20);
-        textField.setStyle("-fx-font-size: 17; -fx-text-fill: #cfcfcf; -fx-background-color: black; -fx-border-color: #737373");
-
-        Label totalLabel = new Label();
-        Label newVal = new Label("Hinzufügen: ");
-        newVal.setStyle("-fx-font-family: 'Microsoft Sans Serif'; -fx-font-size: 20; -fx-text-fill: #d0d0d0;");
 
         String totalValRounded = String.format("%.2f", endVal);
 
@@ -441,12 +444,28 @@ public class DataHandler {
             totalLabel.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: #d0d0d0; -fx-border-color: #d0d0d0; -fx-background-color: transparent; -fx-background: transparent; -fx-padding: 10");
         }
 
-        HBox hBox = new HBox();
-        hBox.setAlignment(Pos.CENTER);
-        hBox.getChildren().addAll(newVal, textField);
+        inputHBox.setAlignment(Pos.CENTER);
+        inputHBox.getChildren().addAll(newVal, textField);
 
-        vBox.getChildren().addAll(fileNameLabel, scrollPane, totalLabel, hBox);
+        vBox.getChildren().addAll(fileNameLabel, scrollPane, totalLabel, inputHBox);
         vBox.setBackground(null);
     }
+
+    public static void replaceLineInFile(String oldText, String newText, String fileName, GridPane gridPane, ArrayList<HBox> hBoxes, File file, VBox vBox, Label fileNameLabel, ScrollPane scrollPane, Label totalLabel, HBox hBox) throws IOException {
+        List<String> fileContent = new ArrayList<>(Files.readAllLines(Path.of(txtFileFolder + fileName), StandardCharsets.UTF_8));
+
+        for (int i = 0; i < fileContent.size(); i++) {
+            if (fileContent.get(i).equals(oldText)) {
+                fileContent.set(i, newText);
+                break;
+            }
+        }
+
+        Files.write(Path.of(txtFileFolder + fileName), fileContent, StandardCharsets.UTF_8);
+        gridPane.getChildren().removeAll(hBoxes);
+        vBox.getChildren().removeAll(fileNameLabel, scrollPane, totalLabel, hBox);
+        createAccButtonVBox(file, vBox, hBoxes);
+    }
+
 }
 

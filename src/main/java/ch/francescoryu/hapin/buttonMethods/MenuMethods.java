@@ -30,7 +30,7 @@ public class MenuMethods {
     }
 
     public static void setSelectedButtonStyle(Button button) {
-        button.setStyle("-fx-font-size: 25; " +
+        button.setStyle("-fx-font-size: 20; " +
                 "-fx-font-family: 'Microsoft Sans Serif'; " +
                 "-fx-background-radius: 5; " +
                 "-fx-border-width: 2;  " +
