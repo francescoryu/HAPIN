@@ -404,13 +404,14 @@ public class DataHandler {
             if (currVal > 0) {
                 inputTextField.setText(String.valueOf(currVal));
                 inputTextField.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-border-color: #d0d0d0; -fx-background-color: rgba(151,255,53,0.58); -fx-text-fill: #d0d0d0");
-
             }
 
-            if (currVal < 0) {
+            else if (currVal < 0) {
                 inputTextField.setText(String.valueOf(currVal));
                 inputTextField.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-border-color: #d0d0d0; -fx-background-color: rgba(255,53,53,0.58); -fx-text-fill: #d0d0d0");
-            } else if (currVal == 0) {
+            }
+
+            else {
                 inputTextField.setText(String.valueOf(currVal));
                 inputTextField.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-border-color: #d0d0d0; -fx-background-color: transparent; -fx-background: transparent; -fx-text-fill: #d0d0d0");
             }
@@ -463,5 +464,10 @@ public class DataHandler {
         createAccButtonVBox(file, vBox, hBoxes);
     }
 
+    public static void createFile(TextField textField, ArrayList<Button> buttons, GridPane gridPane, VBox vBox, Label label, BorderPane borderPane, HBox hBox, ArrayList<HBox> hBoxes) throws IOException {
+        File file = new File("src/main/resources/AccFiles/" + textField.getText() + ".txt");
+        file.createNewFile();
+        createAccButtons(buttons, gridPane, vBox, label, borderPane, hBox, hBoxes);
+    }
 }
 

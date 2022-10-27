@@ -112,6 +112,11 @@ public class BalanceBox extends VBox {
         //--------------------------------------------------------------------------------------------------------------
 
         saveButton.setOnAction(actionEvent -> {
+            try {
+                DataHandler.createFile(inputAccountName, buttons, gridPane, this, balanceLabel, borderPane, buttonBox, hBoxes);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             getChildren().remove(addBox);
             getChildren().addAll(balanceLabel, borderPane, buttonBox);
         });
