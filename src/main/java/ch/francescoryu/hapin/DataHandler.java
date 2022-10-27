@@ -53,8 +53,6 @@ public class DataHandler {
     static String txtFileFolder = "src/main/resources/AccFiles/";
     static String userName;
 
-    GridPane gridPane = new GridPane();
-
     public static void reloadButtonList(ArrayList<Button> buttons, GridPane gridPane, Button deleteButton) {
 
         gridPane.getChildren().removeAll(buttons);
@@ -330,8 +328,8 @@ public class DataHandler {
             }
             Button btn = new Button();
             MenuMethods.setButtonStyle(btn);
-            String btnNameArr = f.getName();
-            btn.setText(btnNameArr);
+            String[] btnNameArr = f.getName().split("\\.");
+            btn.setText(btnNameArr[0]);
             buttons.add(btn);
             gridPane.add(btn, rowCntr, columnCntr);
             gridPane.setHgap(10);
@@ -357,7 +355,7 @@ public class DataHandler {
 
         int cntr = 0;
 
-        Label fileNameLabel = new Label(f.getName());
+        Label fileNameLabel = new Label(f.getName().split("\\.")[0]);
         MenuMethods.setLabelStyle(fileNameLabel);
 
         GridPane gridPane = new GridPane();
