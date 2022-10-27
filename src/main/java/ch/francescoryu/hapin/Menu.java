@@ -260,8 +260,6 @@ public class Menu extends Application {
 
         //wholeBorderPane.setLeft(navBox);
         wholeBorderPane.setTop(topBox);
-        wholeBorderPane.setTop(topBox);
-        //wholeBorderPane.setRight(todoBox);
 
 
 

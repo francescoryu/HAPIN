@@ -323,7 +323,7 @@ public class DataHandler {
         int columnCntr = 0;
         int rowCntr = 0;
         for (File f : allFiles) {
-            if (btnCntr % 3 == 0) {
+            if (btnCntr % 2 == 0) {
                 columnCntr++;
                 rowCntr = 0;
             }
@@ -340,7 +340,7 @@ public class DataHandler {
 
             btn.setOnAction(actionEvent -> {
                 try {
-                    vBox.getChildren().removeAll(balanceLabel, borderPane, buttonBox);
+                    vBox.getChildren().clear();
                     createAccButtonVBox(f, vBox, hBoxes, balanceLabel, borderPane, buttonBox);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
@@ -456,7 +456,7 @@ public class DataHandler {
         vBox.setBackground(null);
 
         backButton.setOnAction(actionEvent -> {
-            vBox.getChildren().removeAll(fileNameLabel, scrollPane, totalLabel, inputHBox, navButtonBox);
+            vBox.getChildren().clear();
             vBox.getChildren().addAll(balanceLabel, borderPane, buttonBox);
         });
         saveButton.setOnAction(actionEvent -> {
