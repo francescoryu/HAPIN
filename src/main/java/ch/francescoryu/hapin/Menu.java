@@ -174,7 +174,7 @@ public class Menu extends Application {
         chooseFile.setStyle("-fx-font-size: 16; -fx-font-family: 'Microsoft Sans Serif'; -fx-background-color: black; -fx-text-fill: #cfcfcf; -fx-border-color: #737373; -fx-border-width: 2");
 
         chooseFile.setOnAction(actionEvent -> {
-            DataHandler.saveButtonData(stage, DataHandler.getInputFromTextField(inputButtonName, inputButtonUrl));
+            DataHandler.saveButtonData(DataHandler.getInputFromTextField(inputButtonName, inputButtonUrl));
         });
 
         VBox inputBox = new VBox();

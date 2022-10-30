@@ -1,6 +1,8 @@
 package ch.francescoryu.hapin;
 
 import ch.francescoryu.hapin.buttonMethods.MenuMethods;
+import ch.francescoryu.hapin.components.boxes.HyperlinkBox;
+import ch.francescoryu.hapin.components.boxes.SelectionBox;
 import ch.francescoryu.hapin.components.boxes.TodoBox;
 import ch.francescoryu.hapin.components.buttons.BackButton;
 import ch.francescoryu.hapin.components.buttons.SaveButton;
@@ -24,6 +26,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import javafx.util.Duration;
 
 import java.awt.*;
@@ -65,9 +68,10 @@ public class DataHandler {
         }
     }
 
-    public static void saveButtonData(Stage stage, String input) {
+    public static void saveButtonData(String input) {
+        Stage stage1 = new Stage();
         FileChooser fileChooser = new FileChooser();
-        File selectedFile = fileChooser.showOpenDialog(stage);
+        File selectedFile = fileChooser.showOpenDialog(stage1);
 
         File file = new File("src/main/resources/buttonImages/" + selectedFile.getName());
 
@@ -269,15 +273,15 @@ public class DataHandler {
         deletingFile.delete();
     }
 
-    public static void checkLoginData(String userName, PasswordField pwdField, Stage actualStage) throws IOException {
+    public static void checkLoginData(String userName, PasswordField pwdField, Stage actualStage) throws Exception {
         List<String> lines = Files.readAllLines(new File(loginFilePath).toPath());
         for (String s : lines) {
             String[] arrString = s.split(";");
 
             if (userName.equals(arrString[0]) && pwdField.getText().equals(arrString[1])) {
-                Menu menu = new Menu();
+                SelectionBox selectionBox = new SelectionBox();
                 Stage stage = new Stage();
-                menu.start(stage);
+                selectionBox.start(stage);
                 actualStage.close();
             } else {
 

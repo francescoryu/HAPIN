@@ -79,7 +79,7 @@ public class Login extends Application {
             try {
                 DataHandler.checkLoginData(userComboBox.getValue(), pwdTextField, stage);
                 DataHandler.setUserName(userComboBox.getValue());
-            } catch (IOException e) {
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         });
