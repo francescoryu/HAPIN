@@ -1,6 +1,6 @@
 package ch.francescoryu.hapin.components.buttons;
 
-import ch.francescoryu.hapin.Menu;
+import ch.francescoryu.hapin.Main;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -10,11 +10,12 @@ import java.util.Objects;
 
 public class DeleteEverythingButton extends Button {
     public DeleteEverythingButton() {
-        ImageView deleteButtonImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/deleteEverything.png"))));
+        ImageView deleteButtonImageView = new ImageView(new Image(Objects.requireNonNull(Main.class.getResourceAsStream("navMenuImg/deleteEverything.png"))));
         setStyle("-fx-background-color: black;-fx-border-width: 2; -fx-border-color: #737373");
         deleteButtonImageView.setFitHeight(35);
         deleteButtonImageView.setPreserveRatio(true);
         setGraphic(deleteButtonImageView);
         setCursor(Cursor.HAND);
+        setPrefSize(35, 35);
     }
 }

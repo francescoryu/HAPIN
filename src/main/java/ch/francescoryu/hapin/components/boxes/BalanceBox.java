@@ -1,7 +1,7 @@
 package ch.francescoryu.hapin.components.boxes;
 
 import ch.francescoryu.hapin.DataHandler;
-import ch.francescoryu.hapin.Menu;
+import ch.francescoryu.hapin.Main;
 import ch.francescoryu.hapin.buttonMethods.MenuMethods;
 import ch.francescoryu.hapin.components.buttons.AddButton;
 import ch.francescoryu.hapin.components.buttons.DeleteButton;
@@ -19,7 +19,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.awt.*;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -46,8 +45,7 @@ public class BalanceBox extends VBox {
         gridPane.setAlignment(Pos.TOP_CENTER);
         gridPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
-        ScrollPane scrollPane = new ScrollPane();
-        scrollPane.setContent(gridPane);
+        ScrollPane scrollPane = new ScrollPane(gridPane);
         scrollPane.setFitToWidth(true);
         scrollPane.setStyle("-fx-background-color: transparent; -fx-background: transparent");
         scrollPane.getStyleClass().addAll(".scroll-pane", ".scroll-bar");
@@ -77,7 +75,7 @@ public class BalanceBox extends VBox {
 
         Button saveButton = new Button();
         saveButton.setCursor(Cursor.HAND);
-        ImageView saveButtonImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/save.png"))));
+        ImageView saveButtonImageView = new ImageView(new Image(Objects.requireNonNull(Main.class.getResourceAsStream("navMenuImg/save.png"))));
         saveButton.setStyle("-fx-background-color: black; -fx-border-color: #737373; -fx-border-width: 2");
         saveButtonImageView.setFitHeight(25);
         saveButtonImageView.setPreserveRatio(true);
@@ -92,12 +90,12 @@ public class BalanceBox extends VBox {
         //--------------------------------------------------------------------------------------------------------------
 
         BorderPane borderPane = new BorderPane();
-        borderPane.setCenter(scrollPane);
+        borderPane.setTop(scrollPane);
         borderPane.setStyle("-fx-alignment: center;");
         getChildren().addAll(balanceLabel, borderPane, buttonBox);
         setSpacing(10);
         setAlignment(Pos.TOP_CENTER);
-        setStyle("-fx-alignment: center; -fx-padding: 20");
+        setStyle("-fx-padding: 20");
         setMaxHeight(600);
         setMinWidth(size.getWidth() / 3);
         //setMaxWidth(650);

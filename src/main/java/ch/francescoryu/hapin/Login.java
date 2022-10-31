@@ -57,7 +57,7 @@ public class Login extends Application {
         Button showPwdButton = new Button();
         showPwdButton.setStyle("-fx-min-width: 20; -fx-min-height: 20");
 
-        ImageView showPwdImageView = new ImageView(new Image(Objects.requireNonNull(Menu.class.getResourceAsStream("navMenuImg/showPwd.png"))));
+        ImageView showPwdImageView = new ImageView(new Image(Objects.requireNonNull(Login.class.getResourceAsStream("navMenuImg/showPwd.png"))));
         showPwdImageView.setFitHeight(20);
         showPwdImageView.setPreserveRatio(true);
         showPwdButton.setGraphic(showPwdImageView);
@@ -78,7 +78,7 @@ public class Login extends Application {
         loginButton.setOnAction(actionEvent -> {
             try {
                 DataHandler.checkLoginData(userComboBox.getValue(), pwdTextField, stage);
-                DataHandler.setUserName(userComboBox.getValue());
+                //DataHandler.setUserName(userComboBox.getValue());
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

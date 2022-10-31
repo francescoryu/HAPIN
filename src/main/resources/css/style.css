@@ -46,8 +46,29 @@
     -fx-border-color: #737373;
 }
 
-@font-face {
-    font-family: 'GoodDog';
-    //src: url("");
+.tab-pane {
+    -fx-background-color: linear-gradient(to right bottom, #11002b, #3f0028);
+    -fx-font-size: 20;
+    -fx-font-family: "Microsoft Sans Serif";
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: #11002b;
+}
+
+.tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
+    -fx-border-color: transparent;
+}
+
+.tab .tab-label {
+    -fx-text-fill: #cfcfcf;
+}
+
+.tab-pane .tab {
+    -fx-background-color: #11002b;
+}
+
+.tab-pane .tab:selected {
+    -fx-background-color: #3f0028;
 }
 
