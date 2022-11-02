@@ -459,22 +459,35 @@ public class DataHandler {
         vBox.getChildren().addAll(fileNameLabel, scrollPane, totalLabel, inputHBox, navButtonBox);
         vBox.setBackground(null);
 
+        Label errorLabel = new Label("Not Matching Format");
+        errorLabel.setStyle("-fx-text-fill: #d0d0d0");
+
         backButton.setOnAction(actionEvent -> {
             vBox.getChildren().clear();
             vBox.getChildren().addAll(balanceLabel, borderPane, buttonBox);
         });
         saveButton.setOnAction(actionEvent -> {
             FileWriter fw = null;
-            try {
-                fw = new FileWriter(f, true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                bw.write(textField.getText());
-                bw.newLine();
-                bw.close();
-                createAccButtonVBox(f, vBox, hBoxes, balanceLabel, borderPane, buttonBox);
-                vBox.getChildren().removeAll(fileNameLabel, scrollPane, totalLabel, inputHBox, navButtonBox);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+
+            if (textField.getText().matches("^-?([0-9])+\\.?([0-9]+)?$")) {
+                try {
+                    vBox.getChildren().remove(errorLabel);
+                    fw = new FileWriter(f, true);
+                    BufferedWriter bw = new BufferedWriter(fw);
+                    bw.write(textField.getText());
+                    bw.newLine();
+                    bw.close();
+                    createAccButtonVBox(f, vBox, hBoxes, balanceLabel, borderPane, buttonBox);
+                    vBox.getChildren().removeAll(fileNameLabel, scrollPane, totalLabel, inputHBox, navButtonBox);
+                    textField.clear();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            else {
+                textField.clear();
+                vBox.getChildren().clear();
+                vBox.getChildren().addAll(fileNameLabel, scrollPane, totalLabel, inputHBox, errorLabel, navButtonBox);
             }
         });
     }

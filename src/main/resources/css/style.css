@@ -28,7 +28,7 @@
 
 .scroll-bar:horizontal .thumb, .scroll-bar:vertical .thumb {
     -fx-background-color: black;
-    -fx-pref-width: 4;
+    -fx-max-width: 4;
 }
 
 .increment-button, .decrement-button {
@@ -48,7 +48,7 @@
 
 .tab-pane {
     -fx-background-color: linear-gradient(to right bottom, #11002b, #3f0028);
-    -fx-font-size: 20;
+    -fx-font-size: 15;
     -fx-font-family: "Microsoft Sans Serif";
 }
 

@@ -115,12 +115,10 @@ public class HyperlinkBox extends VBox {
         textBox.getChildren().addAll(buttonNameText, urlText, imgText);
 
         inputButtonName = new TextField();
-        inputButtonName.setPrefColumnCount(20);
         MenuMethods.setInputTextFieldStyle(inputButtonName);
 
         inputButtonUrl = new TextField();
         MenuMethods.setInputTextFieldStyle(inputButtonUrl);
-        inputButtonUrl.setPrefColumnCount(20);
 
         Button chooseFile = new Button("Select File");
         chooseFile.setCursor(javafx.scene.Cursor.HAND);
@@ -171,13 +169,13 @@ public class HyperlinkBox extends VBox {
 
         popupBorderPane.setStyle("");
         popupBorderPane.setLeft(textBox);
-        popupBorderPane.setRight(inputBox);
+        popupBorderPane.setCenter(inputBox);
         popupBorderPane.setBottom(buttonBox);
         //popupBorderPane.setMaxSize(300, 200);
 
         VBox addButtonBox = new VBox();
         addButtonBox.getChildren().addAll(addButtonLabel, popupBorderPane);
-        addButtonBox.setStyle("-fx-padding: 20; -fx-border-color: #737373; -fx-border-width: 2;");
+        addButtonBox.setStyle("-fx-padding: 20;");
         addButtonBox.setAlignment(Pos.CENTER);
         addButtonBox.setSpacing(10);
 
