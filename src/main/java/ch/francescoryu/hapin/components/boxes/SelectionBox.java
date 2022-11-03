@@ -8,11 +8,13 @@ import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 
 public class SelectionBox extends Application {
 
     ArrayList<Tab> tabs = new ArrayList<>();
+    Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -25,7 +27,7 @@ public class SelectionBox extends Application {
         tabPane.getStylesheets().add(TodoBox.class.getResource("/css/style.css").toExternalForm());
 
         Tab hyperTab = new Tab("Hyperlink", hyperlinkBox);
-        hyperTab.setStyle("-fx-border-color: red");
+        tabs.add(hyperTab);
         Tab balanceTab = new Tab("Balance", balanceBox);
         tabs.add(balanceTab);
         Tab toDoTab = new Tab("TodoList", todoBox);
@@ -37,6 +39,8 @@ public class SelectionBox extends Application {
 
         Scene scene = new Scene(tabPane);
         stage.setScene(scene);
+        stage.setHeight(700);
+        stage.setWidth(650);
         stage.show();
     }
 }

@@ -9,10 +9,10 @@ import javafx.scene.image.ImageView;
 import java.util.Objects;
 
 public class DeleteButton extends Button {
-    public DeleteButton() {
+    public DeleteButton(double d) {
         ImageView deleteButtonImageView = new ImageView(new Image(Objects.requireNonNull(Main.class.getResourceAsStream("navMenuImg/delete.png"))));
         setStyle("-fx-background-color: black;-fx-border-width: 2; -fx-border-color: #737373");
-        deleteButtonImageView.setFitHeight(35);
+        deleteButtonImageView.setFitHeight(d);
         deleteButtonImageView.setPreserveRatio(true);
         setGraphic(deleteButtonImageView);
         setCursor(Cursor.HAND);

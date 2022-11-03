@@ -70,7 +70,7 @@ public class HyperlinkBox extends VBox {
 
         AddButton addButton = new AddButton(35);
 
-        DeleteButton deleteButton = new DeleteButton();
+        DeleteButton deleteButton = new DeleteButton(35);
 
         //--------------------------------------------------------------------------------------------------------------
 

@@ -5,6 +5,7 @@ import ch.francescoryu.hapin.components.boxes.HyperlinkBox;
 import ch.francescoryu.hapin.components.boxes.SelectionBox;
 import ch.francescoryu.hapin.components.boxes.TodoBox;
 import ch.francescoryu.hapin.components.buttons.BackButton;
+import ch.francescoryu.hapin.components.buttons.DeleteButton;
 import ch.francescoryu.hapin.components.buttons.SaveButton;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -404,6 +405,8 @@ public class DataHandler {
             TextField inputTextField = new TextField();
             inputTextField.setPrefColumnCount(10);
 
+            DeleteButton deleteButton = new DeleteButton(20);
+
             SaveButton button = new SaveButton(20);
 
             button.setOnAction(actionEvent -> {
@@ -414,7 +417,7 @@ public class DataHandler {
                 }
             });
 
-            hBox.getChildren().addAll(inputTextField, button);
+            hBox.getChildren().addAll(inputTextField, button, deleteButton);
 
             if (currVal > 0) {
                 inputTextField.setText(String.valueOf(currVal));

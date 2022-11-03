@@ -57,7 +57,7 @@ public class BalanceBox extends VBox {
 
         AddButton addButton = new AddButton(35);
 
-        DeleteButton deleteButton = new DeleteButton();
+        DeleteButton deleteButton = new DeleteButton(35);
 
         buttonBox.getChildren().addAll(addButton, deleteButton);
 
@@ -96,8 +96,6 @@ public class BalanceBox extends VBox {
         setSpacing(10);
         setAlignment(Pos.TOP_CENTER);
         setStyle("-fx-padding: 20");
-        setMaxHeight(600);
-        setMinWidth(size.getWidth() / 3);
         //setMaxWidth(650);
 
         //--------------------------------------------------------------------------------------------------------------

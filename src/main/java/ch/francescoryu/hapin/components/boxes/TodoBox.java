@@ -46,7 +46,7 @@ public class TodoBox extends VBox {
         gridPane.setVgap(10);
         //gridPane.setStyle("-fx-padding: 10; -fx-border-color: white; -fx-spacing: 10");
 
-        DeleteButton deleteButton = new DeleteButton();
+        DeleteButton deleteButton = new DeleteButton(35);
 
         DeleteEverythingButton deleteEverythingButton = new DeleteEverythingButton();
         deleteEverythingButton.setOnAction(actionEvent -> {
@@ -105,7 +105,7 @@ public class TodoBox extends VBox {
 
         });
 
-        DeleteButton clearTodoButton = new DeleteButton();
+        DeleteButton clearTodoButton = new DeleteButton(35);
         clearTodoButton.setOnAction(actionEvent -> {
             inputTodoList.setText("");
             inputTodoList.setPromptText("e.g. buy milk");
@@ -121,9 +121,6 @@ public class TodoBox extends VBox {
         buttonDeleteBox.setStyle("-fx-alignment: center");
         buttonDeleteBox.getChildren().addAll(deleteButton, deleteEverythingButton);
 
-
-        setPrefWidth(size.getWidth() / 3);
-        setPrefHeight(size.getHeight() / 2);
         setStyle("-fx-padding: 20;");
         setSpacing(10);
         setAlignment(Pos.TOP_CENTER);
