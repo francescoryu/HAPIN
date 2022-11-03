@@ -87,16 +87,13 @@
 }
 
 .date-picker > .text-field {
-    /*-fx-background-radius: 0;
-    -fx-border-width: 2;
-    -fx-border-color: #68a0b4 transparent #68a0b4 #68a0b4;*/
     -fx-border-width: 2;
     -fx-background-radius: 3 0 0 3;
     -fx-font-size: 15;
 }
 
 .date-picker-popup > .month-year-pane {
-    -fx-background-color: #68a0b4;
+    -fx-background-color: #cca8ff;
     -fx-text-fill: black;
 }
 

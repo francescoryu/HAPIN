@@ -3,6 +3,7 @@ package ch.francescoryu.hapin.components.boxes;
 import ch.francescoryu.hapin.DataHandler;
 import ch.francescoryu.hapin.buttonMethods.MenuMethods;
 import ch.francescoryu.hapin.components.buttons.AddButton;
+import ch.francescoryu.hapin.components.buttons.ClearButton;
 import ch.francescoryu.hapin.components.buttons.DeleteButton;
 import ch.francescoryu.hapin.components.buttons.DeleteEverythingButton;
 import javafx.geometry.Pos;
@@ -12,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -40,10 +42,16 @@ public class TodoBox extends VBox {
                 "-fx-text-fill: black");
 
         ArrayList<Button> buttons = new ArrayList<>();
+        ArrayList<Label> labels = new ArrayList<>();
 
         GridPane gridPane = new GridPane();
-
+        gridPane.setMaxHeight(400);
+        gridPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         gridPane.setVgap(10);
+
+        GridPane labelPane = new GridPane();
+        labelPane.setStyle("-fx-border-color: green");
+        labelPane.setVgap(10);
         //gridPane.setStyle("-fx-padding: 10; -fx-border-color: white; -fx-spacing: 10");
 
         DeleteButton deleteButton = new DeleteButton(35);
@@ -51,7 +59,7 @@ public class TodoBox extends VBox {
         DeleteEverythingButton deleteEverythingButton = new DeleteEverythingButton();
         deleteEverythingButton.setOnAction(actionEvent -> {
             try {
-                DataHandler.deleteWholeTodoFile(gridPane, buttons, deleteEverythingButton);
+                DataHandler.deleteWholeTodoFile(gridPane, labelPane, buttons, labels, deleteEverythingButton);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -59,8 +67,10 @@ public class TodoBox extends VBox {
 
 
         ScrollPane todoScrollPane = new ScrollPane(gridPane);
-        todoScrollPane.setStyle("-fx-background-color: transparent; -fx-background: transparent; -fx-padding: 10");
+        todoScrollPane.setStyle("-fx-background-color: transparent; -fx-background: transparent; -fx-padding: 10; -fx-border-color: red; -fx-fit-to-width: true");
         todoScrollPane.getStyleClass().addAll(".scroll-bar", ".scroll-pane");
+        todoScrollPane.setFitToWidth(true);
+        todoScrollPane.setFitToHeight(true);
 
 
 
@@ -79,7 +89,7 @@ public class TodoBox extends VBox {
         //--------------------------------------------------------------------------------------------------------------
 
 
-        DataHandler.readTodoFile(gridPane, buttons, deleteButton);
+        DataHandler.readTodoFile(gridPane, labelPane, buttons, labels, deleteButton);
 
 
         TextField inputTodoList = new TextField();
@@ -96,17 +106,8 @@ public class TodoBox extends VBox {
 
 
         AddButton addTodoButton = new AddButton(25);
-        addTodoButton.setOnAction(actionEvent -> {
-            try {
-                DataHandler.writeTodoFile(inputTodoList, priority, buttons, gridPane);
-                DataHandler.readTodoFile(gridPane, buttons, deleteButton);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
 
-        });
-
-        DeleteButton clearTodoButton = new DeleteButton(25);
+        ClearButton clearTodoButton = new ClearButton(25);
         clearTodoButton.setOnAction(actionEvent -> {
             inputTodoList.setText("");
             inputTodoList.setPromptText("e.g. buy milk");
@@ -118,7 +119,7 @@ public class TodoBox extends VBox {
         buttonTodoBox.getChildren().addAll(priority, addTodoButton, clearTodoButton);
 
         DatePicker datePicker = new DatePicker();
-        datePicker.getStyleClass().addAll(".date-picker" );
+        datePicker.getStyleClass().addAll(".date-picker");
 
         VBox datePickerBox = new VBox(datePicker);
         datePickerBox.setAlignment(Pos.CENTER);
@@ -132,6 +133,16 @@ public class TodoBox extends VBox {
         setSpacing(10);
         setAlignment(Pos.TOP_CENTER);
         getChildren().addAll(todoLabel, inputTodoList, buttonTodoBox, datePickerBox, todoScrollPane, buttonDeleteBox);
+
+        addTodoButton.setOnAction(actionEvent -> {
+            try {
+                DataHandler.writeTodoFile(inputTodoList, priority, datePicker);
+                DataHandler.readTodoFile(gridPane, labelPane, buttons, labels, deleteButton);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+        });
     }
 
 }
