@@ -11,7 +11,7 @@ import java.util.Objects;
 public class BackButton extends Button {
     public BackButton(double size) {
         ImageView deleteButtonImageView = new ImageView(new Image(Objects.requireNonNull(Main.class.getResourceAsStream("navMenuImg/backButton.png"))));
-        setStyle("-fx-background-color: black;-fx-border-width: 2; -fx-border-color: #737373");
+        setStyle("-fx-background-color: #F8F5FA;");
         deleteButtonImageView.setFitHeight(size);
         deleteButtonImageView.setPreserveRatio(true);
         setGraphic(deleteButtonImageView);

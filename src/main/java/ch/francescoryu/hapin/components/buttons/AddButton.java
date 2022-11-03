@@ -11,7 +11,7 @@ import java.util.Objects;
 public class AddButton extends Button {
     public AddButton(double d) {
         ImageView addButtonImageView = new ImageView(new Image(Objects.requireNonNull(Main.class.getResourceAsStream("navMenuImg/add.png"))));
-        setStyle("-fx-background-color: black;-fx-border-width: 2; -fx-border-color: #737373;");
+        setStyle("-fx-background-color: #F8F5FA;");
         addButtonImageView.setFitHeight(d);
         addButtonImageView.setPreserveRatio(true);
         setGraphic(addButtonImageView);

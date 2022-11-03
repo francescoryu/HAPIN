@@ -143,7 +143,7 @@ public class HyperlinkBox extends VBox {
 
         Button clearButton = new Button();
         clearButton.setCursor(javafx.scene.Cursor.HAND);
-        ImageView clearButtonImageView = new ImageView(new javafx.scene.image.Image(Objects.requireNonNull(ch.francescoryu.hapin.Main.class.getResourceAsStream("navMenuImg/delete.png"))));
+        ImageView clearButtonImageView = new ImageView(new javafx.scene.image.Image(Objects.requireNonNull(ch.francescoryu.hapin.Main.class.getResourceAsStream("navMenuImg/deleteEverything.png"))));
         clearButton.setStyle("-fx-background-color: black; -fx-border-color: #737373; -fx-border-width: 2");
         clearButtonImageView.setFitHeight(25);
         clearButtonImageView.setPreserveRatio(true);

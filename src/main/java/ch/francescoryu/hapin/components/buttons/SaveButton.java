@@ -11,7 +11,7 @@ import java.util.Objects;
 public class SaveButton extends Button {
     public SaveButton(double d) {
         ImageView deleteButtonImageView = new ImageView(new Image(Objects.requireNonNull(Main.class.getResourceAsStream("navMenuImg/save.png"))));
-        setStyle("-fx-background-color: black;-fx-border-width: 2; -fx-border-color: #737373");
+        setStyle("-fx-background-color: #F8F5FA;");
         deleteButtonImageView.setFitHeight(d);
         deleteButtonImageView.setPreserveRatio(true);
         setGraphic(deleteButtonImageView);

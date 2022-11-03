@@ -421,17 +421,17 @@ public class DataHandler {
 
             if (currVal > 0) {
                 inputTextField.setText(String.valueOf(currVal));
-                inputTextField.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-border-color: #d0d0d0; -fx-background-color: rgba(151,255,53,0.58); -fx-text-fill: black");
+                inputTextField.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-background-color: rgba(151,255,53,0.58); -fx-text-fill: black");
             }
 
             else if (currVal < 0) {
                 inputTextField.setText(String.valueOf(currVal));
-                inputTextField.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-border-color: #d0d0d0; -fx-background-color: rgba(255,53,53,0.58); -fx-text-fill: black");
+                inputTextField.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-background-color: rgba(255,53,53,0.58); -fx-text-fill: black");
             }
 
             else if (currVal == 0){
                 inputTextField.setText(String.valueOf(currVal));
-                inputTextField.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-border-color: #d0d0d0; -fx-background-color: transparent; -fx-background: transparent; -fx-text-fill: black");
+                inputTextField.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-background-color: transparent; -fx-background: transparent; -fx-text-fill: black");
             }
 
             endVal = endVal + currVal;
@@ -448,14 +448,14 @@ public class DataHandler {
 
         if (endVal > 0) {
             totalLabel.setText("Total: +" + totalValRounded);
-            totalLabel.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: black; -fx-border-color: #d0d0d0; -fx-background-color: rgba(151,255,53,0.58); -fx-padding: 10");
+            totalLabel.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: black; -fx-background-color: rgba(151,255,53,0.58); -fx-padding: 10");
         }
         if (endVal < 0) {
             totalLabel.setText("Total: " + totalValRounded);
-            totalLabel.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: black; -fx-border-color: #d0d0d0; -fx-background-color: rgba(255,53,53,0.58); -fx-padding: 10");
+            totalLabel.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: black; -fx-background-color: rgba(255,53,53,0.58); -fx-padding: 10");
         } else if (endVal == 0) {
             totalLabel.setText("Total: " + totalValRounded);
-            totalLabel.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: black; -fx-border-color: #d0d0d0; -fx-background-color: transparent; -fx-background: transparent; -fx-padding: 10");
+            totalLabel.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: black; -fx-background-color: transparent; -fx-background: transparent; -fx-padding: 10");
         }
 
         vBox.getChildren().addAll(fileNameLabel, scrollPane, totalLabel, inputHBox, navButtonBox);
