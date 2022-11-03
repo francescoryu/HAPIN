@@ -1,21 +1,21 @@
 .combo-box .list-view .list-cell {
-    -fx-text-fill: "#cfcfcf";
-    -fx-background-color: black;
+    -fx-text-fill: black;
+    -fx-background-color: #F8F5FA;
 }
 
 .combo-box .list-view:hover .list-cell:hover {
-    -fx-background-color: #565656;
+    -fx-background-color: #8c8c8c;
     -fx-cursor: hand;
 }
 
 .combo-box {
-    -fx-background-color: black;
-    -fx-border-width: 2;
-    -fx-border-color: #737373;
+    -fx-background-color: #F8F5FA;
+    /*-fx-border-width: 2;
+    -fx-border-color: #00222f;*/
 }
 
 .combo-box-base .text {
-    -fx-fill: "#cfcfcf";
+    -fx-fill: black;
 }
 
 .scroll-pane .corner {
@@ -27,7 +27,7 @@
 }
 
 .scroll-bar:horizontal .thumb, .scroll-bar:vertical .thumb {
-    -fx-background-color: black;
+    -fx-background-color: #68a0b4;
     -fx-max-width: 4;
 }
 
@@ -42,18 +42,18 @@
     -fx-border-width: 2;
     -fx-min-width: 180;
     -fx-text-fill: black;
-    -fx-background-color: #cfcfcf;
+    -fx-background-color: #68a0b4;
     -fx-border-color: #737373;
 }
 
 .tab-pane {
-    -fx-background-color: linear-gradient(to right bottom, #11002b, #3f0028);
+    -fx-background-color: linear-gradient(to right bottom, #cca8ff, #6ec9ff);
     -fx-font-size: 15;
     -fx-font-family: "Microsoft Sans Serif";
 }
 
 .tab-pane .tab-header-area .tab-header-background {
-    -fx-background-color: #11002b;
+    -fx-background-color: #a9a2dc;
 }
 
 .tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
@@ -61,14 +61,42 @@
 }
 
 .tab .tab-label {
-    -fx-text-fill: #cfcfcf;
+    -fx-text-fill: black;
 }
 
 .tab-pane .tab {
-    -fx-background-color: #11002b;
+    -fx-background-color: #cca8ff;
 }
 
 .tab-pane .tab:selected {
-    -fx-background-color: #3f0028;
+    -fx-background-color: #4f8daf;
+}
+
+.date-picker {
+    -fx-background-radius: 3 3 3 3;
+    -fx-border-radius: 0;
+    -fx-background-color: -fx-control-inner-background;
+    -fx-background-insets: 0;
+}
+
+.date-picker .arrow-button {
+    -fx-font-family: "Microsoft Sans Serif";
+    -fx-border-width: 2;
+    -fx-background-radius: 0 3 3 0;
+    -fx-background-color: -fx-control-inner-background
+}
+
+.date-picker > .text-field {
+    /*-fx-background-radius: 0;
+    -fx-border-width: 2;
+    -fx-border-color: #68a0b4 transparent #68a0b4 #68a0b4;*/
+    -fx-border-width: 2;
+    -fx-background-radius: 3 0 0 3;
+    -fx-font-size: 15;
+}
+
+.date-picker-popup > .month-year-pane {
+    -fx-background-color: #68a0b4;
+    -fx-text-fill: black;
 }
 

@@ -37,7 +37,7 @@ public class TodoBox extends VBox {
         todoLabel.setStyle("-fx-font-size: 30; " +
                 "-fx-font-family: 'Microsoft Sans Serif'; " +
                 "-fx-text-alignment: center;" +
-                "-fx-text-fill: #cfcfcf");
+                "-fx-text-fill: black");
 
         ArrayList<Button> buttons = new ArrayList<>();
 
@@ -68,11 +68,10 @@ public class TodoBox extends VBox {
         priority.getStyleClass().addAll(".combo-box", ".combo-box-base");
         priority.getItems().addAll("High", "Medium", "Low");
         priority.setPromptText("choose priority");
-        priority.setStyle("-fx-font-size: 20; " +
+        priority.setStyle("-fx-font-size: 15; " +
                 "-fx-font-family: 'Microsoft Sans Serif'; " +
-                "-fx-border-color: #737373; " +
-                "-fx-border-width: 2;" +
-                "-fx-pref-height: 45");
+                //"-fx-border-color: #737373; " +
+                "-fx-border-width: 2;");
         priority.setCursor(Cursor.HAND);
 
         //--------------------------------------------------------------------------------------------------------------
@@ -85,16 +84,18 @@ public class TodoBox extends VBox {
 
         TextField inputTodoList = new TextField();
         inputTodoList.setPromptText("e.g. buy milk");
-        inputTodoList.setStyle("-fx-font-size: 20;" +
+        inputTodoList.setStyle("-fx-font-size: 16;" +
                 "-fx-font-family: 'Microsoft Sans Serif';" +
-                "-fx-text-fill: #cfcfcf;" +
-                "-fx-control-inner-background: black;" +
-                "-fx-border-color: #737373;" +
-                "-fx-border-width: 2;");
+                "-fx-text-fill: black;" +
+                "-fx-control-inner-background: #F8F5FA;" +
+                "-fx-prompt-text-fill: #6c6c6c;" +
+                "-fx-padding: 3;" +
+                "-fx-background-radius: 3;" +
+                "-fx-text-box-border: transparent;");
         inputTodoList.setMaxWidth(360);
 
 
-        AddButton addTodoButton = new AddButton(35);
+        AddButton addTodoButton = new AddButton(25);
         addTodoButton.setOnAction(actionEvent -> {
             try {
                 DataHandler.writeTodoFile(inputTodoList, priority, buttons, gridPane);
@@ -105,7 +106,7 @@ public class TodoBox extends VBox {
 
         });
 
-        DeleteButton clearTodoButton = new DeleteButton(35);
+        DeleteButton clearTodoButton = new DeleteButton(25);
         clearTodoButton.setOnAction(actionEvent -> {
             inputTodoList.setText("");
             inputTodoList.setPromptText("e.g. buy milk");
@@ -116,6 +117,12 @@ public class TodoBox extends VBox {
         buttonTodoBox.setSpacing(22);
         buttonTodoBox.getChildren().addAll(priority, addTodoButton, clearTodoButton);
 
+        DatePicker datePicker = new DatePicker();
+        datePicker.getStyleClass().addAll(".date-picker" );
+
+        VBox datePickerBox = new VBox(datePicker);
+        datePickerBox.setAlignment(Pos.CENTER);
+
         HBox buttonDeleteBox = new HBox();
         buttonDeleteBox.setSpacing(10);
         buttonDeleteBox.setStyle("-fx-alignment: center");
@@ -124,7 +131,7 @@ public class TodoBox extends VBox {
         setStyle("-fx-padding: 20;");
         setSpacing(10);
         setAlignment(Pos.TOP_CENTER);
-        getChildren().addAll(todoLabel, inputTodoList, buttonTodoBox, todoScrollPane, buttonDeleteBox);
+        getChildren().addAll(todoLabel, inputTodoList, buttonTodoBox, datePickerBox, todoScrollPane, buttonDeleteBox);
     }
 
 }

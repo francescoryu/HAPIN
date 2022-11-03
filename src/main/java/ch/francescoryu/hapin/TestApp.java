@@ -8,13 +8,13 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class TestApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        DatePicker datePicker = new DatePicker();
-        datePicker.show();
+        DatePicker datePicker = new DatePicker(LocalDate.now());
         Button button = new Button();
         button.setOnAction(actionEvent -> {
             System.out.println(datePicker.getEditor().getText());

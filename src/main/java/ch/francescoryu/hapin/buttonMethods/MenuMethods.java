@@ -17,12 +17,12 @@ public class MenuMethods {
     public static void setButtonStyle(Button button) {
         button.setStyle("-fx-font-size: 20; " +
                 "-fx-font-family: 'Microsoft Sans Serif'; " +
-                "-fx-background-radius: 5; " +
                 "-fx-border-width: 2;  " +
                 "-fx-min-width: 140;" +
-                "-fx-text-fill: #cfcfcf;" +
-                "-fx-background-color: black;" +
-                "-fx-border-color: #737373");
+                "-fx-text-fill: black;" +
+                "-fx-background-color: #F8F5FA;" +
+                "-fx-border-radius: 3;" +
+                "-fx-background-radius: 3");
 
         button.setCursor(Cursor.HAND);
 
@@ -32,12 +32,12 @@ public class MenuMethods {
     public static void setSelectedButtonStyle(Button button) {
         button.setStyle("-fx-font-size: 20; " +
                 "-fx-font-family: 'Microsoft Sans Serif'; " +
-                "-fx-background-radius: 5; " +
+                "-fx-background-radius: 3; " +
                 "-fx-border-width: 2;  " +
                 //"-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );" +
                 "-fx-text-fill: black;" +
                 "-fx-background-color: darkgrey;" +
-                "-fx-border-color: #737373");
+                "");
 
         button.setCursor(Cursor.HAND);
 
@@ -48,7 +48,7 @@ public class MenuMethods {
         text.setStyle("-fx-font-size: 30; " +
                 "-fx-font-family: 'Microsoft Sans Serif'; " +
                 "-fx-text-alignment: center;" +
-                "-fx-text-fill: #cfcfcf");
+                "-fx-text-fill: black");
     }
 
     public static void setPopUpStyle(Label text) {
@@ -60,9 +60,9 @@ public class MenuMethods {
     public static void setInputTextFieldStyle(TextField textField) {
         textField.setStyle("-fx-font-size: 16;" +
                 "-fx-font-family: 'Microsoft Sans Serif';" +
-                "-fx-text-fill: #cfcfcf;" +
-                "-fx-control-inner-background: black;" +
-                "-fx-border-color: #737373;" +
-                "-fx-border-width: 2");
+                "-fx-text-fill: black;" +
+                "-fx-control-inner-background: #F8F5FA;" +
+                "-fx-border-width: 2;" +
+                "-fx-border-radius: 100");
     }
 }

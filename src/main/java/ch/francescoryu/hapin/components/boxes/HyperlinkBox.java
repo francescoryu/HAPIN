@@ -40,7 +40,7 @@ public class HyperlinkBox extends VBox {
         linksText.setStyle("-fx-font-size: 30; " +
                 "-fx-font-family: 'Microsoft Sans Serif'; " +
                 "-fx-text-alignment: center;" +
-                "-fx-text-fill: #cfcfcf;");
+                "-fx-text-fill: black");
 
         //--------------------------------------------------------------------------------------------------------------
 
