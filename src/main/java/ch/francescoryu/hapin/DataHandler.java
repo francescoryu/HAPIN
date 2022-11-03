@@ -145,11 +145,11 @@ public class DataHandler {
 
             button1.setOnAction(actionEvent -> {
                 if (Objects.equals(arr[0], "1")) {
-                    button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: #ff5454; -fx-background-color: darkgrey; -fx-padding: 0");
+                    button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: #c90000; -fx-background-color: darkgrey; -fx-padding: 0");
                 } else if (Objects.equals(arr[0], "2")) {
-                    button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: orange; -fx-background-color: darkgrey; -fx-padding: 0");
+                    button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: #b27700; -fx-background-color: darkgrey; -fx-padding: 0");
                 } else if (Objects.equals(arr[0], "3")) {
-                    button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: green; -fx-background-color: darkgrey; -fx-padding: 0");
+                    button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: #005e00; -fx-background-color: darkgrey; -fx-padding: 0");
                 }
                 deleteButton.setOnAction(actionEvent1 -> {
                     try {
@@ -161,13 +161,13 @@ public class DataHandler {
             });
 
             if (Objects.equals(arr[0], "1")) {
-                button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: #ff5454; -fx-background-color: transparent; -fx-background: transparent; -fx-padding: 0");
+                button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: #c90000; -fx-background-color: transparent; -fx-background: transparent; -fx-padding: 0");
 
             } else if (Objects.equals(arr[0], "2")) {
-                button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: orange; -fx-background-color: transparent; -fx-background: transparent; -fx-padding: 0");
+                button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: #b27700; -fx-background-color: transparent; -fx-background: transparent; -fx-padding: 0");
 
             } else if (Objects.equals(arr[0], "3")) {
-                button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: green; -fx-background-color: transparent; -fx-background: transparent; -fx-padding: 0");
+                button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: #005e00; -fx-background-color: transparent; -fx-background: transparent; -fx-padding: 0");
 
             }
 
@@ -374,11 +374,11 @@ public class DataHandler {
 
         TextField textField = new TextField();
         textField.setPrefColumnCount(10);
-        textField.setStyle("-fx-font-size: 17; -fx-text-fill: #cfcfcf; -fx-background-color: black; -fx-border-color: #737373");
+        textField.setStyle("-fx-font-size: 17; -fx-text-fill: black; -fx-border-radius: 3");
 
         Label totalLabel = new Label();
         Label newVal = new Label("Add value: ");
-        newVal.setStyle("-fx-font-family: 'Microsoft Sans Serif'; -fx-font-size: 20; -fx-text-fill: #d0d0d0;");
+        newVal.setStyle("-fx-font-family: 'Microsoft Sans Serif'; -fx-font-size: 20; -fx-text-fill: black;");
 
         BackButton backButton = new BackButton(25);
         SaveButton saveButton = new SaveButton(25);
@@ -462,7 +462,7 @@ public class DataHandler {
         vBox.setBackground(null);
 
         Label errorLabel = new Label("Not Matching Format");
-        errorLabel.setStyle("-fx-text-fill: #d0d0d0");
+        errorLabel.setStyle("-fx-text-fill: black");
 
         backButton.setOnAction(actionEvent -> {
             vBox.getChildren().clear();

@@ -122,29 +122,28 @@ public class HyperlinkBox extends VBox {
 
         Button chooseFile = new Button("Select File");
         chooseFile.setCursor(javafx.scene.Cursor.HAND);
-        chooseFile.setStyle("-fx-font-size: 16; -fx-font-family: 'Microsoft Sans Serif'; -fx-background-color: black; -fx-text-fill: #cfcfcf; -fx-border-color: #737373; -fx-border-width: 2");
-
+        chooseFile.setStyle("-fx-background-color: #F8F5FA;");
         chooseFile.setOnAction(actionEvent -> {
             DataHandler.saveButtonData(DataHandler.getInputFromTextField(inputButtonName, inputButtonUrl));
         });
 
         VBox inputBox = new VBox();
         inputBox.setStyle("-fx-padding: 15");
-        inputBox.setSpacing(24);
+        inputBox.setSpacing(30);
         inputBox.getChildren().addAll(inputButtonName, inputButtonUrl, chooseFile);
 
         Button saveButton = new Button();
         saveButton.setCursor(javafx.scene.Cursor.HAND);
         ImageView saveButtonImageView = new ImageView(new javafx.scene.image.Image(Objects.requireNonNull(ch.francescoryu.hapin.Main.class.getResourceAsStream("navMenuImg/save.png"))));
-        saveButton.setStyle("-fx-background-color: black; -fx-border-color: #737373; -fx-border-width: 2");
+        saveButton.setStyle("-fx-background-color: #F8F5FA;");
         saveButtonImageView.setFitHeight(25);
         saveButtonImageView.setPreserveRatio(true);
         saveButton.setGraphic(saveButtonImageView);
 
         Button clearButton = new Button();
         clearButton.setCursor(javafx.scene.Cursor.HAND);
-        ImageView clearButtonImageView = new ImageView(new javafx.scene.image.Image(Objects.requireNonNull(ch.francescoryu.hapin.Main.class.getResourceAsStream("navMenuImg/deleteEverything.png"))));
-        clearButton.setStyle("-fx-background-color: black; -fx-border-color: #737373; -fx-border-width: 2");
+        ImageView clearButtonImageView = new ImageView(new javafx.scene.image.Image(Objects.requireNonNull(ch.francescoryu.hapin.Main.class.getResourceAsStream("navMenuImg/clear.png"))));
+        clearButton.setStyle("-fx-background-color: #F8F5FA;");
         clearButtonImageView.setFitHeight(25);
         clearButtonImageView.setPreserveRatio(true);
         clearButton.setGraphic(clearButtonImageView);
@@ -157,7 +156,7 @@ public class HyperlinkBox extends VBox {
         Button cancelButton = new Button();
         cancelButton.setCursor(Cursor.HAND);
         ImageView cancelButtonImageView = new ImageView(new Image(Objects.requireNonNull(Main.class.getResourceAsStream("navMenuImg/cancel.png"))));
-        cancelButton.setStyle("-fx-background-color: black; -fx-border-color: #737373; -fx-border-width: 2");
+        cancelButton.setStyle("-fx-background-color: #F8F5FA;");
         cancelButtonImageView.setFitHeight(25);
         cancelButtonImageView.setPreserveRatio(true);
         cancelButton.setGraphic(cancelButtonImageView);

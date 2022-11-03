@@ -54,7 +54,7 @@ public class MenuMethods {
     public static void setPopUpStyle(Label text) {
         text.setStyle("-fx-font-size: 20;" +
                 "-fx-font-family: 'Microsoft Sans Serif';" +
-                "-fx-text-fill: #cfcfcf");
+                "-fx-text-fill: black");
     }
 
     public static void setInputTextFieldStyle(TextField textField) {
