@@ -87,9 +87,9 @@ public class HyperlinkBox extends VBox {
 
         VBox navBox = new VBox();
         navBox.setStyle("-fx-padding: 20;");
-        navBox.setPrefHeight(size.getHeight() / 2);
+        //navBox.setPrefHeight(size.getHeight() / 2);
         navBox.setSpacing(10);
-        navBox.setPrefWidth(size.getWidth() / 3);
+        //navBox.setPrefWidth(size.getWidth() / 3);
         navBox.setAlignment(Pos.TOP_CENTER);
         navBox.getChildren().addAll(linksText, buttonScrollPane, navButtonBox);
 
