@@ -103,7 +103,7 @@ public class DataHandler {
         return inputFromTextField;
     }
 
-    public static void writeTodoFile(TextField textField, ComboBox<String> comboBox, DatePicker datePicker) throws IOException {
+    public static void writeTodoFile(TextField textField, ComboBox<String> comboBox, DatePicker datePicker, String status) throws IOException {
         if (textField.getText().matches("") || datePicker.getEditor().getText().matches("") || comboBox.getValue().matches("")) {
             comboBox.setPromptText("select priority");
             datePicker.setPromptText("Missing deadline");
@@ -143,6 +143,7 @@ public class DataHandler {
         int cntr = 0;
 
         tableView.getItems().clear();
+        tableView.getStylesheets().add(TodoBox.class.getResource("/css/style.css").toExternalForm());
 
         //Collections.sort(lines);
         for (String s : lines) {
@@ -150,9 +151,18 @@ public class DataHandler {
             String[] arr = s.split(";");
 
             Label priorityLabel = new Label(arr[0]);
-            Label textLabel = new Label(arr[1]);
             Label deadLine = new Label(arr[2]);
             CheckBox checkBox = new CheckBox();
+            checkBox.getStyleClass().addAll(".check-box");
+
+            checkBox.setOnAction(actionEvent -> {
+                if (checkBox.isSelected()) {
+                    System.out.println("SELECTED");
+                }
+                else {
+                    System.out.println("UNSELECTED");
+                }
+            });
 
             deadLine.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: black");
 
@@ -183,6 +193,7 @@ public class DataHandler {
         }
 
         tableView.refresh();
+        tableView.setPlaceholder(new Label("No rows to display"));
     }
 
     public static void writeFile(String input) {

@@ -148,7 +148,7 @@ public class TodoBox extends VBox {
 
         addTodoButton.setOnAction(actionEvent -> {
             try {
-                DataHandler.writeTodoFile(inputTodoList, priority, datePicker);
+                DataHandler.writeTodoFile(inputTodoList, priority, datePicker, null);
                 DataHandler.readTodoFile(tableView, labels, deleteButton);
             } catch (IOException e) {
                 throw new RuntimeException(e);
