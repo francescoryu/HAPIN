@@ -148,7 +148,7 @@ public class DataHandler {
 
         tableView.getItems().clear();
 
-        Collections.sort(lines);
+        //Collections.sort(lines);
         for (String s : lines) {
 
             String[] arr = s.split(";");
