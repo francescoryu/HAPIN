@@ -1,7 +1,7 @@
 package ch.francescoryu.hapin.components.boxes;
 
 import ch.francescoryu.hapin.DataHandler;
-import ch.francescoryu.hapin.Person;
+import ch.francescoryu.hapin.testing.Person;
 import ch.francescoryu.hapin.buttonMethods.MenuMethods;
 import ch.francescoryu.hapin.components.buttons.AddButton;
 import ch.francescoryu.hapin.components.buttons.ClearButton;
@@ -15,8 +15,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -63,6 +61,7 @@ public class TodoBox extends VBox {
 
         tableView.getColumns().addAll(column1, column2, column3);
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        tableView.getStyleClass().addAll(".table-row-cell", ".table-view");
 
         DeleteButton deleteButton = new DeleteButton(35);
 

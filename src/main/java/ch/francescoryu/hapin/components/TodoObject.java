@@ -1,4 +1,4 @@
-package ch.francescoryu.hapin;
+package ch.francescoryu.hapin.components;
 
 public class TodoObject {
 

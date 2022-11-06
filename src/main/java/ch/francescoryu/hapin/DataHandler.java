@@ -1,7 +1,7 @@
 package ch.francescoryu.hapin;
 
 import ch.francescoryu.hapin.buttonMethods.MenuMethods;
-import ch.francescoryu.hapin.components.boxes.HyperlinkBox;
+import ch.francescoryu.hapin.components.TodoObject;
 import ch.francescoryu.hapin.components.boxes.SelectionBox;
 import ch.francescoryu.hapin.components.boxes.TodoBox;
 import ch.francescoryu.hapin.components.buttons.BackButton;
@@ -10,9 +10,7 @@ import ch.francescoryu.hapin.components.buttons.SaveButton;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.geometry.HPos;
 import javafx.geometry.Pos;
-import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -26,10 +24,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import javafx.util.Duration;
 
 import java.awt.*;
@@ -131,10 +127,10 @@ public class DataHandler {
     }
 
 
-    public static void deleteTodo(Label label, ArrayList<Label> labels, TableView tableView, String path, Button deleteButton) throws IOException {
+    public static void deleteTodo(TodoObject todoObject, ArrayList<Label> labels, TableView tableView, String path, Button deleteButton) throws IOException {
         tableView.getItems().clear();
         try {
-            remButtonFromFile(label.getText(), path, 1);
+            remButtonFromFile(todoObject.getInput(), path, 1);
             readTodoFile(tableView, labels, deleteButton);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -163,7 +159,7 @@ public class DataHandler {
                 TodoObject todoObject = (TodoObject) tableView.getSelectionModel().getSelectedItem();
                 System.out.println(todoObject.getInput());
                 try {
-                    deleteTodo(textLabel, labels, tableView, todoFilePath, deleteButton);
+                    deleteTodo(todoObject, labels, tableView, todoFilePath, deleteButton);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

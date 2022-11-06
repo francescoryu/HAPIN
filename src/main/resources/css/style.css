@@ -97,3 +97,34 @@
     -fx-text-fill: black;
 }
 
+.table-row-cell:selected {
+
+}
+
+.table-view .table-cell {
+    -fx-background-color: transparent;
+}
+
+.table-view {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+}
+
+.table-view:focused{
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header-background .label {
+    -fx-text-fill: black;
+}
+
+.table-view .column-header {
+    -fx-background-color: #85abce;
+}
+
+.table-view .arrow {
+}
