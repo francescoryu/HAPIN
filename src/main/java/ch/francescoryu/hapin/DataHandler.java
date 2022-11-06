@@ -124,76 +124,58 @@ public class DataHandler {
     }
 
 
-    public static void deleteTodo(Label label, Button b, ArrayList<Button> buttons, ArrayList<Label> labels, GridPane pane, GridPane labelPane, String path, Button deleteButton) throws IOException {
-        pane.getChildren().clear();
-        pane.getChildren().removeAll(labels);
+    public static void deleteTodo(Label label, ArrayList<Label> labels, TableView tableView, String path, Button deleteButton) throws IOException {
+        tableView.getItems().clear();
         try {
-            remButtonFromFile(b.getText(), path, 1);
-            readTodoFile(pane, labelPane, buttons, labels, deleteButton);
+            remButtonFromFile(label.getText(), path, 1);
+            readTodoFile(tableView, labels, deleteButton);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static void readTodoFile(GridPane gridPane, GridPane labelPane, ArrayList<Button> buttons, ArrayList<Label> labels, Button deleteButton) throws IOException {
+    public static void readTodoFile(TableView tableView,  ArrayList<Label> labels, Button deleteButton) throws IOException {
         List<String> lines = Files.readAllLines(new File(todoFilePath).toPath());
         int i = 0;
         int cntr = 0;
-        gridPane.getChildren().removeAll(buttons);
-        labelPane.getChildren().removeAll(labels);
-        gridPane.getChildren().clear();
+
+        tableView.getItems().clear();
+
         Collections.sort(lines);
         for (String s : lines) {
 
-            HBox hBox = new HBox();
-            hBox.setAlignment(Pos.CENTER_LEFT);
+
 
             String[] arr = s.split(";");
-            Button button1 = new Button(arr[1]);
-            //button1.setAlignment(Pos.CENTER_LEFT);
-            button1.setCursor(Cursor.HAND);
-            button1.setAlignment(Pos.BASELINE_LEFT);
+
 
             Label deadLine = new Label(arr[2]);
+            Label textLabel = new Label(arr[1]);
             deadLine.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: black");
 
-            hBox.getChildren().addAll(button1, deadLine);
 
-            button1.setOnAction(actionEvent -> {
-                if (Objects.equals(arr[0], "1")) {
-                    button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: #c90000; -fx-background-color: darkgrey; -fx-padding: 0; -fx-pref-width: 300");
-                } else if (Objects.equals(arr[0], "2")) {
-                    button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: #b27700; -fx-background-color: darkgrey; -fx-padding: 0; -fx-pref-width: 300");
-                } else if (Objects.equals(arr[0], "3")) {
-                    button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: #005e00; -fx-background-color: darkgrey; -fx-padding: 0; -fx-pref-width: 300");
-                }
-                deleteButton.setOnAction(actionEvent1 -> {
-                    try {
-                        deleteTodo(deadLine, button1, buttons, labels, gridPane, labelPane, todoFilePath, deleteButton);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                });
-            });
+            tableView.getItems().addAll(new TodoObject(arr[1], arr[2]));
+
 
             if (Objects.equals(arr[0], "1")) {
-                button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: #c90000; -fx-background-color: transparent; -fx-background: transparent; -fx-padding: 0; -fx-pref-width: 300");
+                textLabel.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: #c90000; -fx-background-color: transparent; -fx-background: transparent; -fx-padding: 0;");
 
             } else if (Objects.equals(arr[0], "2")) {
-                button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: #b27700; -fx-background-color: transparent; -fx-background: transparent; -fx-padding: 0; -fx-pref-width: 300");
+                textLabel.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: #b27700; -fx-background-color: transparent; -fx-background: transparent; -fx-padding: 0;");
 
             } else if (Objects.equals(arr[0], "3")) {
-                button1.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: #005e00; -fx-background-color: transparent; -fx-background: transparent; -fx-padding: 0; -fx-pref-width: 300");
+                textLabel.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: #005e00; -fx-background-color: transparent; -fx-background: transparent; -fx-padding: 0;");
 
             }
 
-
-            gridPane.setAlignment(Pos.CENTER_LEFT);
-            gridPane.add(hBox, i, cntr);
-            gridPane.setStyle("-fx-fit-to-width: true;");
             cntr++;
         }
 
+        tableView.refresh();
+        tableView.setOnMouseClicked(mouseEvent -> {
+            TodoObject todoObject = (TodoObject) tableView.getSelectionModel().getSelectedItem();
+            System.out.println(todoObject.getInput());
+        });
     }
 
     public static void writeFile(String input) {
@@ -207,9 +189,9 @@ public class DataHandler {
         }
     }
 
-    public static void deleteWholeTodoFile(GridPane gridPane, GridPane labelPane, ArrayList<Button> buttons, ArrayList<Label> labels, Button deleteButton) throws IOException {
+    public static void deleteWholeTodoFile(TableView tableView,  ArrayList<Label> labels, Button deleteButton) throws IOException {
         new FileWriter(todoFilePath, false).close();
-        readTodoFile(gridPane, labelPane, buttons, labels, deleteButton);
+        readTodoFile(tableView, labels, deleteButton);
     }
 
 

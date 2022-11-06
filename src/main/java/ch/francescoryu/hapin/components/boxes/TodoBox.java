@@ -1,6 +1,7 @@
 package ch.francescoryu.hapin.components.boxes;
 
 import ch.francescoryu.hapin.DataHandler;
+import ch.francescoryu.hapin.Person;
 import ch.francescoryu.hapin.buttonMethods.MenuMethods;
 import ch.francescoryu.hapin.components.buttons.AddButton;
 import ch.francescoryu.hapin.components.buttons.ClearButton;
@@ -13,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -44,29 +46,34 @@ public class TodoBox extends VBox {
         ArrayList<Button> buttons = new ArrayList<>();
         ArrayList<Label> labels = new ArrayList<>();
 
-        GridPane gridPane = new GridPane();
-        gridPane.setMaxHeight(400);
-        gridPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        gridPane.setVgap(10);
+        TableView tableView = new TableView();
 
-        GridPane labelPane = new GridPane();
-        labelPane.setStyle("-fx-border-color: green");
-        labelPane.setVgap(10);
-        //gridPane.setStyle("-fx-padding: 10; -fx-border-color: white; -fx-spacing: 10");
+        TableColumn<Person, String> column1 = new TableColumn<>("Activity");
+        column1.setEditable(true);
+
+        column1.setCellValueFactory(new PropertyValueFactory<>("input"));
+
+
+        TableColumn<Person, String> column2 = new TableColumn<>("Due to");
+
+        column2.setCellValueFactory(new PropertyValueFactory<>("date"));
+
+        tableView.getColumns().addAll(column1, column2);
+        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         DeleteButton deleteButton = new DeleteButton(35);
 
         DeleteEverythingButton deleteEverythingButton = new DeleteEverythingButton();
         deleteEverythingButton.setOnAction(actionEvent -> {
             try {
-                DataHandler.deleteWholeTodoFile(gridPane, labelPane, buttons, labels, deleteEverythingButton);
+                DataHandler.deleteWholeTodoFile(tableView, labels, deleteEverythingButton);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
 
 
-        ScrollPane todoScrollPane = new ScrollPane(gridPane);
+        ScrollPane todoScrollPane = new ScrollPane(tableView);
         todoScrollPane.setStyle("-fx-background-color: transparent; -fx-background: transparent; -fx-padding: 10; -fx-border-color: red; -fx-fit-to-width: true");
         todoScrollPane.getStyleClass().addAll(".scroll-bar", ".scroll-pane");
         todoScrollPane.setFitToWidth(true);
@@ -89,7 +96,7 @@ public class TodoBox extends VBox {
         //--------------------------------------------------------------------------------------------------------------
 
 
-        DataHandler.readTodoFile(gridPane, labelPane, buttons, labels, deleteButton);
+        DataHandler.readTodoFile(tableView, labels, deleteButton);
 
 
         TextField inputTodoList = new TextField();
@@ -132,12 +139,12 @@ public class TodoBox extends VBox {
         setStyle("-fx-padding: 20;");
         setSpacing(10);
         setAlignment(Pos.TOP_CENTER);
-        getChildren().addAll(todoLabel, inputTodoList, buttonTodoBox, datePickerBox, todoScrollPane, buttonDeleteBox);
+        getChildren().addAll(todoLabel, inputTodoList, buttonTodoBox, datePickerBox, tableView, buttonDeleteBox);
 
         addTodoButton.setOnAction(actionEvent -> {
             try {
                 DataHandler.writeTodoFile(inputTodoList, priority, datePicker);
-                DataHandler.readTodoFile(gridPane, labelPane, buttons, labels, deleteButton);
+                DataHandler.readTodoFile(tableView, labels, deleteButton);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
