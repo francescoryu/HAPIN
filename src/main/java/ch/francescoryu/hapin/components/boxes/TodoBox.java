@@ -48,17 +48,20 @@ public class TodoBox extends VBox {
 
         TableView tableView = new TableView();
 
-        TableColumn<Person, String> column1 = new TableColumn<>("Activity");
-        column1.setEditable(true);
+        TableColumn<Person, String> column1 = new TableColumn<>("Priority");
 
-        column1.setCellValueFactory(new PropertyValueFactory<>("input"));
+        column1.setCellValueFactory(new PropertyValueFactory<>("priority"));
 
 
-        TableColumn<Person, String> column2 = new TableColumn<>("Due to");
+        TableColumn<Person, String> column2 = new TableColumn<>("Activity");
 
-        column2.setCellValueFactory(new PropertyValueFactory<>("date"));
+        column2.setCellValueFactory(new PropertyValueFactory<>("input"));
 
-        tableView.getColumns().addAll(column1, column2);
+        TableColumn<Person, String> column3 = new TableColumn<>("Due To");
+
+        column3.setCellValueFactory(new PropertyValueFactory<>("date"));
+
+        tableView.getColumns().addAll(column1, column2, column3);
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         DeleteButton deleteButton = new DeleteButton(35);
@@ -111,6 +114,8 @@ public class TodoBox extends VBox {
                 "-fx-text-box-border: transparent;");
         inputTodoList.setMaxWidth(360);
 
+        DatePicker datePicker = new DatePicker();
+        datePicker.getStyleClass().addAll(".date-picker");
 
         AddButton addTodoButton = new AddButton(25);
 
@@ -124,9 +129,6 @@ public class TodoBox extends VBox {
         buttonTodoBox.setStyle("-fx-alignment: center");
         buttonTodoBox.setSpacing(22);
         buttonTodoBox.getChildren().addAll(priority, addTodoButton, clearTodoButton);
-
-        DatePicker datePicker = new DatePicker();
-        datePicker.getStyleClass().addAll(".date-picker");
 
         VBox datePickerBox = new VBox(datePicker);
         datePickerBox.setAlignment(Pos.CENTER);

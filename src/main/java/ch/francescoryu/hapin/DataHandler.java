@@ -108,19 +108,26 @@ public class DataHandler {
     }
 
     public static void writeTodoFile(TextField textField, ComboBox<String> comboBox, DatePicker datePicker) throws IOException {
-        if (textField.getText().matches("")) {
+        if (textField.getText().matches("") || datePicker.getEditor().getText().matches("") || comboBox.getValue().matches("")) {
+            comboBox.setPromptText("select priority");
+            datePicker.setPromptText("Missing deadline");
             textField.setPromptText("You need to type something");
         } else {
             if (comboBox.getValue().matches("High")) {
                 writeFile("1;" + textField.getText() + ";" + datePicker.getEditor().getText());
+                textField.setText("");
+                datePicker.getEditor().setText("");
             } else if (comboBox.getValue().matches("Medium")) {
                 writeFile("2;" + textField.getText() + ";" + datePicker.getEditor().getText());
+                textField.setText("");
+                datePicker.getEditor().setText("");
             } else if (comboBox.getValue().matches("Low")) {
                 writeFile("3;" + textField.getText() + ";" + datePicker.getEditor().getText());
+                textField.setText("");
+                datePicker.getEditor().setText("");
             }
+
         }
-        textField.setText("");
-        datePicker.getEditor().setText("");
     }
 
 
@@ -134,7 +141,7 @@ public class DataHandler {
         }
     }
 
-    public static void readTodoFile(TableView tableView,  ArrayList<Label> labels, Button deleteButton) throws IOException {
+    public static void readTodoFile(TableView tableView, ArrayList<Label> labels, Button deleteButton) throws IOException {
         List<String> lines = Files.readAllLines(new File(todoFilePath).toPath());
         int i = 0;
         int cntr = 0;
@@ -144,38 +151,41 @@ public class DataHandler {
         Collections.sort(lines);
         for (String s : lines) {
 
-
-
             String[] arr = s.split(";");
 
-
-            Label deadLine = new Label(arr[2]);
+            Label priorityLabel = new Label(arr[0]);
             Label textLabel = new Label(arr[1]);
+            Label deadLine = new Label(arr[2]);
+
             deadLine.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: black");
 
-
-            tableView.getItems().addAll(new TodoObject(arr[1], arr[2]));
+            deleteButton.setOnAction(actionEvent -> {
+                TodoObject todoObject = (TodoObject) tableView.getSelectionModel().getSelectedItem();
+                System.out.println(todoObject.getInput());
+                try {
+                    deleteTodo(textLabel, labels, tableView, todoFilePath, deleteButton);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
 
 
             if (Objects.equals(arr[0], "1")) {
-                textLabel.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: #c90000; -fx-background-color: transparent; -fx-background: transparent; -fx-padding: 0;");
-
-            } else if (Objects.equals(arr[0], "2")) {
-                textLabel.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: #b27700; -fx-background-color: transparent; -fx-background: transparent; -fx-padding: 0;");
-
-            } else if (Objects.equals(arr[0], "3")) {
-                textLabel.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: #005e00; -fx-background-color: transparent; -fx-background: transparent; -fx-padding: 0;");
-
+                priorityLabel.setText("1 High");
             }
+            else if (Objects.equals(arr[0], "2")) {
+                priorityLabel.setText("2 Medium");
+            }
+            else if (Objects.equals(arr[0], "3")) {
+                priorityLabel.setText("3 Low");
+            }
+
+            tableView.getItems().addAll(new TodoObject(priorityLabel.getText(), arr[1], arr[2]));
 
             cntr++;
         }
 
         tableView.refresh();
-        tableView.setOnMouseClicked(mouseEvent -> {
-            TodoObject todoObject = (TodoObject) tableView.getSelectionModel().getSelectedItem();
-            System.out.println(todoObject.getInput());
-        });
     }
 
     public static void writeFile(String input) {
@@ -189,7 +199,7 @@ public class DataHandler {
         }
     }
 
-    public static void deleteWholeTodoFile(TableView tableView,  ArrayList<Label> labels, Button deleteButton) throws IOException {
+    public static void deleteWholeTodoFile(TableView tableView, ArrayList<Label> labels, Button deleteButton) throws IOException {
         new FileWriter(todoFilePath, false).close();
         readTodoFile(tableView, labels, deleteButton);
     }
@@ -422,14 +432,10 @@ public class DataHandler {
             if (currVal > 0) {
                 inputTextField.setText(String.valueOf(currVal));
                 inputTextField.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-background-color: rgba(151,255,53,0.58); -fx-text-fill: black");
-            }
-
-            else if (currVal < 0) {
+            } else if (currVal < 0) {
                 inputTextField.setText(String.valueOf(currVal));
                 inputTextField.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-background-color: rgba(255,53,53,0.58); -fx-text-fill: black");
-            }
-
-            else if (currVal == 0){
+            } else if (currVal == 0) {
                 inputTextField.setText(String.valueOf(currVal));
                 inputTextField.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-background-color: transparent; -fx-background: transparent; -fx-text-fill: black");
             }
@@ -485,8 +491,7 @@ public class DataHandler {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-            }
-            else {
+            } else {
                 textField.clear();
                 vBox.getChildren().clear();
                 vBox.getChildren().addAll(fileNameLabel, scrollPane, totalLabel, inputHBox, errorLabel, navButtonBox);
