@@ -110,6 +110,10 @@
     -fx-background: transparent;
 }
 
+.table-view .table-column {
+    -fx-alignment: center;
+}
+
 .table-view:focused{
     -fx-background-color: transparent;
 }

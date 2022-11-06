@@ -152,6 +152,7 @@ public class DataHandler {
             Label priorityLabel = new Label(arr[0]);
             Label textLabel = new Label(arr[1]);
             Label deadLine = new Label(arr[2]);
+            CheckBox checkBox = new CheckBox();
 
             deadLine.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-text-fill: black");
 
@@ -176,7 +177,7 @@ public class DataHandler {
                 priorityLabel.setText("3 Low");
             }
 
-            tableView.getItems().addAll(new TodoObject(priorityLabel.getText(), arr[1], arr[2]));
+            tableView.getItems().addAll(new TodoObject(priorityLabel.getText(), arr[1], arr[2], checkBox));
 
             cntr++;
         }

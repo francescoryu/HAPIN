@@ -59,7 +59,11 @@ public class TodoBox extends VBox {
 
         column3.setCellValueFactory(new PropertyValueFactory<>("date"));
 
-        tableView.getColumns().addAll(column1, column2, column3);
+        TableColumn<Person, String> column4 = new TableColumn<>("Status");
+
+        column4.setCellValueFactory(new PropertyValueFactory<>("checkBox"));
+
+        tableView.getColumns().addAll(column1, column2, column3, column4);
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         tableView.getStyleClass().addAll(".table-row-cell", ".table-view");
 
