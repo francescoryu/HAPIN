@@ -107,7 +107,6 @@
 
 .table-view {
     -fx-background-color: transparent;
-    -fx-background: transparent;
 }
 
 .table-view .table-column {
@@ -149,6 +148,5 @@
 }
 
 .check-box:selected .box {
-
-    -fx-background-color: #28a3f4;
+    -fx-background-color: #cca8ff;
 }

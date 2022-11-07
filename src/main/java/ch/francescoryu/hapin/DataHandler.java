@@ -110,15 +110,15 @@ public class DataHandler {
             textField.setPromptText("You need to type something");
         } else {
             if (comboBox.getValue().matches("High")) {
-                writeFile("1;" + textField.getText() + ";" + datePicker.getEditor().getText());
+                writeFile("1;" + textField.getText() + ";" + datePicker.getEditor().getText() + ";unselected");
                 textField.setText("");
                 datePicker.getEditor().setText("");
             } else if (comboBox.getValue().matches("Medium")) {
-                writeFile("2;" + textField.getText() + ";" + datePicker.getEditor().getText());
+                writeFile("2;" + textField.getText() + ";" + datePicker.getEditor().getText() + ";unselected");
                 textField.setText("");
                 datePicker.getEditor().setText("");
             } else if (comboBox.getValue().matches("Low")) {
-                writeFile("3;" + textField.getText() + ";" + datePicker.getEditor().getText());
+                writeFile("3;" + textField.getText() + ";" + datePicker.getEditor().getText() + ";unselected");
                 textField.setText("");
                 datePicker.getEditor().setText("");
             }
@@ -135,6 +135,20 @@ public class DataHandler {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static void replaceTodoLine(String oldText, String newText, TableView tableView, ArrayList<Label> labels, Button deleteButton) throws IOException {
+        List<String> fileContent = new ArrayList<>(Files.readAllLines(Path.of(todoFilePath), StandardCharsets.UTF_8));
+
+        for (int i = 0; i < fileContent.size(); i++) {
+            String s = fileContent.get(i);
+            if (s.equals(oldText)) {
+                fileContent.set(i, newText);
+                break;
+            }
+        }
+
+        Files.write(Path.of(todoFilePath), fileContent, StandardCharsets.UTF_8);
     }
 
     public static void readTodoFile(TableView tableView, ArrayList<Label> labels, Button deleteButton) throws IOException {
@@ -155,12 +169,30 @@ public class DataHandler {
             CheckBox checkBox = new CheckBox();
             checkBox.getStyleClass().addAll(".check-box");
 
+            if (arr[3].equals("unselected")) {
+                checkBox.setSelected(false);
+            }
+
+            else {
+                checkBox.setSelected(true);
+            }
+
             checkBox.setOnAction(actionEvent -> {
                 if (checkBox.isSelected()) {
                     System.out.println("SELECTED");
+                    try {
+                        replaceTodoLine(arr[0] + ";" + arr[1] + ";" + arr[2] + ";unselected", arr[0] + ";" + arr[1] + ";" + arr[2] + ";selected", tableView, labels, deleteButton);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
                 else {
                     System.out.println("UNSELECTED");
+                    try {
+                        replaceTodoLine(arr[0] + ";" + arr[1] + ";" + arr[2] + ";selected", arr[0] + ";" + arr[1] + ";" + arr[2] + ";unselected", tableView, labels, deleteButton);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             });
 
