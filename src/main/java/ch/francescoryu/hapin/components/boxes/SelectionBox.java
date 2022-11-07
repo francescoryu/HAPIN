@@ -27,10 +27,13 @@ public class SelectionBox extends Application {
         HyperlinkBox hyperlinkBox = new HyperlinkBox();
         BalanceBox balanceBox = new BalanceBox();
         TodoBox todoBox = new TodoBox();
+        WelcomeBox welcomeBox = new WelcomeBox();
 
         TabPane tabPane = new TabPane();
         tabPane.getStylesheets().add(TodoBox.class.getResource("/css/style.css").toExternalForm());
 
+        Tab welcomeTab = new Tab("Home", welcomeBox);
+        tabs.add(welcomeTab);
         Tab hyperTab = new Tab("Hyperlink", hyperlinkBox);
         tabs.add(hyperTab);
         Tab balanceTab = new Tab("Balance", balanceBox);
@@ -38,7 +41,7 @@ public class SelectionBox extends Application {
         Tab toDoTab = new Tab("TodoList", todoBox);
         tabs.add(toDoTab);
 
-        tabPane.getTabs().addAll(hyperTab, balanceTab, toDoTab);
+        tabPane.getTabs().addAll(welcomeTab, hyperTab, balanceTab, toDoTab);
         tabPane.getStyleClass().add(".tab-pane");
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 
