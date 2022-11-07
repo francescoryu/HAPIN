@@ -179,7 +179,6 @@ public class DataHandler {
 
             checkBox.setOnAction(actionEvent -> {
                 if (checkBox.isSelected()) {
-                    System.out.println("SELECTED");
                     try {
                         replaceTodoLine(arr[0] + ";" + arr[1] + ";" + arr[2] + ";unselected", arr[0] + ";" + arr[1] + ";" + arr[2] + ";selected", tableView, labels, deleteButton);
                     } catch (IOException e) {
@@ -187,7 +186,6 @@ public class DataHandler {
                     }
                 }
                 else {
-                    System.out.println("UNSELECTED");
                     try {
                         replaceTodoLine(arr[0] + ";" + arr[1] + ";" + arr[2] + ";selected", arr[0] + ";" + arr[1] + ";" + arr[2] + ";unselected", tableView, labels, deleteButton);
                     } catch (IOException e) {
