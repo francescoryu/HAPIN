@@ -36,7 +36,7 @@ public class MenuMethods {
                 "-fx-border-width: 2;  " +
                 //"-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.7) , 10,0,0,1 );" +
                 "-fx-text-fill: black;" +
-                "-fx-background-color: darkgrey;" +
+                "-fx-background-color: #d3d3d3;" +
                 "");
 
         button.setCursor(Cursor.HAND);

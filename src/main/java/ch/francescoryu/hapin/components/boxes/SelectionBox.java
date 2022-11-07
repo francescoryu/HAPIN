@@ -1,15 +1,20 @@
 package ch.francescoryu.hapin.components.boxes;
 
+import ch.francescoryu.hapin.Main;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class SelectionBox extends Application {
 
@@ -40,6 +45,8 @@ public class SelectionBox extends Application {
         Scene scene = new Scene(tabPane);
         stage.setScene(scene);
         stage.setHeight(700);
+        stage.getIcons().add(new ImageView(new Image(Objects.requireNonNull(Main.class.getResourceAsStream("navMenuImg/icon.png")))).getImage());
+        stage.setTitle("HAPIN");
         stage.setWidth(650);
         stage.show();
     }

@@ -26,6 +26,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.awt.*;
@@ -454,6 +455,9 @@ public class DataHandler {
             inputTextField.setPrefColumnCount(10);
 
             DeleteButton deleteButton = new DeleteButton(20);
+            deleteButton.setOnAction(actionEvent -> {
+                System.out.println(lines.indexOf(s));
+            });
 
             SaveButton button = new SaveButton(20);
 

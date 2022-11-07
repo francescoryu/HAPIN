@@ -41,10 +41,14 @@
     -fx-font-family: 'Microsoft Sans Serif';
     -fx-border-width: 2;
     -fx-min-width: 180;
-    -fx-text-fill: black;
     -fx-background-color: #68a0b4;
     -fx-border-color: #737373;
 }
+
+.button:pressed {
+    -fx-effect: innershadow( gaussian , rgba(159, 159, 159, 0.7), 20,0,0,0 );
+}
+
 
 .tab-pane {
     -fx-background-color: linear-gradient(to right bottom, #cca8ff, #6ec9ff);

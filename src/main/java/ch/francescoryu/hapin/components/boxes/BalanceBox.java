@@ -5,6 +5,7 @@ import ch.francescoryu.hapin.Main;
 import ch.francescoryu.hapin.buttonMethods.MenuMethods;
 import ch.francescoryu.hapin.components.buttons.AddButton;
 import ch.francescoryu.hapin.components.buttons.DeleteButton;
+import ch.francescoryu.hapin.components.buttons.SaveButton;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
@@ -73,10 +74,9 @@ public class BalanceBox extends VBox {
         inputAccountName.setPromptText("Add Account Name");
         MenuMethods.setInputTextFieldStyle(inputAccountName);
 
-        Button saveButton = new Button();
+        SaveButton saveButton = new SaveButton(25);
         saveButton.setCursor(Cursor.HAND);
         ImageView saveButtonImageView = new ImageView(new Image(Objects.requireNonNull(Main.class.getResourceAsStream("navMenuImg/save.png"))));
-        saveButton.setStyle("-fx-background-color: black; -fx-border-color: #737373; -fx-border-width: 2");
         saveButtonImageView.setFitHeight(25);
         saveButtonImageView.setPreserveRatio(true);
         saveButton.setGraphic(saveButtonImageView);
