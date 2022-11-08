@@ -105,11 +105,14 @@ public class DataHandler {
     }
 
     public static void writeTodoFile(TextField textField, ComboBox<String> comboBox, DatePicker datePicker, String status) throws IOException {
-        if (textField.getText().matches("") || datePicker.getEditor().getText().matches("") || comboBox.getValue().matches("")) {
+        if (textField.getText().matches("") || datePicker.getEditor().getText().matches("") || comboBox.getValue().matches("") || !datePicker.getEditor().getText().matches("^\\d{2}.\\d{2}.\\d{4}$")) {
             comboBox.setPromptText("select priority");
             datePicker.setPromptText("Missing deadline");
             textField.setPromptText("You need to type something");
-        } else {
+        }
+
+
+        else {
             if (comboBox.getValue().matches("High")) {
                 writeFile("1;" + textField.getText() + ";" + datePicker.getEditor().getText() + ";unselected");
                 textField.setText("");
@@ -158,6 +161,7 @@ public class DataHandler {
         int cntr = 0;
 
         tableView.getItems().clear();
+        System.out.println("TEST");
         tableView.getStylesheets().add(TodoBox.class.getResource("/css/style.css").toExternalForm());
 
         //Collections.sort(lines);
@@ -223,7 +227,6 @@ public class DataHandler {
             cntr++;
         }
 
-        tableView.refresh();
         tableView.setPlaceholder(new Label("No rows to display"));
     }
 
