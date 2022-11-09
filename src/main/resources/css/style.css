@@ -138,7 +138,7 @@
 
 }
 
-.table-row-cell:even {
+/*.table-row-cell:even {
     -fx-background-color: #e1f2ff;
     -fx-background-insets: 0, 0 0 1 0;
     -fx-padding: 0.0em;
@@ -151,10 +151,10 @@
 }
 
 .table-row-cell:selected {
-    -fx-background-color: #4100b6;
+    -fx-background-color: #5d3c93;
     -fx-background-insets: 0, 0 0 1 0;
     -fx-padding: 0.0em;
-}
+}*/
 
 .check-box .box {
 
