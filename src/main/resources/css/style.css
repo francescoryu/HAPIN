@@ -46,7 +46,7 @@
 }
 
 .button:pressed {
-    -fx-effect: innershadow( gaussian , rgba(159, 159, 159, 0.7), 20,0,0,0 );
+    -fx-effect: innershadow(gaussian, rgba(159, 159, 159, 0.7), 20, 0, 0, 0);
 }
 
 
@@ -101,9 +101,6 @@
     -fx-text-fill: black;
 }
 
-.table-row-cell:selected {
-
-}
 
 .table-view {
     -fx-border-color: #4f8daf;
@@ -114,7 +111,7 @@
     -fx-alignment: center;
 }
 
-.table-view:focused{
+.table-view:focused {
     -fx-background-color: transparent;
 }
 
@@ -141,11 +138,29 @@
 
 }
 
+.table-row-cell:even {
+    -fx-background-color: #e1f2ff;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #eee5ff;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #4100b6;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+
 .check-box .box {
 
     -fx-background-color: white;
-    -fx-border-color:grey;
-    -fx-border-radius:3px;
+    -fx-border-color: grey;
+    -fx-border-radius: 3px;
 
 }
 
