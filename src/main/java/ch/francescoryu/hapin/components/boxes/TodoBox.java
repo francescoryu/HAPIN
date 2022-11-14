@@ -118,7 +118,7 @@ public class TodoBox extends VBox {
         inputTodoList.setMaxWidth(360);
 
         DatePicker datePicker = new DatePicker();
-        datePicker.getStyleClass().addAll(".date-picker");
+        datePicker.getStyleClass().addAll(".date-picker", ".date-picker-popup");
 
         AddButton addTodoButton = new AddButton(25);
 
