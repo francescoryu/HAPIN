@@ -18,6 +18,11 @@
     -fx-fill: black;
 }
 
+.webkit-scrollbar-thumb:vertical {
+    -fx-background-color: #68a0b4;
+    -fx-max-width: 4;
+}
+
 .scroll-pane .corner {
     -fx-background-color: transparent;
 }

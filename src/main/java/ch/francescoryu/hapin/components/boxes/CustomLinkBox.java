@@ -1,4 +1,4 @@
-package ch.francescoryu.hapin.testing;
+package ch.francescoryu.hapin.components.boxes;
 
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -10,22 +10,23 @@ import javafx.stage.Stage;
 
 import java.awt.*;
 
-public class TestApp extends Application {
+public class CustomLinkBox extends VBox {
 
-    @Override
-    public void start(Stage stage) throws Exception {
+
+    public void loadLink(String link) throws Exception {
+
+        this.getStylesheets().add(CustomLinkBox.class.getResource("/css/style.css").toExternalForm());
 
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
 
-        // width will store the width of the screen
-        int width = (int) size.getWidth();
-
-        // height will store the height of the screen
         int height = (int) size.getHeight();
 
         WebView webView = new WebView();
         WebEngine webEngine = webView.getEngine();
-        webEngine.load("https://google.ch");
+
+        webView.getStyleClass().addAll(".webkit-scrollbar-thumb", ".scroll-bar");
+
+        webEngine.load("https://" + link);
         webView.setPrefHeight(height);
 
         VBox vbox = new VBox();
@@ -34,6 +35,8 @@ public class TestApp extends Application {
         vbox.getChildren().add(webView);
 
         Scene scene = new Scene(vbox);
+
+        Stage stage = new Stage();
 
         stage.setScene(scene);
         stage.setMaximized(true);

@@ -2,6 +2,7 @@ package ch.francescoryu.hapin;
 
 import ch.francescoryu.hapin.buttonMethods.MenuMethods;
 import ch.francescoryu.hapin.components.TodoObject;
+import ch.francescoryu.hapin.components.boxes.CustomLinkBox;
 import ch.francescoryu.hapin.components.boxes.SelectionBox;
 import ch.francescoryu.hapin.components.boxes.TodoBox;
 import ch.francescoryu.hapin.components.buttons.BackButton;
@@ -24,6 +25,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -109,10 +112,7 @@ public class DataHandler {
             comboBox.setPromptText("select priority");
             datePicker.setPromptText("Missing deadline");
             textField.setPromptText("You need to type something");
-        }
-
-
-        else {
+        } else {
             if (comboBox.getValue().matches("High")) {
                 writeFile("1;" + textField.getText() + ";" + datePicker.getEditor().getText() + ";unselected");
                 textField.setText("");
@@ -176,9 +176,7 @@ public class DataHandler {
 
             if (arr[3].equals("unselected")) {
                 checkBox.setSelected(false);
-            }
-
-            else {
+            } else {
                 checkBox.setSelected(true);
             }
 
@@ -189,8 +187,7 @@ public class DataHandler {
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
-                }
-                else {
+                } else {
                     try {
                         replaceTodoLine(arr[0] + ";" + arr[1] + ";" + arr[2] + ";selected", arr[0] + ";" + arr[1] + ";" + arr[2] + ";unselected", tableView, labels, deleteButton);
                     } catch (IOException e) {
@@ -214,11 +211,9 @@ public class DataHandler {
 
             if (Objects.equals(arr[0], "1")) {
                 priorityLabel.setText("1 High");
-            }
-            else if (Objects.equals(arr[0], "2")) {
+            } else if (Objects.equals(arr[0], "2")) {
                 priorityLabel.setText("2 Medium");
-            }
-            else if (Objects.equals(arr[0], "3")) {
+            } else if (Objects.equals(arr[0], "3")) {
                 priorityLabel.setText("3 Low");
             }
 
@@ -271,10 +266,14 @@ public class DataHandler {
             if (withLink) {
                 b.setOnAction(e -> {
                     try {
-                        Desktop.getDesktop().browse(new URI("https://" + arr[1]));
-                    } catch (IOException | URISyntaxException e1) {
-                        e1.printStackTrace();
+
+                        CustomLinkBox customLinkBox = new CustomLinkBox();
+
+                        customLinkBox.loadLink(arr[1]);
+                    } catch (Exception ex) {
+                        throw new RuntimeException(ex);
                     }
+
                 });
                 b.setOnMouseClicked(mouseEvent -> {
                     if (mouseEvent.getButton() == MouseButton.SECONDARY) {
