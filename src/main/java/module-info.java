@@ -6,6 +6,7 @@ module ch.francescoryu.hapin {
     requires java.desktop;
     requires org.jetbrains.annotations;
     requires javafx.media;
+    requires javafx.web;
 
     opens ch.francescoryu.hapin to javafx.fxml;
     exports ch.francescoryu.hapin;
