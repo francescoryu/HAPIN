@@ -262,7 +262,6 @@ public class DataHandler {
             b.setGraphic(imageView);
             MenuMethods.setButtonStyle(b);
 
-
             if (withLink) {
                 b.setOnAction(e -> {
                     try {
