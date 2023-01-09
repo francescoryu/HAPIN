@@ -50,7 +50,6 @@ public class HyperlinkBox extends VBox {
 
         HBox infoBox = new HBox(3);
         infoBox.setStyle("-fx-alignment: center-right; -fx-font-size: 40; -fx-padding: 10; ");
-        infoBox.getChildren().addAll(DataHandler.createClock());
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -75,7 +74,7 @@ public class HyperlinkBox extends VBox {
         //--------------------------------------------------------------------------------------------------------------
 
         try {
-            DataHandler.createButtons(buttons, buttonGridPane, true, deleteButton);
+            DataHandler.createHyperLinkButtons(buttons, buttonGridPane, true, deleteButton);
         } catch (IOException | URISyntaxException e) {
             throw new RuntimeException(e);
         }
@@ -124,7 +123,7 @@ public class HyperlinkBox extends VBox {
         chooseFile.setCursor(javafx.scene.Cursor.HAND);
         chooseFile.setStyle("-fx-background-color: #F8F5FA;");
         chooseFile.setOnAction(actionEvent -> {
-            DataHandler.saveButtonData(DataHandler.getInputFromTextField(inputButtonName, inputButtonUrl));
+            DataHandler.saveHyperLinkData(DataHandler.getInputFromTextField(inputButtonName, inputButtonUrl));
         });
 
         VBox inputBox = new VBox();
@@ -181,7 +180,7 @@ public class HyperlinkBox extends VBox {
         getChildren().addAll(navBox);
 
         addButton.setOnAction(actionEvent -> {
-            DataHandler.reloadButtonList(buttons, buttonGridPane, deleteButton);
+            DataHandler.reloadHyperLinkButtons(buttons, buttonGridPane, deleteButton);
             getChildren().clear();
             getChildren().add(addButtonBox);
         });
@@ -201,7 +200,7 @@ public class HyperlinkBox extends VBox {
                     throw new RuntimeException(e);
                 }
             } else {
-                DataHandler.reloadButtonList(buttons, buttonGridPane, deleteButton);
+                DataHandler.reloadHyperLinkButtons(buttons, buttonGridPane, deleteButton);
                 inputButtonName.setText("");
                 inputButtonUrl.setText("");
                 getChildren().clear();

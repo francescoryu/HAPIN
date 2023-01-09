@@ -42,6 +42,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.text.DateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.*;
 
@@ -58,20 +60,20 @@ public class DataHandler {
     static String loginFilePath = "src/main/resources/txt-files/login.txt";
     static String todoFilePath = "src/main/resources/txt-files/todo.txt";
     static String txtFileFolder = "src/main/resources/AccFiles/";
-    static String userName;
+    static String tempUserName;
 
-    public static void reloadButtonList(ArrayList<Button> buttons, GridPane gridPane, Button deleteButton) {
+    public static void reloadHyperLinkButtons(ArrayList<Button> buttons, GridPane gridPane, Button deleteButton) {
 
         gridPane.getChildren().removeAll(buttons);
         buttons.clear();
         try {
-            createButtons(buttons, gridPane, true, deleteButton);
+            createHyperLinkButtons(buttons, gridPane, true, deleteButton);
         } catch (IOException | URISyntaxException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static void saveButtonData(String input) {
+    public static void saveHyperLinkData(String input) {
         Stage stage1 = new Stage();
         FileChooser fileChooser = new FileChooser();
         File selectedFile = fileChooser.showOpenDialog(stage1);
@@ -242,7 +244,7 @@ public class DataHandler {
     }
 
 
-    public static void createButtons(ArrayList<Button> buttons, GridPane gridPane, boolean withLink, Button deleteButton) throws IOException, URISyntaxException {
+    public static void createHyperLinkButtons(ArrayList<Button> buttons, GridPane gridPane, boolean withLink, Button deleteButton) throws IOException, URISyntaxException {
         int j = 0;
         List<String> lines = Files.readAllLines(new File(saveFilePath).toPath());
 
@@ -291,9 +293,9 @@ public class DataHandler {
         }
     }
 
-    public static void reloadNavButton(GridPane pane, ArrayList<Button> buttons, Button deleteButton) throws IOException, URISyntaxException {
+    public static void reloadHyperLinkButtons(GridPane pane, ArrayList<Button> buttons, Button deleteButton) throws IOException, URISyntaxException {
         pane.getChildren().removeAll(buttons);
-        createButtons(buttons, pane, true, deleteButton);
+        createHyperLinkButtons(buttons, pane, true, deleteButton);
     }
 
     public static void deleteButton(Button b, ArrayList<Button> buttons, GridPane pane, String path, Button deleteButton) {
@@ -301,7 +303,7 @@ public class DataHandler {
         buttons.remove(b);
         try {
             remButtonFromFile(b.getText(), path, 0);
-            reloadNavButton(pane, buttons, deleteButton);
+            reloadHyperLinkButtons(pane, buttons, deleteButton);
         } catch (IOException | URISyntaxException e) {
             throw new RuntimeException(e);
         }
@@ -330,6 +332,7 @@ public class DataHandler {
             String[] arrString = s.split(";");
 
             if (userName.equals(arrString[0]) && pwdField.getText().equals(arrString[1])) {
+                tempUserName = userName;
                 SelectionBox selectionBox = new SelectionBox();
                 Stage stage = new Stage();
                 selectionBox.start(stage);
@@ -338,6 +341,10 @@ public class DataHandler {
 
             }
         }
+    }
+
+    public static String transferUserName() {
+        return tempUserName;
     }
 
     public static void loadUserToComboBox(ComboBox<String> comboBox) throws IOException {
@@ -349,22 +356,23 @@ public class DataHandler {
         }
     }
 
-    public static void setUserName(String userNameValue) {
-        userName = userNameValue;
-    }
-
     public static Text createClock() {
         final Text clock = new Text();
         final DateFormat format = DateFormat.getInstance();
         final Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
             final Calendar cal = Calendar.getInstance();
-            clock.setText(format.format(cal.getTime()));
+            clock.setText(format.format(cal.getTime()).split(",")[1]);
         }));
 
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
-
         return clock;
+    }
+
+    public static String getLocalDate() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd. MMMM yyyy");
+        LocalDateTime now = LocalDateTime.now();
+        return dtf.format(now);
     }
 
     public static void createAccButtons(ArrayList<Button> buttons, GridPane gridPane, VBox vBox, Label balanceLabel, BorderPane borderPane, HBox buttonBox, ArrayList<HBox> hBoxes) throws IOException {

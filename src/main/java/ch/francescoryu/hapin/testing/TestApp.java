@@ -9,35 +9,21 @@ import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 import java.awt.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class TestApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
 
-        Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        System.out.println(dtf.format(now));
 
-        // width will store the width of the screen
-        int width = (int) size.getWidth();
-
-        // height will store the height of the screen
-        int height = (int) size.getHeight();
-
-        WebView webView = new WebView();
-        WebEngine webEngine = webView.getEngine();
-        webEngine.load("https://google.ch");
-        webView.setPrefHeight(height);
-
-        VBox vbox = new VBox();
-        vbox.setAlignment(Pos.CENTER);
-
-        vbox.getChildren().add(webView);
-
-        Scene scene = new Scene(vbox);
-
-        stage.setScene(scene);
-        stage.setMaximized(true);
-
-        stage.show();
+        LocalDateTime dt2 = LocalDateTime.parse("19:50:12");
+        if (now.isAfter(dt2)) {
+            System.out.println("TRUE");
+        }
     }
 }
