@@ -3,15 +3,12 @@ package ch.francescoryu.hapin.components.boxes;
 import ch.francescoryu.hapin.Main;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
-import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -28,6 +25,7 @@ public class SelectionBox extends Application {
         BalanceBox balanceBox = new BalanceBox();
         TodoBox todoBox = new TodoBox();
         WelcomeBox welcomeBox = new WelcomeBox();
+        TicTacToeBox ticTacToeBox = new TicTacToeBox();
 
         TabPane tabPane = new TabPane();
         tabPane.getStylesheets().add(TodoBox.class.getResource("/css/style.css").toExternalForm());
@@ -40,8 +38,10 @@ public class SelectionBox extends Application {
         tabs.add(balanceTab);
         Tab toDoTab = new Tab("TodoList", todoBox);
         tabs.add(toDoTab);
+        Tab ticTacToeTab = new Tab("TicTacToe", ticTacToeBox);
+        tabs.add(ticTacToeTab);
 
-        tabPane.getTabs().addAll(welcomeTab, hyperTab, balanceTab, toDoTab);
+        tabPane.getTabs().addAll(welcomeTab, hyperTab, balanceTab, toDoTab, ticTacToeTab);
         tabPane.getStyleClass().add(".tab-pane");
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 

@@ -14,4 +14,6 @@ module ch.francescoryu.hapin {
     opens ch.francescoryu.hapin.testing to javafx.fxml;
     exports ch.francescoryu.hapin.components;
     opens ch.francescoryu.hapin.components to javafx.fxml;
+    exports ch.francescoryu.hapin.backend;
+    opens ch.francescoryu.hapin.backend to javafx.fxml;
 }

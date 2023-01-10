@@ -1,6 +1,6 @@
 package ch.francescoryu.hapin.components.boxes;
 
-import ch.francescoryu.hapin.DataHandler;
+import ch.francescoryu.hapin.backend.DataHandler;
 import ch.francescoryu.hapin.testing.Person;
 import ch.francescoryu.hapin.buttonMethods.MenuMethods;
 import ch.francescoryu.hapin.components.buttons.AddButton;

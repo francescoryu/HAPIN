@@ -1,6 +1,6 @@
 package ch.francescoryu.hapin.components.boxes;
 
-import ch.francescoryu.hapin.DataHandler;
+import ch.francescoryu.hapin.backend.DataHandler;
 import ch.francescoryu.hapin.Main;
 import ch.francescoryu.hapin.buttonMethods.MenuMethods;
 import ch.francescoryu.hapin.components.buttons.AddButton;
@@ -43,6 +43,7 @@ public class BalanceBox extends VBox {
         MenuMethods.setLabelStyle(balanceLabel);
 
         GridPane gridPane = new GridPane();
+        gridPane.setStyle("-fx-padding: 10;");
         gridPane.setAlignment(Pos.TOP_CENTER);
         gridPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
@@ -118,10 +119,7 @@ public class BalanceBox extends VBox {
         });
 
         //--------------------------------------------------------------------------------------------------------------
-        //--------------------------------------------------------------------------------------------------------------
-        //--------------------------------------------------------------------------------------------------------------
 
         DataHandler.createAccButtons(buttons, gridPane, this, balanceLabel, borderPane, buttonBox, hBoxes);
     }
-
 }

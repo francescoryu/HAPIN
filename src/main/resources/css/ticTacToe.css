@@ -1,0 +1,15 @@
+.button {
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+    -fx-pref-width: 150;
+    -fx-min-height: 150;
+}
+.button:hover {
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+    -fx-pref-width: 150;
+    -fx-min-height: 150;
+    -fx-scale-y: 1;
+    -fx-scale-x: 1;
+    -fx-cursor: hand;
+}

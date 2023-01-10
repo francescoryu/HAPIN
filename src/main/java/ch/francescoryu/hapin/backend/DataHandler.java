@@ -1,4 +1,4 @@
-package ch.francescoryu.hapin;
+package ch.francescoryu.hapin.backend;
 
 import ch.francescoryu.hapin.buttonMethods.MenuMethods;
 import ch.francescoryu.hapin.components.TodoObject;
@@ -88,7 +88,6 @@ public class DataHandler {
             myWriter.newLine();
             myWriter.close();
         } catch (IOException e) {
-            System.out.println("ERROR");
             e.printStackTrace();
         }
         if (selectedFile.exists()) {
@@ -163,7 +162,6 @@ public class DataHandler {
         int cntr = 0;
 
         tableView.getItems().clear();
-        System.out.println("TEST");
         tableView.getStylesheets().add(TodoBox.class.getResource("/css/style.css").toExternalForm());
 
         //Collections.sort(lines);
@@ -202,7 +200,6 @@ public class DataHandler {
 
             deleteButton.setOnAction(actionEvent -> {
                 TodoObject todoObject = (TodoObject) tableView.getSelectionModel().getSelectedItem();
-                System.out.println(todoObject.getInput());
                 try {
                     deleteTodo(todoObject, labels, tableView, todoFilePath, deleteButton);
                 } catch (IOException e) {
@@ -361,7 +358,7 @@ public class DataHandler {
         final DateFormat format = DateFormat.getInstance();
         final Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
             final Calendar cal = Calendar.getInstance();
-            clock.setText(format.format(cal.getTime()).split(",")[1]);
+            clock.setText("Current time: " + format.format(cal.getTime()).split(",")[1]);
         }));
 
         timeline.setCycleCount(Animation.INDEFINITE);
@@ -465,7 +462,7 @@ public class DataHandler {
 
             DeleteButton deleteButton = new DeleteButton(20);
             deleteButton.setOnAction(actionEvent -> {
-                System.out.println(lines.indexOf(s));
+
             });
 
             SaveButton button = new SaveButton(20);

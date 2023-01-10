@@ -1,6 +1,6 @@
 package ch.francescoryu.hapin.components.boxes;
 
-import ch.francescoryu.hapin.DataHandler;
+import ch.francescoryu.hapin.backend.DataHandler;
 import ch.francescoryu.hapin.Main;
 import ch.francescoryu.hapin.buttonMethods.MenuMethods;
 import ch.francescoryu.hapin.components.buttons.AddButton;
@@ -54,10 +54,10 @@ public class HyperlinkBox extends VBox {
         //--------------------------------------------------------------------------------------------------------------
 
         GridPane buttonGridPane = new GridPane();
-        //buttonGridPane.setStyle(" -fx-border-color: red;");
+        buttonGridPane.setStyle("-fx-padding: 10");
         buttonGridPane.setAlignment(Pos.TOP_CENTER);
         buttonGridPane.setVgap(10);
-        //buttonGridPane.setAlignment(Pos.CENTER);
+        //buttonGridPane.setPadding();
         buttonGridPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
         ScrollPane buttonScrollPane = new ScrollPane();
@@ -133,7 +133,7 @@ public class HyperlinkBox extends VBox {
 
         Button saveButton = new Button();
         saveButton.setCursor(javafx.scene.Cursor.HAND);
-        ImageView saveButtonImageView = new ImageView(new javafx.scene.image.Image(Objects.requireNonNull(ch.francescoryu.hapin.Main.class.getResourceAsStream("navMenuImg/save.png"))));
+        ImageView saveButtonImageView = new ImageView(new javafx.scene.image.Image(Objects.requireNonNull(Main.class.getResourceAsStream("navMenuImg/save.png"))));
         saveButton.setStyle("-fx-background-color: #F8F5FA;");
         saveButtonImageView.setFitHeight(25);
         saveButtonImageView.setPreserveRatio(true);
@@ -141,7 +141,7 @@ public class HyperlinkBox extends VBox {
 
         Button clearButton = new Button();
         clearButton.setCursor(javafx.scene.Cursor.HAND);
-        ImageView clearButtonImageView = new ImageView(new javafx.scene.image.Image(Objects.requireNonNull(ch.francescoryu.hapin.Main.class.getResourceAsStream("navMenuImg/clear.png"))));
+        ImageView clearButtonImageView = new ImageView(new javafx.scene.image.Image(Objects.requireNonNull(Main.class.getResourceAsStream("navMenuImg/clear.png"))));
         clearButton.setStyle("-fx-background-color: #F8F5FA;");
         clearButtonImageView.setFitHeight(25);
         clearButtonImageView.setPreserveRatio(true);
