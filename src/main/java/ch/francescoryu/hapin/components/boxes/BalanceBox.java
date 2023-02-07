@@ -110,7 +110,7 @@ public class BalanceBox extends VBox {
 
         saveButton.setOnAction(actionEvent -> {
             try {
-                DataHandler.createFile(inputAccountName, buttons, gridPane, this, balanceLabel, borderPane, buttonBox, hBoxes);
+                DataHandler.createFile(inputAccountName, buttons, gridPane, this, balanceLabel, borderPane, buttonBox, hBoxes, deleteButton);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -120,6 +120,6 @@ public class BalanceBox extends VBox {
 
         //--------------------------------------------------------------------------------------------------------------
 
-        DataHandler.createAccButtons(buttons, gridPane, this, balanceLabel, borderPane, buttonBox, hBoxes);
+        DataHandler.createAccButtons(buttons, gridPane, this, balanceLabel, borderPane, buttonBox, hBoxes, deleteButton);
     }
 }

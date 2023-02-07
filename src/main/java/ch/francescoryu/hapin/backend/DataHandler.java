@@ -371,7 +371,7 @@ public class DataHandler {
         return dtf.format(now);
     }
 
-    public static void createAccButtons(ArrayList<Button> buttons, GridPane gridPane, VBox vBox, Label balanceLabel, BorderPane borderPane, HBox buttonBox, ArrayList<HBox> hBoxes) throws IOException {
+    public static void createAccButtons(ArrayList<Button> buttons, GridPane gridPane, VBox vBox, Label balanceLabel, BorderPane borderPane, HBox buttonBox, ArrayList<HBox> hBoxes, DeleteButton deleteButton) throws IOException {
         gridPane.getChildren().removeAll(buttons);
 
         File folder = new File(Paths.get(txtFileFolder).toUri());
@@ -398,6 +398,20 @@ public class DataHandler {
             btnCntr++;
 
             btn.setOnAction(actionEvent -> {
+
+                btn.setOnMouseClicked(mouseEvent -> {
+                    if (mouseEvent.getButton() == MouseButton.SECONDARY) {
+                        deleteButton.setOnAction(actionEvent1 -> {
+                            try {
+                                Files.delete(Paths.get(txtFileFolder + f.getName()));
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                        });
+                    }
+                });
+
                 try {
                     vBox.getChildren().clear();
                     createAccButtonVBox(f, vBox, hBoxes, balanceLabel, borderPane, buttonBox);
@@ -461,6 +475,8 @@ public class DataHandler {
 
             DeleteButton deleteButton = new DeleteButton(20);
             deleteButton.setOnAction(actionEvent -> {
+                gridPane.getChildren().remove(lines.indexOf(s), 0);
+                lines.remove(s);
 
             });
 
@@ -469,6 +485,8 @@ public class DataHandler {
             button.setOnAction(actionEvent -> {
                 try {
                     replaceLineInFile(s, inputTextField.getText(), f.getName(), gridPane, hBoxes, f, vBox, hBox, balanceLabel, borderPane);
+                    vBox.getChildren().clear();
+                    createAccButtonVBox(f, vBox, hBoxes, balanceLabel, borderPane, buttonBox);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -485,6 +503,7 @@ public class DataHandler {
             } else if (currVal == 0) {
                 inputTextField.setText(String.valueOf(currVal));
                 inputTextField.setStyle("-fx-font-size: 20; -fx-font-family: 'Microsoft Sans Serif'; -fx-background-color: transparent; -fx-background: transparent; -fx-text-fill: black");
+                gridPane.getChildren().remove(hBox);
             }
 
             endVal = endVal + currVal;
@@ -493,8 +512,6 @@ public class DataHandler {
             gridPane.add(hBox, 0, cntr);
             hBoxes.add(hBox);
             cntr++;
-
-
         }
 
         String totalValRounded = String.format("%.2f", endVal);
@@ -532,8 +549,8 @@ public class DataHandler {
                     bw.write(textField.getText());
                     bw.newLine();
                     bw.close();
-                    createAccButtonVBox(f, vBox, hBoxes, balanceLabel, borderPane, buttonBox);
                     vBox.getChildren().removeAll(fileNameLabel, scrollPane, totalLabel, inputHBox, navButtonBox);
+                    createAccButtonVBox(f, vBox, hBoxes, balanceLabel, borderPane, buttonBox);
                     textField.clear();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
@@ -562,10 +579,10 @@ public class DataHandler {
         createAccButtonVBox(file, vBox, hBoxes, balanceLabel, borderPane, hBox1);
     }
 
-    public static void createFile(TextField textField, ArrayList<Button> buttons, GridPane gridPane, VBox vBox, Label label, BorderPane borderPane, HBox hBox, ArrayList<HBox> hBoxes) throws IOException {
+    public static void createFile(TextField textField, ArrayList<Button> buttons, GridPane gridPane, VBox vBox, Label label, BorderPane borderPane, HBox hBox, ArrayList<HBox> hBoxes, DeleteButton deleteButton) throws IOException {
         File file = new File("src/main/resources/AccFiles/" + textField.getText() + ".txt");
         file.createNewFile();
-        createAccButtons(buttons, gridPane, vBox, label, borderPane, hBox, hBoxes);
+        createAccButtons(buttons, gridPane, vBox, label, borderPane, hBox, hBoxes, deleteButton);
     }
 }
 
