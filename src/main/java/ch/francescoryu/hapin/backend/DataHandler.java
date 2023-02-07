@@ -63,7 +63,6 @@ public class DataHandler {
     static String tempUserName;
 
     public static void reloadHyperLinkButtons(ArrayList<Button> buttons, GridPane gridPane, Button deleteButton) {
-
         gridPane.getChildren().removeAll(buttons);
         buttons.clear();
         try {
